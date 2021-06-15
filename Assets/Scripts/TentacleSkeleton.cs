@@ -23,7 +23,7 @@ public class TentacleSkeleton : MonoBehaviour
         var parent = _skeletonRoot;
         while (parent.childCount > 0)
         {
-            _allBones.Add(parent.GetChild(0);
+            _allBones.Add(parent.GetChild(0));
             parent = parent.GetChild(0);
         }
     }
