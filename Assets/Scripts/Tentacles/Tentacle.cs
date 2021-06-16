@@ -2,18 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using RootMotion.FinalIK;
 
-[RequireComponent(typeof(SkinnedMeshRenderer))]
+[RequireComponent(typeof(SkinnedMeshRenderer), typeof(FABRIK))]
 public class Tentacle : MonoBehaviour
 {
     [SerializeField] private GameObject _cylinder;
     [SerializeField] private int _startSegments;
-
+    
     private SkinnedMeshRenderer _skinnedMesh;
+    private FABRIK _fabrik;
 
     private void Start()
     {
         _skinnedMesh = GetComponent<SkinnedMeshRenderer>();
+        _fabrik = GetComponent<FABRIK>();
 
         GameObject[] cylinders = new GameObject[_startSegments];
 
@@ -21,7 +24,6 @@ public class Tentacle : MonoBehaviour
         {
             cylinders[i] = Instantiate(_cylinder, transform.position + (new Vector3(0, _cylinder.transform.localScale.y * 2, 0) * i), Quaternion.identity);
         }
-
 
         CombineInstance[] combine = new CombineInstance[cylinders.Length];
 
@@ -87,6 +89,7 @@ public class Tentacle : MonoBehaviour
         }
         mesh.bindposes = bindPoses;
 
+        _fabrik.solver.SetChain(bones, bones[0]);
         _skinnedMesh.bones = bones;
         _skinnedMesh.sharedMesh = mesh;
 
