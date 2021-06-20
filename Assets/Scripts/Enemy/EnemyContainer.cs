@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class EnemyContainer : MonoBehaviour
 {
-    public event UnityAction<Enemy> Stucked;
+    public event UnityAction<Enemy> EnemyStucked;
 
     private List<Enemy> _allEnemies;
 
@@ -29,6 +29,6 @@ public class EnemyContainer : MonoBehaviour
 
     private void OnEnemyStucked(Enemy enemy)
     {
-        Stucked?.Invoke(enemy);
+        EnemyStucked?.Invoke(enemy);
     }
 }

@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnxietyState : State
+public class AnxietyState : IdleAnxietyState
 {
     [SerializeField] private EnemyAnimations _animations;
     [SerializeField] private ViewZoneDetector _zoneDetector;
-    [SerializeField] private ParticleSystem _anxietyEffect;
 
-    private void OnEnable()
+    protected override void Enable()
     {
         _animations.EnemyAnxiety();
-        Instantiate(_anxietyEffect, transform);
-
         _zoneDetector.Enable();
     }
 

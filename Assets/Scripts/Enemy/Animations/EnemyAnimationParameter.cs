@@ -8,4 +8,5 @@ public static class EnemyAnimationParameter
     public static readonly string AttackForce = nameof(AttackForce);
     public static readonly string Teeter = nameof(Teeter);
     public static readonly string Anxiety = nameof(Anxiety);
+    public static readonly string Idle = nameof(Idle);
 }

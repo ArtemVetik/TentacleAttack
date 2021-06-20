@@ -15,12 +15,12 @@ public class AnxietyTransition : Transition
 
     protected override void Enable()
     {
-        _enemyContainer.Stucked += OnEnemyStucked;
+        _enemyContainer.EnemyStucked += OnEnemyStucked;
     }
 
     private void OnDisable()
     {
-        _enemyContainer.Stucked -= OnEnemyStucked;
+        _enemyContainer.EnemyStucked -= OnEnemyStucked;
     }
 
     private void OnEnemyStucked(Enemy enemy)

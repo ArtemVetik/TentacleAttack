@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StuckState : State
 {
+    [SerializeField] private ParticleSystem _stuckEffect;
+
     private EnemyAnimations _animations;
     private Quaternion _forwardRotation;
 
@@ -15,6 +17,7 @@ public class StuckState : State
     private void OnEnable()
     {
         _animations.EnemyStuck();
+        Instantiate(_stuckEffect, transform.position - Vector3.forward + Vector3.up * 2f, Quaternion.identity);
     }
 
     private void Start()

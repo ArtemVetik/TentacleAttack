@@ -36,4 +36,9 @@ public class EnemyAnimations : MonoBehaviour
     {
         _animator.SetTrigger(EnemyAnimationParameter.Anxiety);
     }
+
+    public void PlayIdle()
+    {
+        _animator.SetTrigger(EnemyAnimationParameter.Idle);
+    }
 }
