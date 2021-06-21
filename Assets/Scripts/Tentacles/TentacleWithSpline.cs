@@ -164,7 +164,6 @@ public class TentacleWithSpline : MonoBehaviour
             SplineNode node = new SplineNode(targetPosition, splineNodes[splineNodes.Count - 1].Direction);
             _spline.AddNode(node);
         }
-
         SetBoniesAlongSpline();
     }
 
