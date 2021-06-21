@@ -150,7 +150,7 @@ public class TentacleWithSpline : MonoBehaviour
     {
         var direction = forward - bone.position;
         var rotation = Quaternion.LookRotation(direction, Vector3.up);
-        rotation.eulerAngles = new Vector3(rotation.eulerAngles.x - 90, rotation.eulerAngles.y, rotation.eulerAngles.z);
+        rotation.eulerAngles = new Vector3(rotation.eulerAngles.x, rotation.eulerAngles.y, rotation.eulerAngles.z);
 
         bone.rotation = Quaternion.Lerp(bone.rotation, rotation, 10f * Time.deltaTime);
     }
