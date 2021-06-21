@@ -29,6 +29,7 @@ public class TentacleWithSpline : MonoBehaviour
         _activeBones = new List<Transform>();
         _staticBones = new List<Transform>();
 
+        // Выставляю ноды по вертикали для удобства тестирования
         for (int i = 0; i < _spline.nodes.Count; i++)
         {
             _spline.nodes[i].Position = new Vector3(0, _stepBetweenSplineNodes * i, 0);
@@ -36,21 +37,25 @@ public class TentacleWithSpline : MonoBehaviour
 
         _target.position = _spline.nodes[_spline.nodes.Count - 1].Position;
 
+        // создание хранилища для комбинирования мешей
         CombineInstance[] combine = new CombineInstance[_startSegments.Length];
 
+        //заполнение хранилища для комбинирования мешей
         for (int i = 0; i < combine.Length; i++)
         {
             combine[i].mesh = _startSegments[i].GetComponent<MeshFilter>().sharedMesh;
             combine[i].transform = _startSegments[i].transform.localToWorldMatrix;
         }
 
-        HideStartSegments();
+        HideStartSegments(); // скрытие стартовых мешей
 
+        // создание нового меша из скомбинированных
         Mesh mesh = new Mesh();
         mesh.CombineMeshes(combine);
         mesh.RecalculateNormals();
         mesh.Optimize();
 
+        // перебор Y позиция всех вертиксов и записываем одинаковые
         List<float> yVertixPosition = new List<float>();
 
         foreach (var vertix in mesh.vertices)
@@ -61,8 +66,10 @@ public class TentacleWithSpline : MonoBehaviour
             }
         }
 
+        // сортируем от малого к большему
         yVertixPosition = yVertixPosition.OrderByDescending(y => y).ToList();
 
+        // создание и заполнение хранилище весов костей
         BoneWeight[] weights = new BoneWeight[mesh.vertexCount];
 
         for (int i = 0; i < weights.Length; i++)
@@ -71,38 +78,36 @@ public class TentacleWithSpline : MonoBehaviour
             {
                 if ((float)Math.Round(mesh.vertices[i].y, NUMBER_OF_DECIMAL_PLACES) == yVertixPosition[j])
                 {
-                    weights[i].boneIndex0 = j;
+                    //если у вертикса совпала Yпозиция, то мы задаем кости вес
+
+                    weights[i].boneIndex0 = j; 
                     weights[i].weight0 = 1.0f;
                 }
             }
         }
         mesh.boneWeights = weights;
 
+        //создание самих костей
         Transform[] bones = new Transform[yVertixPosition.Count];
         Matrix4x4[] bindPoses = new Matrix4x4[yVertixPosition.Count];
 
         for (int i = 0; i < bones.Length; i++)
         {
             bones[i] = new GameObject("Bone_" + i).transform;
-            bones[i].parent = i == 0 ? transform : bones[i - 1];
-            bones[i].localRotation = Quaternion.Euler(90, 0, 0);
+            bones[i].parent = i == 0 ? transform : bones[i - 1]; // назначаем родителя костям
+            bones[i].localRotation = Quaternion.Euler(90, 0, 0); // поворачиваем чтобы Z смотрел вперед
             bones[i].position = transform.position + new Vector3(0, yVertixPosition[i], 0);
 
-            _activeBones.Add(bones[i]);
+            _activeBones.Add(bones[i]); // заполняем хранилище костей
 
             bindPoses[i] = bones[i].worldToLocalMatrix * transform.localToWorldMatrix;
         }
         mesh.bindposes = bindPoses;
 
-        _meshRenderer.bones = bones;
-        _meshRenderer.sharedMesh = mesh;
+        _meshRenderer.bones = bones; // передаем в SkinnedMesh Renderer кости ...
+        _meshRenderer.sharedMesh = mesh; // ... и меш
 
-        SetBoniesAlongSpline();
-    }
-
-    private void Update()
-    {
-        //SetBoniesAlongSpline();
+        SetBoniesAlongSpline(); // расставляем кости по сплайну
     }
 
     private void HideStartSegments()
