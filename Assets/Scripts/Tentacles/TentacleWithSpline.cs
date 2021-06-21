@@ -80,7 +80,7 @@ public class TentacleWithSpline : MonoBehaviour
                 {
                     //если у вертикса совпала Yпозиция, то мы задаем кости вес
 
-                    weights[i].boneIndex0 = j; 
+                    weights[i].boneIndex0 = j;
                     weights[i].weight0 = 1.0f;
                 }
             }
@@ -95,7 +95,7 @@ public class TentacleWithSpline : MonoBehaviour
         {
             bones[i] = new GameObject("Bone_" + i).transform;
             bones[i].parent = i == 0 ? transform : bones[i - 1]; // назначаем родителя костям
-            bones[i].localRotation = Quaternion.Euler(90, 0, 0); // поворачиваем чтобы Z смотрел вперед
+            bones[i].rotation = Quaternion.Euler(90, 0, 0); // поворачиваем чтобы Z смотрел вперед
             bones[i].position = transform.position + new Vector3(0, yVertixPosition[i], 0);
 
             _activeBones.Add(bones[i]); // заполняем хранилище костей
@@ -133,26 +133,25 @@ public class TentacleWithSpline : MonoBehaviour
     private void SetBoniesAlongSpline()
     {
         _activeBones[0].position = GetPositionByDistance(_spline.Length - 0.2f);
-        var forwardVector = GetPositionByDistance(_spline.Length - 0.1f) - _activeBones[0].position;
+        var forwardVector = GetPositionByDistance(_spline.Length) - _activeBones[0].position;
 
-        LookRotation(_activeBones[0], forwardVector);
+        _activeBones[0].rotation = XLookRotation2D(forwardVector);
 
         for (int i = 1; i < _activeBones.Count; i++)
         {
             Vector3 position = GetPositionByDistance(_spline.Length - (i * _stepBetweenSegments));
             _activeBones[i].position = position;
             forwardVector = GetPositionByDistance(_spline.Length - (i * _stepBetweenSegments + 0.05f)) - _activeBones[i].position;
-            LookRotation(_activeBones[i], forwardVector);
+            _activeBones[i].rotation = XLookRotation2D(forwardVector);
         }
     }
 
-    private void LookRotation(Transform bone, Vector3 forward)
+    private Quaternion XLookRotation2D(Vector3 forward)
     {
-        var direction = forward - bone.position;
-        var rotation = Quaternion.LookRotation(direction, Vector3.up);
-        rotation.eulerAngles = new Vector3(rotation.eulerAngles.x, rotation.eulerAngles.y, rotation.eulerAngles.z);
+        Quaternion first = Quaternion.Euler(90f, 0f, 0f);
+        Quaternion second = Quaternion.LookRotation(Vector3.forward, forward);
 
-        bone.rotation = Quaternion.Lerp(bone.rotation, rotation, 10f * Time.deltaTime);
+        return second * first;
     }
 
     public void TentacleMove(Vector3 targetPosition)
