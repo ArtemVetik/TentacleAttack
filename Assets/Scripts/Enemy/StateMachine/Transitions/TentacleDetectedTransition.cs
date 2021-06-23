@@ -21,7 +21,7 @@ public class TentacleDetectedTransition : Transition
     {
         foreach (var hit in hits)
         {
-            if (hit.collider.TryGetComponent(out FooPlayer tentacle))
+            if (hit.collider.TryGetComponent(out TentacleSegment tentacle))
             {
                 _container.Init(tentacle);
                 NeedTransit = true;

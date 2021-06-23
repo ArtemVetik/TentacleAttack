@@ -13,7 +13,7 @@ public class AttackState : State
     private AimIK _aimIK;
     private Spline _moveSpline;
     private EnemyAnimations _animations;
-    private FooPlayer _tentacle;
+    private TentacleSegment _tentacle;
     private Vector3 _previousPosition;
 
     private void Awake()
@@ -27,7 +27,7 @@ public class AttackState : State
     {
         _tentacle = _container.Player;
 
-        _aimIK.solver.target = _tentacle.transform;
+        _aimIK.solver.target = _tentacle.CenterTransform;
         _aimIK.enabled = true;
 
         _weapon.gameObject.SetActive(true);
@@ -37,8 +37,8 @@ public class AttackState : State
 
     private void Update()
     {
-        var directionVector = (_tentacle.transform.position - transform.position).normalized;
-        var sample = _moveSpline.GetProjectionSample(_tentacle.transform.position - directionVector * 2f);
+        var directionVector = (_tentacle.MeshCenterPosition - transform.position).normalized;
+        var sample = _moveSpline.GetProjectionSample(_tentacle.MeshCenterPosition - directionVector * 2f);
 
         var attackForce = 1f - Vector3.Distance(transform.position, sample.location) / _moveSpline.Length * 2f;
         _animations.SetAttackForce(attackForce);

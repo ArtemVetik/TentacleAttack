@@ -26,9 +26,7 @@ namespace SplineMesh {
         /// </summary>
         public Quaternion Rotation {
             get {
-                //return Quaternion.Euler(0,0,0);
-
-                Quaternion first = Quaternion.Euler(90f, 0f, 0f);
+                Quaternion first = Quaternion.Euler(-90f, 0f, -90f);
                 Quaternion second = Quaternion.LookRotation(Vector3.forward, tangent);
 
                 return second * first;

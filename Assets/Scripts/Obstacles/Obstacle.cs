@@ -9,7 +9,7 @@ public abstract class Obstacle : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out FooPlayer player))
+        if (other.TryGetComponent(out TentacleSegment player))
         {
             Activate();
             Activated?.Invoke(this);

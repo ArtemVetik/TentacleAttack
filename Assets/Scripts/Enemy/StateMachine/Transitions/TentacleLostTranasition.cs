@@ -7,7 +7,7 @@ public class TentacleLostTranasition : Transition
     [SerializeField] private PlayerContainer _container;
     [SerializeField] private float _lostDistance;
 
-    private FooPlayer _player;
+    private TentacleSegment _player;
 
     protected override void Enable()
     {
@@ -16,7 +16,7 @@ public class TentacleLostTranasition : Transition
 
     private void Update()
     {
-        if (Vector3.Distance(transform.position, _player.transform.position) > _lostDistance)
+        if (Vector3.Distance(transform.position, _player.MeshCenterPosition) > _lostDistance)
             NeedTransit = true;
     }
 }

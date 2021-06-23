@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerContainer : MonoBehaviour
 {
-    public FooPlayer Player { get; private set; }
+    public TentacleSegment Player { get; private set; }
 
-    public void Init(FooPlayer activePlayer)
+    public void Init(TentacleSegment activePlayer)
     {
         Player = activePlayer;
     }

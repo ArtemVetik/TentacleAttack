@@ -14,7 +14,7 @@ public class Sword : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out FooPlayer player))
+        if (other.TryGetComponent(out TentacleSegment player))
         {
             Debug.Log("Player damaged!");
         }

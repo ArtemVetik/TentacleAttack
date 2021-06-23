@@ -116,6 +116,7 @@ namespace SplineMesh {
                     typeof(MeshFilter),
                     typeof(MeshRenderer),
                     typeof(MeshBender),
+                    typeof(TentacleSegment),
                     typeof(MeshCollider));
                 res.isStatic = !updateInPlayMode;
             } else {

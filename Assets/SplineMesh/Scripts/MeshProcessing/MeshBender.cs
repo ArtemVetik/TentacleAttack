@@ -25,6 +25,9 @@ namespace SplineMesh {
         private Dictionary<float, CurveSample> sampleCache = new Dictionary<float, CurveSample>();
 
         private SourceMesh source;
+
+        public Mesh SelfMesh => result;
+
         /// <summary>
         /// The source mesh to bend.
         /// </summary>
@@ -321,6 +324,8 @@ namespace SplineMesh {
                 bentVertices.Select(b => b.normal));
             if (TryGetComponent(out MeshCollider collider)) {
                 collider.sharedMesh = result;
+                collider.convex = true;
+                collider.isTrigger = true;
             }
         }
     }
