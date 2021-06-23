@@ -26,10 +26,18 @@ namespace SplineMesh {
         /// </summary>
         public Quaternion Rotation {
             get {
+                //return Quaternion.Euler(0,0,0);
+
+                Quaternion first = Quaternion.Euler(90f, 0f, 0f);
+                Quaternion second = Quaternion.LookRotation(Vector3.forward, tangent);
+
+                return second * first;
+
                 if (rotation == Quaternion.identity) {
                     var upVector = Vector3.Cross(tangent, Vector3.Cross(Quaternion.AngleAxis(roll, Vector3.forward) * up, tangent).normalized);
                     rotation = Quaternion.LookRotation(tangent, upVector);
                 }
+
                 return rotation;
             }
         }

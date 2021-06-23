@@ -45,6 +45,7 @@ public class SplineMovement : MonoBehaviour
         if (length > 0)
         {
             CurveSample sample = _spline.GetSampleAtDistance(length);
+            //CurveSample sample = _spline.GetSample(length / _spline.Length * _spline.nodes.Count);
             return sample.location;
         }
         else

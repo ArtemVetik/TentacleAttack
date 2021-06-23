@@ -23,6 +23,7 @@ namespace SplineMesh {
         private bool toUpdate = false;
 
         [Tooltip("Mesh to bend along the spline.")]
+        public Mesh headMesh;
         public Mesh mesh;
         [Tooltip("Material to apply on the bent mesh.")]
         public Material material;
@@ -85,7 +86,7 @@ namespace SplineMesh {
             if (curveSpace) {
                 int i = 0;
                 foreach (var curve in spline.curves) {
-                    var go = FindOrCreate("segment " + i++ + " mesh");
+                    var go = FindOrCreate("segment " + i++ + " mesh", i == spline.curves.Count);
                     go.GetComponent<MeshBender>().SetInterval(curve);
                     go.GetComponent<MeshCollider>().enabled = generateCollider;
                     used.Add(go);
@@ -105,7 +106,8 @@ namespace SplineMesh {
             }
         }
 
-        private GameObject FindOrCreate(string name) {
+        private GameObject FindOrCreate(string name, bool isHead = false) {
+
             var childTransform = generated.transform.Find(name);
             GameObject res;
             if (childTransform == null) {
@@ -122,7 +124,7 @@ namespace SplineMesh {
             res.GetComponent<MeshRenderer>().material = material;
             res.GetComponent<MeshCollider>().material = physicMaterial;
             MeshBender mb = res.GetComponent<MeshBender>();
-            mb.Source = SourceMesh.Build(mesh)
+            mb.Source = SourceMesh.Build(isHead ? headMesh : mesh)
                 .Translate(translation)
                 .Rotate(Quaternion.Euler(rotation))
                 .Scale(scale);
