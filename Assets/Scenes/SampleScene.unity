@@ -544,6 +544,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartTentacle
       objectReference: {fileID: 0}
+    - target: {fileID: 6744000375626583336, guid: d566a45642aa4c14baba5e4f77622085, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d566a45642aa4c14baba5e4f77622085, type: 3}
 --- !u!114 &928469150 stripped
@@ -635,7 +639,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 20, z: -20}
+  m_LocalPosition: {x: 0, y: 15.33, z: -30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -683,6 +687,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6637150605522311764, guid: f61d34a7d9c803843bc4a42ee17edd4c, type: 3}
   m_PrefabInstance: {fileID: 1597251540}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1300130520
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1300130521}
+  - component: {fileID: 1300130522}
+  m_Layer: 0
+  m_Name: SegmentPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1300130521
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300130520}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.9912906, y: 1.4216526, z: -1.2802714}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1300130522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300130520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1d790adc1f695441b76c3cd202af8b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _segment: {fileID: 6291587928919195886, guid: f61d34a7d9c803843bc4a42ee17edd4c, type: 3}
+  _poolCount: 25
 --- !u!1 &1383495897
 GameObject:
   m_ObjectHideFlags: 0
@@ -814,7 +863,7 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720544707}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 0
   m_MotionVectors: 1
@@ -848,7 +897,7 @@ SkinnedMeshRenderer:
   m_SortingOrder: 0
   serializedVersion: 2
   m_Quality: 0
-  m_UpdateWhenOffscreen: 1
+  m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
   m_Mesh: {fileID: 0}
   m_Bones: []
@@ -890,7 +939,6 @@ MonoBehaviour:
   _moveSpeed: 5
   _target: {fileID: 1383495898}
   _joystick: {fileID: 928469150}
-  _tentacle: {fileID: 1918847047}
 --- !u!4 &1783553472
 Transform:
   m_ObjectHideFlags: 0
@@ -918,6 +966,7 @@ GameObject:
   - component: {fileID: 1918847045}
   - component: {fileID: 1918847047}
   - component: {fileID: 1918847049}
+  - component: {fileID: 1918847050}
   m_Layer: 0
   m_Name: Tentacle
   m_TagString: Untagged
@@ -951,51 +1000,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodes:
-  - position: {x: 0, y: 0, z: 0}
-    direction: {x: 0, y: 0.5, z: 0}
+  - position: {x: 0, y: -4.577908, z: 0}
+    direction: {x: 0, y: -2.9334311, z: 0}
     up: {x: 0, y: 1, z: 0}
     scale: {x: 1, y: 1}
     roll: 0
   - position: {x: 0, y: 2, z: 0}
-    direction: {x: 0, y: 3, z: 0}
+    direction: {x: 0, y: 4.144477, z: 0}
     up: {x: 0, y: 1, z: 0}
     scale: {x: 0.9390862, y: 0.9390862}
     roll: 0
   - position: {x: 0, y: 4, z: 0}
-    direction: {x: 0, y: 5, z: 0}
+    direction: {x: 0, y: 4.5, z: 0}
     up: {x: 0, y: 1, z: 0}
     scale: {x: 0.8781724, y: 0.8781724}
     roll: 0
-  - position: {x: 0, y: 6, z: 0}
-    direction: {x: 0, y: 6.5, z: 0}
-    up: {x: 0, y: 1, z: 0}
-    scale: {x: 0.8172586, y: 0.8172586}
-    roll: 0
-  - position: {x: 0, y: 6, z: 0}
-    direction: {x: 0, y: 6.5, z: 0}
-    up: {x: 0, y: 1, z: 0}
-    scale: {x: 0.7821722, y: 0.7821722}
-    roll: 0
-  - position: {x: 0, y: 8, z: 0}
-    direction: {x: 0, y: 9.528776, z: 0}
-    up: {x: 0, y: 1, z: 0}
-    scale: {x: 0.5481868, y: 0.5481868}
-    roll: 0
-  - position: {x: 0, y: 12.115103, z: 0}
-    direction: {x: 0, y: 13.143879, z: 0}
-    up: {x: 0, y: 1, z: 0}
-    scale: {x: 0, y: 0}
-    roll: 0
   curves:
   - n1:
-      position: {x: 0, y: 0, z: 0}
-      direction: {x: 0, y: 0.5, z: 0}
+      position: {x: 0, y: -4.577908, z: 0}
+      direction: {x: 0, y: -2.9334311, z: 0}
       up: {x: 0, y: 1, z: 0}
       scale: {x: 1, y: 1}
       roll: 0
     n2:
       position: {x: 0, y: 2, z: 0}
-      direction: {x: 0, y: 3, z: 0}
+      direction: {x: 0, y: 4.144477, z: 0}
       up: {x: 0, y: 1, z: 0}
       scale: {x: 0.9390862, y: 0.9390862}
       roll: 0
@@ -1004,80 +1033,20 @@ MonoBehaviour:
         m_Calls: []
   - n1:
       position: {x: 0, y: 2, z: 0}
-      direction: {x: 0, y: 3, z: 0}
+      direction: {x: 0, y: 4.144477, z: 0}
       up: {x: 0, y: 1, z: 0}
       scale: {x: 0.9390862, y: 0.9390862}
       roll: 0
     n2:
       position: {x: 0, y: 4, z: 0}
-      direction: {x: 0, y: 5, z: 0}
+      direction: {x: 0, y: 4.5, z: 0}
       up: {x: 0, y: 1, z: 0}
       scale: {x: 0.8781724, y: 0.8781724}
       roll: 0
     Changed:
       m_PersistentCalls:
         m_Calls: []
-  - n1:
-      position: {x: 0, y: 4, z: 0}
-      direction: {x: 0, y: 5, z: 0}
-      up: {x: 0, y: 1, z: 0}
-      scale: {x: 0.8781724, y: 0.8781724}
-      roll: 0
-    n2:
-      position: {x: 0, y: 6, z: 0}
-      direction: {x: 0, y: 6.5, z: 0}
-      up: {x: 0, y: 1, z: 0}
-      scale: {x: 0.8172586, y: 0.8172586}
-      roll: 0
-    Changed:
-      m_PersistentCalls:
-        m_Calls: []
-  - n1:
-      position: {x: 0, y: 6, z: 0}
-      direction: {x: 0, y: 6.5, z: 0}
-      up: {x: 0, y: 1, z: 0}
-      scale: {x: 0.8172586, y: 0.8172586}
-      roll: 0
-    n2:
-      position: {x: 0, y: 6, z: 0}
-      direction: {x: 0, y: 6.5, z: 0}
-      up: {x: 0, y: 1, z: 0}
-      scale: {x: 0.7821722, y: 0.7821722}
-      roll: 0
-    Changed:
-      m_PersistentCalls:
-        m_Calls: []
-  - n1:
-      position: {x: 0, y: 6, z: 0}
-      direction: {x: 0, y: 6.5, z: 0}
-      up: {x: 0, y: 1, z: 0}
-      scale: {x: 0.7821722, y: 0.7821722}
-      roll: 0
-    n2:
-      position: {x: 0, y: 8, z: 0}
-      direction: {x: 0, y: 9.528776, z: 0}
-      up: {x: 0, y: 1, z: 0}
-      scale: {x: 0.5481868, y: 0.5481868}
-      roll: 0
-    Changed:
-      m_PersistentCalls:
-        m_Calls: []
-  - n1:
-      position: {x: 0, y: 8, z: 0}
-      direction: {x: 0, y: 9.528776, z: 0}
-      up: {x: 0, y: 1, z: 0}
-      scale: {x: 0.5481868, y: 0.5481868}
-      roll: 0
-    n2:
-      position: {x: 0, y: 12.115103, z: 0}
-      direction: {x: 0, y: 13.143879, z: 0}
-      up: {x: 0, y: 1, z: 0}
-      scale: {x: 0, y: 0}
-      roll: 0
-    Changed:
-      m_PersistentCalls:
-        m_Calls: []
-  Length: 12.691103
+  Length: 8.577908
   isLoop: 0
   CurveChanged:
     m_PersistentCalls:
@@ -1094,14 +1063,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fde4f32463604104c9b9a2d5eea1eb4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stepBetweenSplineNodes: 2
   _stepBetweenSegments: 0.25
   _target: {fileID: 1383495898}
-  _startSegment: {fileID: 329448289}
-  _segment: {fileID: 1113943967}
+  _segment: {fileID: 6291587928919195886, guid: f61d34a7d9c803843bc4a42ee17edd4c, type: 3}
   _startSegments:
   - {fileID: 329448289}
   - {fileID: 1113943967}
+  _pool: {fileID: 1300130522}
 --- !u!4 &1918847048
 Transform:
   m_ObjectHideFlags: 0
@@ -1134,6 +1102,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 1, g: 1, b: 1, a: 1}
   length: 0.9
+--- !u!114 &1918847050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918847044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3f5b7b817ebf8844891cb88c5659a34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stepBetweenSplineNodes: 2
+  _target: {fileID: 1783553471}
 --- !u!1001 &747322300859452676
 PrefabInstance:
   m_ObjectHideFlags: 0
