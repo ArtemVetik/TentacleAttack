@@ -8,9 +8,11 @@ public class SplineMovement : MonoBehaviour
 {
     [SerializeField] private float _stepBetweenSplineNodes;
     [SerializeField] private TargetMovement _target;
+    [SerializeField] private float _rewindSpeed;
 
     private Spline _spline;
     private int _lastNodeIndex;
+    private bool _isRewind;
 
     public event Action AddedNode;
 
@@ -27,14 +29,18 @@ public class SplineMovement : MonoBehaviour
     private void OnEnable()
     {
         _target.TragetMoved += OnTargetMoved;
+        _target.Rewinding += OnTargetRewining;
+        _target.RewindFinished += OnTargetRewindFinished;
     }
 
     private void OnDisable()
     {
         _target.TragetMoved -= OnTargetMoved;
+        _target.Rewinding -= OnTargetRewining;
+        _target.RewindFinished -= OnTargetRewindFinished;
     }
 
-    void Start()
+    private void Start()
     {
         _spline = GetComponent<Spline>();
         _lastNodeIndex = _spline.nodes.Count - 1;
@@ -45,7 +51,6 @@ public class SplineMovement : MonoBehaviour
         if (length > 0)
         {
             CurveSample sample = _spline.GetSampleAtDistance(length);
-            //CurveSample sample = _spline.GetSample(length / _spline.Length * _spline.nodes.Count);
             return sample.location;
         }
         else
@@ -57,16 +62,69 @@ public class SplineMovement : MonoBehaviour
 
     private void OnTargetMoved(Vector3 position)
     {
-        var splineNodes = _spline.nodes;
-        splineNodes[_lastNodeIndex].Position = position;
+        _spline.nodes[_lastNodeIndex].Position = position;
         if (_spline.curves[_lastNodeIndex - 1].Length > (_stepBetweenSplineNodes + 1))
         {
-            Vector3 lastPosition = GetPositionByDistance(_spline.Length - 1);
-            SplineNode node = new SplineNode(position, splineNodes[_lastNodeIndex].Direction);
-            _spline.nodes[_spline.nodes.Count - 1].Position = lastPosition;
-            _spline.AddNode(node);
-            _lastNodeIndex++;
-            //AddedNode?.Invoke();
+            AddNode(position);
         }
+        if (IsNeedRemoveNode(1.0f, _stepBetweenSplineNodes / 2))
+        {
+            RemoveNode();
+        }
+    }
+
+    private void AddNode(Vector3 position)
+    {
+        Vector3 lastPosition = GetPositionByDistance(_spline.Length - 1);
+        SplineNode node = new SplineNode(position, _spline.nodes[_lastNodeIndex].Direction);
+        _spline.nodes[_spline.nodes.Count - 1].Position = lastPosition;
+        _spline.AddNode(node);
+        _lastNodeIndex++;
+    }
+
+    private void RemoveNode()
+    {
+        Vector3 lastPosition = _spline.nodes[_lastNodeIndex].Position;
+        _spline.RemoveNode(_spline.nodes[_lastNodeIndex]);
+        _lastNodeIndex--;
+        _spline.nodes[_lastNodeIndex].Position = lastPosition;
+    }
+
+    private void OnTargetRewining(Transform target)
+    {
+        _isRewind = true;
+        StartCoroutine(RewindSpline(target));
+    }
+
+    private void OnTargetRewindFinished(Transform targetTransform)
+    {
+        _isRewind = false;
+        targetTransform.position = _spline.nodes[_lastNodeIndex].Position;
+    }
+
+    private IEnumerator RewindSpline(Transform target)
+    {
+
+        while (_isRewind)
+        {
+            Vector3 position = GetPositionByDistance(_spline.Length - _rewindSpeed * Time.deltaTime);
+            _spline.nodes[_lastNodeIndex].Position = position;
+
+            if (IsNeedRemoveNode(1f, 0.5f))
+            {
+                RemoveNode();
+            }
+
+            target.position = _spline.nodes[_lastNodeIndex].Position;
+            _isRewind = _spline.nodes.Count > 3;
+
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
+    private bool IsNeedRemoveNode(float minDistance, float minCurveLength)
+    {
+        float distance = Vector3.Distance(_spline.nodes[_lastNodeIndex].Position, _spline.nodes[_lastNodeIndex - 1].Position);
+        return distance < minDistance && _spline.curves[_lastNodeIndex - 1].Length < minCurveLength;
     }
 }

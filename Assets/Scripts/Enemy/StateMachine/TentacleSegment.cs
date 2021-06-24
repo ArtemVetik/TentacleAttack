@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using SplineMesh;
 
@@ -7,6 +6,8 @@ using SplineMesh;
 [RequireComponent(typeof(Rigidbody))]
 public class TentacleSegment : MonoBehaviour
 {
+    public event Action EnemyFounded;
+    
     public Vector3 MeshCenterPosition => _meshBender.SelfMesh.bounds.center;
     public Transform CenterTransform
     {

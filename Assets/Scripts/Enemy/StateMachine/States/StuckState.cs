@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StuckState : State
@@ -27,6 +25,6 @@ public class StuckState : State
 
     private void Update()
     {
-        transform.rotation = Quaternion.Lerp(transform.rotation, _forwardRotation, Time.deltaTime);
+        //transform.rotation = Quaternion.Lerp(transform.rotation, _forwardRotation, Time.deltaTime);
     }
 }

@@ -3,6 +3,7 @@ using UnityEditor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Profiling;
 
 namespace SplineMesh {
     /// <summary>
@@ -291,7 +292,9 @@ namespace SplineMesh {
                 uv8);
         }
 
-        private void FillStretch() {
+        private void FillStretch() 
+        {
+            Profiler.BeginSample("FillStretch");
             var bentVertices = new List<MeshVertex>(source.Vertices.Count);
             sampleCache.Clear();
             // for each mesh vertex, we found its projection on the curve
@@ -327,6 +330,8 @@ namespace SplineMesh {
                 collider.convex = true;
                 collider.isTrigger = true;
             }
+
+            Profiler.EndSample();
         }
     }
 }
