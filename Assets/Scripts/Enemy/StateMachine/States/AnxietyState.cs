@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class AnxietyState : IdleAnxietyState
 {
-    [SerializeField] private EnemyAnimations _animations;
     [SerializeField] private ViewZoneDetector _zoneDetector;
+
+    private EnemyAnimations _animations;
+    
+    private void Awake()
+    {
+        _animations = GetComponentInChildren<EnemyAnimations>();
+    }
 
     protected override void Enable()
     {
