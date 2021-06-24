@@ -107,6 +107,7 @@ public class SplineMovement : MonoBehaviour
         while (_isRewind)
         {
             Vector3 position = GetPositionByDistance(_spline.Length - _rewindSpeed * Time.deltaTime);
+            position.z = 0;
             _spline.nodes[_lastNodeIndex].Position = position;
             SplineChanged?.Invoke();
 

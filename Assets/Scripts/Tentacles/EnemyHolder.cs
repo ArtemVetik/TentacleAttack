@@ -36,13 +36,11 @@ class EnemyHolder : MonoBehaviour
     public void AddEnemy(Enemy enemy)
     {
         _enemies.Add(enemy);
-        Debug.Log("Enemy add - " + enemy.name);
     }
 
     private void OnChangePosition()
     {
-        
-        for(int i = _enemies.Count - 1; i > 0; i--)
+        for(int i = _enemies.Count - 1; i >= 0; i--)
         {
             int stepNumber = (_enemies.Count - 1) - i;
             float distance = _spline.Length - (_startIndent + _stepBetweenEnemy * i);
@@ -50,7 +48,6 @@ class EnemyHolder : MonoBehaviour
             Vector3 position = distance > 0 ? _spline.GetSampleAtDistance(distance).location : _spline.GetSampleAtDistance(0.01f).location;
             position.y -= 1.0f;
             _enemies[i].transform.position = position;
-            Debug.Log("Enemy - " + _enemies[i].name);
         }
     }
 }
