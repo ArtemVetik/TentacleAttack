@@ -6,8 +6,6 @@ using SplineMesh;
 [RequireComponent(typeof(Rigidbody))]
 public class TentacleSegment : MonoBehaviour
 {
-    public event Action EnemyFounded;
-    
     public Vector3 MeshCenterPosition => _meshBender.SelfMesh.bounds.center;
     public Transform CenterTransform
     {
@@ -37,9 +35,4 @@ public class TentacleSegment : MonoBehaviour
         _body.isKinematic = true;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.TryGetComponent(out Enemy enemy))
-            enemy.ApplyDamage();
-    }
 }

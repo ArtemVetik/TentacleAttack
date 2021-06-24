@@ -15,6 +15,7 @@ public class SplineMovement : MonoBehaviour
     private bool _isRewind;
 
     public event Action AddedNode;
+    public event Action SplineChanged;
 
     public float SplineLength
     {
@@ -63,14 +64,12 @@ public class SplineMovement : MonoBehaviour
     private void OnTargetMoved(Vector3 position)
     {
         _spline.nodes[_lastNodeIndex].Position = position;
+        SplineChanged?.Invoke();
+
         if (_spline.curves[_lastNodeIndex - 1].Length > (_stepBetweenSplineNodes + 1))
-        {
             AddNode(position);
-        }
         if (IsNeedRemoveNode(1.0f, _stepBetweenSplineNodes / 2))
-        {
             RemoveNode();
-        }
     }
 
     private void AddNode(Vector3 position)
@@ -108,12 +107,12 @@ public class SplineMovement : MonoBehaviour
         while (_isRewind)
         {
             Vector3 position = GetPositionByDistance(_spline.Length - _rewindSpeed * Time.deltaTime);
+            position.z = 0;
             _spline.nodes[_lastNodeIndex].Position = position;
+            SplineChanged?.Invoke();
 
             if (IsNeedRemoveNode(1f, 0.5f))
-            {
                 RemoveNode();
-            }
 
             target.position = _spline.nodes[_lastNodeIndex].Position;
             _isRewind = _spline.nodes.Count > 3;
