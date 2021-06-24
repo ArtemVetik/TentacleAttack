@@ -46,7 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meshGenerator: {fileID: 1455792607966117316}
   _maxDistance: 5
-  _fov: 40
+  _angleDelta: 2
+  _fov: 35
 --- !u!1 &1455792607966117312
 GameObject:
   m_ObjectHideFlags: 0
