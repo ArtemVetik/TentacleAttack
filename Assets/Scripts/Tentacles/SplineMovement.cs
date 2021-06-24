@@ -133,4 +133,6 @@ public class SplineMovement : MonoBehaviour
     {
         gameObject.GetComponent<SplineMeshTiling>().enabled = false;
     }
+
+    
 }

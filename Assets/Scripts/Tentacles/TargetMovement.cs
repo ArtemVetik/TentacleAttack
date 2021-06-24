@@ -37,6 +37,9 @@ public class TargetMovement : MonoBehaviour
             if (Input.GetMouseButtonUp(0))
                 Rewind();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Time.timeScale = Time.timeScale == 0 ? 1 : 0;
     }
 
     private void Movement()
@@ -63,5 +66,11 @@ public class TargetMovement : MonoBehaviour
         Rewinding?.Invoke(transform);
     }
 
-    private void ToggleUsed() => _isUsed = !_isUsed;
+    private void ToggleUsed()
+    {
+        _isUsed = !_isUsed;
+        var rb = GetComponent<Rigidbody>();
+        rb.useGravity = true;
+        rb.drag = 0.5f;
+    }
 }
