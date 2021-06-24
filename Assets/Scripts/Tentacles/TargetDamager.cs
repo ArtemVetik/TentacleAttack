@@ -6,9 +6,9 @@ public class TargetDamager : MonoBehaviour
 {
     public event Action<Enemy> EnemyFounded;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.collider.TryGetComponent(out Enemy enemy))
+        if (other.TryGetComponent(out Enemy enemy))
         {
             enemy.ApplyDamage();
             EnemyFounded?.Invoke(enemy);
