@@ -1,4 +1,4 @@
-using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,6 +7,7 @@ public class ViewZoneDetector : MonoBehaviour
 {
     [SerializeField] private ViewZoneMeshGenerator _meshGenerator;
     [SerializeField] private float _maxDistance;
+    [SerializeField] private uint _angleDelta = 1;
     [SerializeField] private float _fov;
 
     public event UnityAction<RaycastHit[]> ObjectsDetected;
@@ -23,12 +24,12 @@ public class ViewZoneDetector : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var hitPointList = new List<RaycastHit>();
+        var hitPointList = new HashSet<RaycastHit>();
 
         var pointList = new List<Vector3>();
         pointList.Add(transform.position);
 
-        for (int angle = -(int)_fov; angle <= _fov; angle++)
+        for (int angle = -(int)_fov; angle <= _fov; angle += (int)_angleDelta)
         {
             float upDistance = Mathf.Tan(angle * Mathf.Deg2Rad) * _maxDistance;
             _lookTransform.localPosition = Vector3.forward * _maxDistance + Vector3.up * upDistance;
