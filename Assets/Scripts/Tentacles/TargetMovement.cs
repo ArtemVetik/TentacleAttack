@@ -10,19 +10,12 @@ public class TargetMovement : MonoBehaviour
     [SerializeField] private Joystick _joystick;
 
     private bool _isRewind;
-    private Vector3 _startPosition;
 
     public event Action<Vector3> TragetMoved;
     public event Action<Transform> Rewinding;
     public event Action<Transform> RewindFinished;
 
     private Rigidbody _body;
-
-    private void Awake()
-    {
-        _body = GetComponent<Rigidbody>();
-        _startPosition = transform.position;
-    }
 
     private void Update()
     {
@@ -39,11 +32,15 @@ public class TargetMovement : MonoBehaviour
             _isRewind = false;
             RewindFinished?.Invoke(transform);
         }
-        Vector3 translation = _joystick.Direction * _moveSpeed * Time.deltaTime;
-        transform.Translate(translation);
-        //_body.velocity = translation;
 
-        TragetMoved?.Invoke(transform.position);
+        Vector3 translation = _joystick.Direction * _moveSpeed * Time.deltaTime;
+        var hitColliders = Physics.OverlapSphere(transform.position + translation, 0.25f, 1 << LayerMask.NameToLayer("Map"));
+
+        if (hitColliders == null || hitColliders.Length == 0)
+        {
+            transform.Translate(translation);
+            TragetMoved?.Invoke(transform.position);
+        }
     }
 
     private void Rewind()
