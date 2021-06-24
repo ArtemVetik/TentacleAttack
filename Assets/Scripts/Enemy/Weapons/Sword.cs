@@ -14,7 +14,7 @@ public class Sword : MonoBehaviour
     {
         if (other.TryGetComponent(out TentacleSegment player))
         {
-            Debug.Log("Player damaged!");
+            GlobalEventStorage.TentacleAddDamageInvoke();
         }
     }
 }

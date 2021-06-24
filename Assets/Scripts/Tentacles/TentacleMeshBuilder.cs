@@ -8,8 +8,6 @@ public class TentacleMeshBuilder
     private Mesh _mesh;
     private List<Transform> _bones = new List<Transform>();
     private Transform _parentOnScene;
-    private SegmentPool _pool;
-    private bool _isFirstBuilding = true;
 
     private readonly Vector3 _defoultRotation = new Vector3(90, 0, 0);
     private const int NUMBER_OF_DECIMAL_PLACES = 2;
@@ -18,10 +16,9 @@ public class TentacleMeshBuilder
     public IEnumerable<Transform> Bones => _bones;
 
 
-    public TentacleMeshBuilder(Transform parent, SegmentPool pool)
+    public TentacleMeshBuilder(Transform parent)
     {
         _parentOnScene = parent;
-        _pool = pool;
     }
 
     public void BuildMesh(params GameObject[] gameObjects)
@@ -48,6 +45,8 @@ public class TentacleMeshBuilder
         _bones[boneIndex].parent = parent;
         _bones[boneIndex].rotation = Quaternion.Euler(_defoultRotation);
         _bones[boneIndex].position = position;
+        _bones[boneIndex].gameObject.AddComponent<BoxCollider>();
+        _bones[boneIndex].gameObject.AddComponent<Rigidbody>();
 
         Matrix4x4[] bindPoses = new Matrix4x4[_mesh.bindposes.Length + 1];
         Array.Copy(_mesh.bindposes, bindPoses, _mesh.bindposes.Length);
@@ -77,19 +76,13 @@ public class TentacleMeshBuilder
         {
             if (gameObjects[i].GetComponent<MeshFilter>() != null)
                 combine[i].mesh = gameObjects[i].GetComponent<MeshFilter>().sharedMesh;
-            else if(gameObjects[i].GetComponent<SkinnedMeshRenderer>() != null)
+            else if (gameObjects[i].GetComponent<SkinnedMeshRenderer>() != null)
                 combine[i].mesh = gameObjects[i].GetComponent<SkinnedMeshRenderer>().sharedMesh;
 
             combine[i].transform = gameObjects[i].transform.localToWorldMatrix;
         }
 
-        if (_isFirstBuilding)
-        {
-            GameObjectsSetActive(false, gameObjects);
-            _isFirstBuilding = false;
-        }
-        else
-            _pool.ReturnSegment();
+        GameObjectsSetActive(false, gameObjects);
 
         Mesh mesh = new Mesh();
         mesh.CombineMeshes(combine);

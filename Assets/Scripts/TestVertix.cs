@@ -11,8 +11,8 @@ public class TestVertix : MonoBehaviour
 
     private void OnValidate()
     {
-        //_mesh = GetComponent<MeshFilter>().sharedMesh;
-        _mesh = GetComponent<SkinnedMeshRenderer>().sharedMesh;
+        _mesh = GetComponent<MeshFilter>().sharedMesh;
+        //_mesh = GetComponent<SkinnedMeshRenderer>().sharedMesh;
     }
 
     private void Update()

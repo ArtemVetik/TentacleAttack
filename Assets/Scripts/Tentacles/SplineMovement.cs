@@ -32,6 +32,7 @@ public class SplineMovement : MonoBehaviour
         _target.TragetMoved += OnTargetMoved;
         _target.Rewinding += OnTargetRewining;
         _target.RewindFinished += OnTargetRewindFinished;
+        GlobalEventStorage.TentacleAddDamageAddListener(OnTentacleAddDamage);
     }
 
     private void OnDisable()
@@ -39,6 +40,7 @@ public class SplineMovement : MonoBehaviour
         _target.TragetMoved -= OnTargetMoved;
         _target.Rewinding -= OnTargetRewining;
         _target.RewindFinished -= OnTargetRewindFinished;
+        GlobalEventStorage.TentacleAddDamageRemoveListener(OnTentacleAddDamage);
     }
 
     private void Start()
@@ -124,5 +126,10 @@ public class SplineMovement : MonoBehaviour
     {
         float distance = Vector3.Distance(_spline.nodes[_lastNodeIndex].Position, _spline.nodes[_lastNodeIndex - 1].Position);
         return distance < minDistance && _spline.curves[_lastNodeIndex - 1].Length < minCurveLength;
+    }
+
+    private void OnTentacleAddDamage()
+    {
+        gameObject.GetComponent<SplineMeshTiling>().enabled = false;
     }
 }

@@ -10,6 +10,7 @@ public class TargetMovement : MonoBehaviour
     [SerializeField] private Joystick _joystick;
 
     private bool _isRewind;
+    private bool _isUsed = true;
 
     public event Action<Vector3> TragetMoved;
     public event Action<Transform> Rewinding;
@@ -17,12 +18,25 @@ public class TargetMovement : MonoBehaviour
 
     private Rigidbody _body;
 
+    private void Start()
+    {
+        GlobalEventStorage.TentacleAddDamageAddListener(ToggleUsed);
+    }
+
+    private void OnDisable()
+    {
+        GlobalEventStorage.TentacleAddDamageRemoveListener(ToggleUsed);
+    }
+
     private void Update()
     {
-        if (Input.GetMouseButton(0))
-            Movement();
-        if (Input.GetMouseButtonUp(0))
-            Rewind();
+        if (_isUsed)
+        {
+            if (Input.GetMouseButton(0))
+                Movement();
+            if (Input.GetMouseButtonUp(0))
+                Rewind();
+        }
     }
 
     private void Movement()
@@ -48,4 +62,6 @@ public class TargetMovement : MonoBehaviour
         _isRewind = true;
         Rewinding?.Invoke(transform);
     }
+
+    private void ToggleUsed() => _isUsed = !_isUsed;
 }
