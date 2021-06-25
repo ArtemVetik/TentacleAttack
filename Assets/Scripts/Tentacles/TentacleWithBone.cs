@@ -10,7 +10,7 @@ public class TentacleWithBone : MonoBehaviour
     [SerializeField] private Transform _parentBone;
     [SerializeField] private PhysicMaterial _material;
     private List<Transform> _bones;
-    private FABRIK _fabrik;
+    //private FABRIK _fabrik;
 
     public int BoneCount => _bones.Count;
 
@@ -18,7 +18,7 @@ public class TentacleWithBone : MonoBehaviour
     {
         _bones = new List<Transform>();
         FillingBones(_parentBone);
-        _fabrik = GetComponent<FABRIK>();
+        //_fabrik = GetComponent<FABRIK>();
 
         gameObject.SetActive(false);
     }
@@ -44,12 +44,12 @@ public class TentacleWithBone : MonoBehaviour
 
         for (int i = _bones.Count - positions.Length, j = 0; i < _bones.Count && j < positions.Length; i++, j++)
         {
-            if(hideUnnecessary)
+            if (hideUnnecessary)
             {
                 foreach (var bone in _bones.Take(_bones.Count - positions.Length))
                 {
                     bone.position = positions[0];
-                    _fabrik.solver.AddBone(bone);
+                    //_fabrik.solver.AddBone(bone);
                 }
 
                 hideUnnecessary = false;
@@ -58,13 +58,25 @@ public class TentacleWithBone : MonoBehaviour
             _bones[i].position = positions[j];
             var collider = _bones[i].gameObject.AddComponent<BoxCollider>();
             var rb = _bones[i].gameObject.AddComponent<Rigidbody>();
-            rb.mass = 1f;
-            rb.drag = 2f;
-            rb.angularDrag = 5f;
+
+            if (i != _bones.Count - positions.Length)
+            {
+                var joint = _bones[i - 1].gameObject.AddComponent<ConfigurableJoint>();
+                joint.connectedBody = rb;
+            }
+
+            //rb.mass = 1f;
+            //rb.drag = 2f;
+            //rb.angularDrag = 5f;
+
+            rb.constraints = RigidbodyConstraints.FreezePosition;
+            //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
+
             //rb.freezeRotation = true;
             collider.material = _material;
             collider.size = new Vector3(0.25f, 0.25f, 0.25f);
-            _fabrik.solver.AddBone(_bones[i]);
+            collider.center = new Vector3(0, 0.25f, 0);
+            //_fabrik.solver.AddBone(_bones[i]);
 
         }
     }
@@ -78,8 +90,5 @@ public class TentacleWithBone : MonoBehaviour
         if (parent.childCount > 0)
             FillingBones(parent.GetChild(0));
     }
-
-
-
 }
 
