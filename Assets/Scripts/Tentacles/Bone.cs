@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using SplineMesh;
 
 public class Bone : MonoBehaviour
 {
@@ -10,9 +11,10 @@ public class Bone : MonoBehaviour
 
     public Vector3 Position => transform.position;
 
-    public void SetPosition(Vector3 position, bool isActive)
+    public void SetPosition(CurveSample sample, bool isActive)
     {
-        transform.position = position;
+        transform.position = sample.location;
+        transform.rotation = sample.Rotation * Quaternion.Euler(-90,0,0);
     }
 
     public void FillingBone()
@@ -20,7 +22,7 @@ public class Bone : MonoBehaviour
         _selfRigidbody = gameObject.AddComponent<Rigidbody>();
         _selfCollider = gameObject.AddComponent<BoxCollider>();
 
-        _selfRigidbody.mass = 1.0f;
+        _selfRigidbody.mass = 0.01f;
         _selfCollider.size = _coliderSize;
     }
 }
