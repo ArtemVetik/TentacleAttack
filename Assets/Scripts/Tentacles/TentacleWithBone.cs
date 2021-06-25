@@ -1,25 +1,23 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using RootMotion.FinalIK;
 using SplineMesh;
+using System;
 
 public class TentacleWithBone : MonoBehaviour
 {
     [SerializeField] private Transform _parentBone;
     [SerializeField] private PhysicMaterial _material;
-    private List<Transform> _bones;
-    //private FABRIK _fabrik;
+    private List<Bone> _bones;
+    private float _distanceBetweenBonies;
 
     public int BoneCount => _bones.Count;
 
     private void Awake()
     {
-        _bones = new List<Transform>();
+        _bones = new List<Bone>();
         FillingBones(_parentBone);
-        //_fabrik = GetComponent<FABRIK>();
-
+        _distanceBetweenBonies = Vector3.Distance(_bones[1].Position, _bones[2].Position);
         gameObject.SetActive(false);
     }
 
@@ -28,13 +26,15 @@ public class TentacleWithBone : MonoBehaviour
         gameObject.SetActive(true);
         bool hideUnnecessary = true;
 
-        Vector3[] positions = new Vector3[spline.nodes.Count * 4 + 1];
+
+        Vector3[] positions = new Vector3[(int)(spline.Length / _distanceBetweenBonies) + 1];
+        List<Bone> activeBones = new List<Bone>();
 
         positions[0] = spline.GetSampleAtDistance(0.01f).location;
 
         for (int i = 1; i < positions.Length; i++)
         {
-            float distance = spline.Length / positions.Length * i;
+            float distance = _distanceBetweenBonies * i;
 
             if (distance > spline.Length)
                 distance = spline.Length - 0.01f;
@@ -48,44 +48,39 @@ public class TentacleWithBone : MonoBehaviour
             {
                 foreach (var bone in _bones.Take(_bones.Count - positions.Length))
                 {
-                    bone.position = positions[0];
-                    //_fabrik.solver.AddBone(bone);
+                    bone.SetPosition(positions[0], false);
                 }
-
                 hideUnnecessary = false;
             }
 
-            _bones[i].position = positions[j];
-            var collider = _bones[i].gameObject.AddComponent<BoxCollider>();
-            var rb = _bones[i].gameObject.AddComponent<Rigidbody>();
-
-            if (i != _bones.Count - positions.Length)
+            try
             {
-                var joint = _bones[i - 1].gameObject.AddComponent<ConfigurableJoint>();
-                joint.connectedBody = rb;
+                _bones[i].SetPosition(positions[j], true);
+                activeBones.Add(_bones[i]);
+                _bones[i].FillingBone();
             }
+            catch (Exception e)
+            {
 
-            //rb.mass = 1f;
-            //rb.drag = 2f;
-            //rb.angularDrag = 5f;
+            }
+        }
 
-            rb.constraints = RigidbodyConstraints.FreezePosition;
-            //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY;
-
-            //rb.freezeRotation = true;
-            collider.material = _material;
-            collider.size = new Vector3(0.25f, 0.25f, 0.25f);
-            collider.center = new Vector3(0, 0.25f, 0);
-            //_fabrik.solver.AddBone(_bones[i]);
-
+        for (int i = 0; i < activeBones.Count - 1; i++)
+        {
+            var joint = activeBones[i].gameObject.AddComponent<HingeJoint>();
+            joint.connectedBody = activeBones[i + 1].GetComponent<Rigidbody>();
+            joint.useSpring = true;
+            var spring = joint.spring;
+            spring.spring = 100;
+            spring.damper = 10;
+            joint.spring = spring;
         }
     }
 
     private void FillingBones(Transform parent)
     {
-        _bones.Add(parent);
-        //parent.gameObject.AddComponent<BoxCollider>();
-        //parent.gameObject.AddComponent<Rigidbody>();
+        var bone = parent.gameObject.AddComponent<Bone>();
+        _bones.Add(bone);
 
         if (parent.childCount > 0)
             FillingBones(parent.GetChild(0));

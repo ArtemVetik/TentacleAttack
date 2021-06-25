@@ -46,8 +46,6 @@ public class TentacleWithBoniesBuilder : MonoBehaviour
 
 
         _tentacle.ShowTentacle(_spline);
-
-        //Time.timeScale = 0;
     }
 
     //private void BuildTentacle()
