@@ -20,6 +20,7 @@ public class ViewZoneMeshGenerator : MonoBehaviour
     private void Start()
     {
         _meshRenderer.material = _renderMaterial;
+        _renderMaterial.renderQueue = 3003;
     }
 
     public void GenerateMesh(List<Vector3> points)

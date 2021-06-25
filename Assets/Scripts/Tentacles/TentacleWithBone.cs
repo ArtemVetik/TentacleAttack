@@ -27,35 +27,35 @@ public class TentacleWithBone : MonoBehaviour
         bool hideUnnecessary = true;
 
 
-        Vector3[] positions = new Vector3[(int)(spline.Length / _distanceBetweenBonies) + 1];
+        CurveSample[] samples = new CurveSample[(int)(spline.Length / _distanceBetweenBonies) + 1];
         List<Bone> activeBones = new List<Bone>();
 
-        positions[0] = spline.GetSampleAtDistance(0.01f).location;
+        samples[0] = spline.GetSampleAtDistance(0.01f);
 
-        for (int i = 1; i < positions.Length; i++)
+        for (int i = 1; i < samples.Length; i++)
         {
             float distance = _distanceBetweenBonies * i;
 
             if (distance > spline.Length)
                 distance = spline.Length - 0.01f;
 
-            positions[i] = spline.GetSampleAtDistance(distance).location;
+            samples[i] = spline.GetSampleAtDistance(distance);
         }
 
-        for (int i = _bones.Count - positions.Length, j = 0; i < _bones.Count && j < positions.Length; i++, j++)
+        for (int i = _bones.Count - samples.Length, j = 0; i < _bones.Count && j < samples.Length; i++, j++)
         {
             if (hideUnnecessary)
             {
-                foreach (var bone in _bones.Take(_bones.Count - positions.Length))
+                foreach (var bone in _bones.Take(_bones.Count - samples.Length))
                 {
-                    bone.SetPosition(positions[0], false);
+                    bone.SetPosition(samples[0], false);
                 }
                 hideUnnecessary = false;
             }
 
             try
             {
-                _bones[i].SetPosition(positions[j], true);
+                _bones[i].SetPosition(samples[j], true);
                 activeBones.Add(_bones[i]);
                 _bones[i].FillingBone();
             }

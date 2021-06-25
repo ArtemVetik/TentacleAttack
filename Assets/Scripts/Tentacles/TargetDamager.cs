@@ -12,7 +12,6 @@ public class TargetDamager : MonoBehaviour
         {
             enemy.ApplyDamage();
             EnemyFounded?.Invoke(enemy);
-            Debug.Log("Damage");
         }
     }
 }

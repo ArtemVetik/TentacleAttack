@@ -12,6 +12,7 @@ public abstract class Obstacle : MonoBehaviour
         if (other.TryGetComponent(out TentacleSegment player))
         {
             Activate();
+            GlobalEventStorage.TentacleAddDamageInvoke();
             Activated?.Invoke(this);
         }
     }
