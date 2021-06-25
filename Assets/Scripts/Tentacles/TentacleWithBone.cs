@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using RootMotion.FinalIK;
+using SplineMesh;
 
 public class TentacleWithBone : MonoBehaviour
 {
@@ -22,17 +23,34 @@ public class TentacleWithBone : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void ShowTentacle(Vector3[] positions)
+    public void ShowTentacle(Spline spline)
     {
         gameObject.SetActive(true);
         bool hideUnnecessary = true;
+
+        Vector3[] positions = new Vector3[spline.nodes.Count * 4 + 1];
+
+        positions[0] = spline.GetSampleAtDistance(0.01f).location;
+
+        for (int i = 1; i < positions.Length; i++)
+        {
+            float distance = spline.Length / positions.Length * i;
+
+            if (distance > spline.Length)
+                distance = spline.Length - 0.01f;
+
+            positions[i] = spline.GetSampleAtDistance(distance).location;
+        }
 
         for (int i = _bones.Count - positions.Length, j = 0; i < _bones.Count && j < positions.Length; i++, j++)
         {
             if(hideUnnecessary)
             {
                 foreach (var bone in _bones.Take(_bones.Count - positions.Length))
+                {
                     bone.position = positions[0];
+                    _fabrik.solver.AddBone(bone);
+                }
 
                 hideUnnecessary = false;
             }
@@ -40,9 +58,12 @@ public class TentacleWithBone : MonoBehaviour
             _bones[i].position = positions[j];
             var collider = _bones[i].gameObject.AddComponent<BoxCollider>();
             var rb = _bones[i].gameObject.AddComponent<Rigidbody>();
-            rb.mass = 0.25f;
-            rb.drag = 0.1f;
+            rb.mass = 1f;
+            rb.drag = 2f;
+            rb.angularDrag = 5f;
+            //rb.freezeRotation = true;
             collider.material = _material;
+            collider.size = new Vector3(0.25f, 0.25f, 0.25f);
             _fabrik.solver.AddBone(_bones[i]);
 
         }

@@ -45,7 +45,7 @@ public class TentacleWithBoniesBuilder : MonoBehaviour
         }
 
 
-        _tentacle.ShowTentacle(positions);
+        _tentacle.ShowTentacle(_spline);
 
         //Time.timeScale = 0;
     }
