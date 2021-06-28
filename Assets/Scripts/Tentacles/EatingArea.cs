@@ -1,14 +1,15 @@
-﻿using System.Collections;
+﻿using System;
 using UnityEngine;
 
 public class EatingArea : MonoBehaviour
 {
+    public event Action Eating;
+
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("TriggerEnter");
-
         if(other.TryGetComponent(out Enemy enemy))
         {
+            Eating?.Invoke();
             Destroy(enemy.gameObject);
         }
     }
