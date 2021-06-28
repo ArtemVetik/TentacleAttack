@@ -68,7 +68,7 @@ public class SplineMovement : MonoBehaviour
         _spline.nodes[_lastNodeIndex].Position = position;
         SplineChanged?.Invoke();
 
-        if (_spline.curves[_lastNodeIndex - 1].Length > (_stepBetweenSplineNodes + 1))
+        if (_spline.curves[_lastNodeIndex - 1].Length > (_stepBetweenSplineNodes + 1f))
             AddNode(position);
         if (IsNeedRemoveNode(1.0f, _stepBetweenSplineNodes / 2))
             RemoveNode();
@@ -76,7 +76,7 @@ public class SplineMovement : MonoBehaviour
 
     private void AddNode(Vector3 position)
     {
-        Vector3 lastPosition = GetPositionByDistance(_spline.Length - 1);
+        Vector3 lastPosition = GetPositionByDistance(_spline.Length - 1f);
         SplineNode node = new SplineNode(position, _spline.nodes[_lastNodeIndex].Direction);
         _spline.nodes[_spline.nodes.Count - 1].Position = lastPosition;
         _spline.AddNode(node);
@@ -134,5 +134,5 @@ public class SplineMovement : MonoBehaviour
         gameObject.GetComponent<SplineMeshTiling>().enabled = false;
     }
 
-    
+
 }
