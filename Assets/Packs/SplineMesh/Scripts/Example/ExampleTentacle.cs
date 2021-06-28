@@ -22,9 +22,10 @@ namespace SplineMesh {
         public float startScale = 1, endScale = 1;
         public float startRoll = 0, endRoll = 0;
 
-        private void OnValidate() {
+        private void Update() {
             // apply scale and roll at each node
             float currentLength = 0;
+
             foreach (CubicBezierCurve curve in spline.GetCurves()) {
                 float startRate = currentLength / spline.Length;
                 currentLength += curve.Length;

@@ -24,6 +24,7 @@ public class TentacleWithBone : MonoBehaviour
     public void ShowTentacle(Spline spline)
     {
         gameObject.SetActive(true);
+        
         bool hideUnnecessary = true;
 
 
@@ -71,9 +72,11 @@ public class TentacleWithBone : MonoBehaviour
             joint.connectedBody = activeBones[i + 1].GetComponent<Rigidbody>();
             joint.useSpring = true;
             var spring = joint.spring;
-            spring.spring = 100;
+            spring.spring = 10;
             spring.damper = 10;
             joint.spring = spring;
+
+            joint.axis = Vector3.forward;
         }
     }
 
