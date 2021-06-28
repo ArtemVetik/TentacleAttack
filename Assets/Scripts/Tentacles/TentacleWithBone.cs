@@ -58,7 +58,7 @@ public class TentacleWithBone : MonoBehaviour
             {
                 _bones[i].SetPosition(samples[j], true);
                 activeBones.Add(_bones[i]);
-                _bones[i].FillingBone();
+                _bones[i].FillingBone(_material);
             }
             catch (Exception e)
             {
@@ -69,11 +69,13 @@ public class TentacleWithBone : MonoBehaviour
         for (int i = 0; i < activeBones.Count - 1; i++)
         {
             var joint = activeBones[i].gameObject.AddComponent<HingeJoint>();
-            joint.connectedBody = activeBones[i + 1].GetComponent<Rigidbody>();
+            var body = activeBones[i + 1].GetComponent<Rigidbody>();
+            joint.connectedBody = body;
             joint.useSpring = true;
             var spring = joint.spring;
-            spring.spring = 10;
-            spring.damper = 10;
+            spring.spring = 100;
+            spring.damper = 5;
+            spring.targetPosition = 0;
             joint.spring = spring;
 
             joint.axis = Vector3.forward;
