@@ -40,14 +40,16 @@ class EnemyHolder : MonoBehaviour
 
     private void OnChangePosition()
     {
-        for(int i = _enemies.Count - 1; i >= 0; i--)
+        for (int i = _enemies.Count - 1; i >= 0; i--)
         {
             int stepNumber = (_enemies.Count - 1) - i;
             float distance = _spline.Length - (_startIndent + _stepBetweenEnemy * i);
 
             Vector3 position = distance > 0 ? _spline.GetSampleAtDistance(distance).location : _spline.GetSampleAtDistance(0.01f).location;
             position.y -= 1.0f;
-            _enemies[i].transform.position = position;
+
+            if (_enemies[i] != null)
+                _enemies[i].transform.position = position;
         }
     }
 }

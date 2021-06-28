@@ -1,0 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
+
+public class StartMovementTrigger : MonoBehaviour
+{
+    [SerializeField] private TargetMovement _targetMovement;
+
+    public event UnityAction MoveStarted;
+
+    private bool _isStarted = false;
+
+    private void OnEnable()
+    {
+        _targetMovement.TragetMoved += OnTargetMoved;
+    }
+
+    private void OnDisable()
+    {
+        _targetMovement.TragetMoved -= OnTargetMoved;
+    }
+
+    private void OnTargetMoved(Vector3 position)
+    {
+        if (_isStarted)
+            return;
+
+        _isStarted = true;
+        MoveStarted?.Invoke();
+    }
+}
