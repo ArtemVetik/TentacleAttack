@@ -24,7 +24,7 @@ public class ViewZoneDetector : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var hitPointList = new HashSet<RaycastHit>();
+        var hitPointList = new List<RaycastHit>((int)(_fov * 2 / _angleDelta));
 
         var pointList = new List<Vector3>();
         pointList.Add(transform.position);
@@ -41,9 +41,7 @@ public class ViewZoneDetector : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hitInfo, rayDistance))
             {
                 pointList.Add(hitInfo.point);
-
-                if (hitPointList.Contains(hitInfo) == false)
-                    hitPointList.Add(hitInfo);
+                hitPointList.Add(hitInfo);
             }
             else
             {

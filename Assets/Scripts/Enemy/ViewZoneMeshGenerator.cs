@@ -29,6 +29,12 @@ public class ViewZoneMeshGenerator : MonoBehaviour
         for (int i = 0; i < points.Count; i++)
             points[i] = transform.InverseTransformPoint(points[i]);
 
+        if (mesh.vertexCount > 0)
+        {
+            mesh.vertices = points.ToArray();
+            return;
+        }
+
         var triangles = new List<int>();
 
         for (int i = 1; i < points.Count - 1; i++)
@@ -43,7 +49,6 @@ public class ViewZoneMeshGenerator : MonoBehaviour
 
         mesh.vertices = points.ToArray();
         mesh.triangles = triangles.ToArray();
-        mesh.RecalculateNormals();
     }
 
     public void ClearMesh()
