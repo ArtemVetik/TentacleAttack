@@ -38,7 +38,11 @@ public class ViewZoneDetector : MonoBehaviour
             Ray ray = new Ray(transform.position, -1 * _lookTransform.forward);
             var rayDistance = Vector3.Distance(transform.position, _lookTransform.position);
 
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, rayDistance))
+            int cubeLayerIndex = LayerMask.NameToLayer("EnemyIgnored");
+            int layerMask = (1 << cubeLayerIndex);
+            layerMask = ~layerMask;
+
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, rayDistance, layerMask))
             {
                 pointList.Add(hitInfo.point);
                 hitPointList.Add(hitInfo);
