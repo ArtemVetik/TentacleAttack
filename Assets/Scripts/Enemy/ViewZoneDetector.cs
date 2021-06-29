@@ -24,7 +24,7 @@ public class ViewZoneDetector : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var hitPointList = new HashSet<RaycastHit>();
+        var hitPointList = new List<RaycastHit>((int)(_fov * 2 / _angleDelta));
 
         var pointList = new List<Vector3>();
         pointList.Add(transform.position);
@@ -38,12 +38,14 @@ public class ViewZoneDetector : MonoBehaviour
             Ray ray = new Ray(transform.position, -1 * _lookTransform.forward);
             var rayDistance = Vector3.Distance(transform.position, _lookTransform.position);
 
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, rayDistance))
+            int cubeLayerIndex = LayerMask.NameToLayer("EnemyIgnored");
+            int layerMask = (1 << cubeLayerIndex);
+            layerMask = ~layerMask;
+
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, rayDistance, layerMask))
             {
                 pointList.Add(hitInfo.point);
-
-                if (hitPointList.Contains(hitInfo) == false)
-                    hitPointList.Add(hitInfo);
+                hitPointList.Add(hitInfo);
             }
             else
             {
