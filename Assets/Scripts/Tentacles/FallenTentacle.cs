@@ -14,14 +14,14 @@ public class FallenTentacle : MonoBehaviour
 
         for(int i = 0; i < _bones.Count - 1; i++)
         {
-            var joint = _bones[i].gameObject.AddComponent<HingeJoint>();
-
+            var joint = _bones[i].gameObject.AddComponent<CharacterJoint>();
+            joint.axis = Vector3.forward;
             joint.connectedBody = _bones[i + 1].GetComponent<Rigidbody>();
-            joint.useSpring = true;
-            var spring = joint.spring;
-            spring.spring = 100;
-            spring.damper = 10;
-            joint.spring = spring;
+            //joint.useSpring = true;
+            //var spring = joint.spring;
+            //spring.spring = 100;
+            //spring.damper = 10;
+            //joint.spring = spring;
         }
     }
 

@@ -656,6 +656,7 @@ GameObject:
   - component: {fileID: 3233868391378342449}
   - component: {fileID: 3233868391378342450}
   - component: {fileID: 3233868391378342451}
+  - component: {fileID: 7123164306729528860}
   - component: {fileID: 3233868391378342452}
   m_Layer: 0
   m_Name: SittingRubbingArmPirate
@@ -788,6 +789,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46cf674ebbc1f2e47a4bffa804f307c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7123164306729528860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3233868391378342453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c38f0404dd4729645a1bcd5cf062e9d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!65 &3233868391378342452
