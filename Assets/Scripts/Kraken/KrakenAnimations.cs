@@ -5,7 +5,7 @@ public class KrakenAnimations : MonoBehaviour
 {
     private Animator _selfAnimator;
     private EatingArea _eatingArea;
-    private const string Eating = "Octopus_Rig|Octopus_Eating_2";
+    private const string Eating = "Octopus_Rig|Octopus_Eating_1";
 
     private void OnDisable()
     {
