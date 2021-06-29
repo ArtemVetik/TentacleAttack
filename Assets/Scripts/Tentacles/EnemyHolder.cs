@@ -51,10 +51,10 @@ class EnemyHolder : MonoBehaviour
             int stepNumber = (_enemies.Count - 1) - i;
             float distance = _spline.Length - (_startIndent + _stepBetweenEnemy * i);
 
-            Vector3 position = distance > 0 ? _spline.GetSampleAtDistance(distance).location : _spline.GetSampleAtDistance(0.01f).location;
+            var sample = distance > 0 ? _spline.GetSampleAtDistance(distance) : _spline.GetSampleAtDistance(0.01f);
 
             if (_enemies[i] != null)
-                _enemies[i].SetPosition(position);
+                _enemies[i].SetTransform(sample);
         }
     }
 
@@ -89,15 +89,18 @@ class EnemyHolder : MonoBehaviour
             _hug = hug;
         }
 
-        public void SetPosition(Vector3 position)
+        public void SetTransform(CurveSample sample)
         {
-            Vector3 enemyPosition = position;
-            enemyPosition.y -= _correctionFactor;
+            Vector3 enemyPosition = sample.location;
+            //enemyPosition.y -= _correctionFactor;
 
             if (_enemy != null)
             {
                 _enemy.position = enemyPosition;
-                _hug.position = position;
+                _enemy.localPosition -= _enemy.up * _correctionFactor;
+                _hug.position = sample.location;
+                _enemy.rotation = sample.Rotation;
+                _hug.rotation = sample.Rotation;
             }
             else
             {
