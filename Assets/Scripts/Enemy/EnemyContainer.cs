@@ -6,6 +6,8 @@ using UnityEngine.Events;
 
 public class EnemyContainer : MonoBehaviour
 {
+    public int AliveEnemyCount { get; private set; }
+
     public event UnityAction<Enemy> EnemyStucked;
 
     private List<Enemy> _allEnemies;
@@ -13,6 +15,7 @@ public class EnemyContainer : MonoBehaviour
     private void Awake()
     {
         _allEnemies = FindObjectsOfType<Enemy>().ToList();
+        AliveEnemyCount = _allEnemies.Count;
     }
 
     private void OnEnable()
@@ -29,6 +32,7 @@ public class EnemyContainer : MonoBehaviour
 
     private void OnEnemyStucked(Enemy enemy)
     {
+        AliveEnemyCount--;
         EnemyStucked?.Invoke(enemy);
     }
 }
