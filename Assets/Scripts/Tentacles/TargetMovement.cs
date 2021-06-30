@@ -17,15 +17,23 @@ public class TargetMovement : MonoBehaviour
     public event Action<Transform> RewindFinished;
 
     private Rigidbody _body;
+    private CompleteLevelTrigger _completeTrigger;
+
+    private void Awake()
+    {
+        _completeTrigger = FindObjectOfType<CompleteLevelTrigger>();
+    }
 
     private void Start()
     {
         GlobalEventStorage.TentacleAddDamageAddListener(ToggleUsed);
+        _completeTrigger.LevelCompleted += OnLevelCompleted;
     }
 
     private void OnDisable()
     {
         GlobalEventStorage.TentacleAddDamageRemoveListener(ToggleUsed);
+        _completeTrigger.LevelCompleted -= OnLevelCompleted;
     }
 
     private void Update()
@@ -72,5 +80,11 @@ public class TargetMovement : MonoBehaviour
         var rb = GetComponent<Rigidbody>();
         rb.useGravity = true;
         rb.drag = 0.5f;
+    }
+
+    private void OnLevelCompleted()
+    {
+        _isUsed = false;
+        Rewind();
     }
 }

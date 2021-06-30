@@ -182,7 +182,7 @@ namespace RootMotion.FinalIK {
 		private bool[] disabledIKComponents = new bool[0];
 
 		// Find all necessary components and initiate
-		public void Start() {
+		public void Awake() {
 			animator = GetComponent<Animator>();
 
 			allIKComponents = (IK[])GetComponentsInChildren<IK>();
