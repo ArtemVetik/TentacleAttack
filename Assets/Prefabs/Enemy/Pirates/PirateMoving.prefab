@@ -4236,8 +4236,8 @@ GameObject:
   - component: {fileID: 1306703430578487000}
   - component: {fileID: 1306703430578487001}
   - component: {fileID: 1306703430578486982}
-  - component: {fileID: 3362942328411718619}
   - component: {fileID: 1306703430578486994}
+  - component: {fileID: 1495157381634345770}
   m_Layer: 7
   m_Name: PirateRoot
   m_TagString: Untagged
@@ -4412,7 +4412,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetState: {fileID: 1306703430578487004}
-  _enemyContainer: {fileID: 0}
 --- !u!114 &1306703430578486982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4423,18 +4422,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46cf674ebbc1f2e47a4bffa804f307c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3362942328411718619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1306703430578486983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c38f0404dd4729645a1bcd5cf062e9d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!65 &1306703430578486994
@@ -4450,6 +4437,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1.5, z: 0.5}
   m_Center: {x: 0, y: 1, z: -0.08}
+--- !u!114 &1495157381634345770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1306703430578486983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92f5b5c8cf84a934fb65e33a03749dc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ragdollPirate: {fileID: 2627093478180100080, guid: d30f22977482eaf46be723d9ccc43f24, type: 3}
 --- !u!1 &1306703430578574204
 GameObject:
   m_ObjectHideFlags: 0

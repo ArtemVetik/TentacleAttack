@@ -8,7 +8,6 @@ class EnemyHolder : MonoBehaviour
     [SerializeField] private float _startIndent;
     [SerializeField] private float _stepBetweenEnemy;
     [SerializeField] private Transform _tentacleHug;
-    [SerializeField] private RagdollEnemy _ragdollTemplate;
 
     private Spline _spline;
     private SplineMovement _movement;
@@ -73,8 +72,8 @@ class EnemyHolder : MonoBehaviour
     {
         foreach (var enemy in _enemies)
         {
-            var inst = Instantiate(_ragdollTemplate, enemy.EnemyPosition, enemy.EnemyRotation);
-            inst.SetMesh(enemy.EnemySkin.SkinnedMeshRenderer.sharedMesh);
+            var ragdollTemplate = enemy.RagdollModel;
+            var inst = ragdollTemplate.InstRagdollEnemy(enemy.EnemyPosition, enemy.EnemyRotation);
             inst.EnableRagdoll();
             enemy.DestroyWithEnemy();
         }
@@ -107,7 +106,7 @@ class EnemyHolder : MonoBehaviour
 
         public Vector3 EnemyPosition => _enemy.position;
         public Quaternion EnemyRotation => _enemy.rotation;
-        public EnemySkin EnemySkin => _enemy.GetComponent<EnemySkin>();
+        public RagdollContainer RagdollModel => _enemy.GetComponent<RagdollContainer>();
 
         public Hug(Transform enemy, Transform hug)
         {
@@ -118,7 +117,6 @@ class EnemyHolder : MonoBehaviour
         public void SetTransform(CurveSample sample)
         {
             Vector3 enemyPosition = sample.location;
-            //enemyPosition.y -= _correctionFactor;
 
             if (_enemy != null)
             {

@@ -656,8 +656,8 @@ GameObject:
   - component: {fileID: 3233868391378342449}
   - component: {fileID: 3233868391378342450}
   - component: {fileID: 3233868391378342451}
-  - component: {fileID: 7123164306729528860}
   - component: {fileID: 3233868391378342452}
+  - component: {fileID: 5026028039282222107}
   m_Layer: 0
   m_Name: SittingRubbingArmPirate
   m_TagString: Untagged
@@ -778,7 +778,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetState: {fileID: 3233868391378342462}
-  _enemyContainer: {fileID: 0}
 --- !u!114 &3233868391378342451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -789,18 +788,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46cf674ebbc1f2e47a4bffa804f307c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7123164306729528860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3233868391378342453}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c38f0404dd4729645a1bcd5cf062e9d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!65 &3233868391378342452
@@ -816,6 +803,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1.5, z: 0.5}
   m_Center: {x: 0, y: 0.7, z: 0.25}
+--- !u!114 &5026028039282222107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3233868391378342453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92f5b5c8cf84a934fb65e33a03749dc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ragdollPirate: {fileID: 2627093478180100080, guid: d30f22977482eaf46be723d9ccc43f24, type: 3}
 --- !u!1 &3233868391397469657
 GameObject:
   m_ObjectHideFlags: 0

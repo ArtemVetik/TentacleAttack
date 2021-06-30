@@ -3083,8 +3083,8 @@ GameObject:
   - component: {fileID: 1558665726055133734}
   - component: {fileID: 1558665726055133735}
   - component: {fileID: 1558665726055133732}
-  - component: {fileID: 9086246542403674635}
   - component: {fileID: 1558665726055133733}
+  - component: {fileID: 4714560730890133674}
   m_Layer: 7
   m_Name: StrokeHandGesturePirate
   m_TagString: Untagged
@@ -3205,7 +3205,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetState: {fileID: 1558665726055133731}
-  _enemyContainer: {fileID: 0}
 --- !u!114 &1558665726055133732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3216,18 +3215,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46cf674ebbc1f2e47a4bffa804f307c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &9086246542403674635
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1558665726055133722}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c38f0404dd4729645a1bcd5cf062e9d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!65 &1558665726055133733
@@ -3243,6 +3230,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5, z: 1.5}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &4714560730890133674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1558665726055133722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92f5b5c8cf84a934fb65e33a03749dc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ragdollPirate: {fileID: 2627093478180100080, guid: d30f22977482eaf46be723d9ccc43f24, type: 3}
 --- !u!1 &1558665726070334156
 GameObject:
   m_ObjectHideFlags: 0

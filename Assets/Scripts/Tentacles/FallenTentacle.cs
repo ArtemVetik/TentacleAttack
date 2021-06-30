@@ -12,11 +12,10 @@ public class FallenTentacle : MonoBehaviour
     {
         FillingBones(_parent);
 
-        for(int i = 0; i < _bones.Count - 1; i++)
+        for(int i = 1; i < _bones.Count; i++)
         {
-            var joint = _bones[i].gameObject.AddComponent<CharacterJoint>();
-            joint.axis = Vector3.forward;
-            joint.connectedBody = _bones[i + 1].GetComponent<Rigidbody>();
+            var joint = _bones[i].gameObject.AddComponent<HingeJoint>();
+            joint.connectedBody = _bones[i - 1].GetComponent<Rigidbody>();
             //joint.useSpring = true;
             //var spring = joint.spring;
             //spring.spring = 100;
@@ -30,7 +29,7 @@ public class FallenTentacle : MonoBehaviour
         var collider = parent.gameObject.AddComponent<BoxCollider>();
         parent.gameObject.AddComponent<Rigidbody>();
 
-        collider.size = new Vector3(0.2f, 0.2f, 0.2f);
+        //collider.size = new Vector3(0.2f, 0.2f, 0.2f);
 
         _bones.Add(parent);
 

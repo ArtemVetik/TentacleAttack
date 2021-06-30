@@ -3093,7 +3093,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1385380963034552673}
-  - component: {fileID: 1653295366}
+  - component: {fileID: 2627093478180100080}
   m_Layer: 7
   m_Name: RagdollPirate
   m_TagString: Untagged
@@ -3116,7 +3116,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 183.228, z: 0}
---- !u!114 &1653295366
+--- !u!114 &2627093478180100080
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3125,10 +3125,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1385380963034552687}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15a4aac2aa7e2eb4abd146e1b90492bd, type: 3}
+  m_Script: {fileID: 11500000, guid: d9398f3c2311b9b4eb1ac965e8f96ca8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _ragdollUtility: {fileID: 4600671722153481761}
+  _skinnedMesh: {fileID: 1385380963346090789}
 --- !u!1 &1385380963057870467
 GameObject:
   m_ObjectHideFlags: 0
