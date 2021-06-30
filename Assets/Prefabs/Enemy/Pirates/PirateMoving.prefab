@@ -4323,7 +4323,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transitions: []
-  _stuckEffect: {fileID: 5511037330727657488, guid: eb39aca7253994b4184f8bd9af3682a3, type: 3}
 --- !u!114 &1306703430578487004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4449,7 +4448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f5b5c8cf84a934fb65e33a03749dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ragdollPirate: {fileID: 2627093478180100080, guid: d30f22977482eaf46be723d9ccc43f24, type: 3}
+  _ragdollTemplate: {fileID: 2627093478180100080, guid: d30f22977482eaf46be723d9ccc43f24, type: 3}
 --- !u!1 &1306703430578574204
 GameObject:
   m_ObjectHideFlags: 0
