@@ -56,9 +56,9 @@ public class EndGamePanel : MonoBehaviour
     private void NextScene()
     {
         int index = SceneManager.GetActiveScene().buildIndex;
-        int sceneCount = SceneManager.sceneCount;
+        int sceneCount = SceneManager.sceneCountInBuildSettings;
         index++;
-        if (index > sceneCount)
+        if (index >= sceneCount)
             index = 0;
         SceneManager.LoadScene(index);
     }
