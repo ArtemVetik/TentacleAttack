@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,6 +8,7 @@ public class EnemyContainer : MonoBehaviour
     public int AliveEnemyCount { get; private set; }
 
     public event UnityAction<Enemy> EnemyStucked;
+    public event UnityAction EnemyEnded;
 
     private List<Enemy> _allEnemies;
 
@@ -34,5 +34,10 @@ public class EnemyContainer : MonoBehaviour
     {
         AliveEnemyCount--;
         EnemyStucked?.Invoke(enemy);
+
+        if(AliveEnemyCount == 0)
+        {
+            EnemyEnded?.Invoke();
+        }
     }
 }

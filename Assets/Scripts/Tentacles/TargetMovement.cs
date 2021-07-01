@@ -17,23 +17,23 @@ public class TargetMovement : MonoBehaviour
     public event Action<Transform> RewindFinished;
 
     private Rigidbody _body;
-    private CompleteLevelTrigger _completeTrigger;
+    private EnemyContainer _enemyContainer;
 
     private void Awake()
     {
-        _completeTrigger = FindObjectOfType<CompleteLevelTrigger>();
+        _enemyContainer = FindObjectOfType<EnemyContainer>();
     }
 
     private void Start()
     {
         GlobalEventStorage.TentacleAddDamageAddListener(ToggleUsed);
-        _completeTrigger.LevelCompleted += OnLevelCompleted;
+        _enemyContainer.EnemyEnded += OnLevelCompleted;
     }
 
     private void OnDisable()
     {
         GlobalEventStorage.TentacleAddDamageRemoveListener(ToggleUsed);
-        _completeTrigger.LevelCompleted -= OnLevelCompleted;
+        _enemyContainer.EnemyEnded -= OnLevelCompleted;
     }
 
     private void Update()

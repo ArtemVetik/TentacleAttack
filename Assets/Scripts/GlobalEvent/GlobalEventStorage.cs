@@ -12,7 +12,7 @@ public static class GlobalEventStorage
 
     public static void TentacleAddDamageRemoveListener(Action method)
     {
-        TentacleAddDamage += method;
+        TentacleAddDamage -= method;
     }
 
     public static void TentacleAddDamageInvoke()

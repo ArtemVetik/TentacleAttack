@@ -16,6 +16,7 @@ public class SplineMovement : MonoBehaviour
 
     public event Action AddedNode;
     public event Action SplineChanged;
+    public event Action SplineRewinded;
 
     public float SplineLength
     {
@@ -121,6 +122,8 @@ public class SplineMovement : MonoBehaviour
 
             yield return new WaitForFixedUpdate();
         }
+
+        SplineRewinded?.Invoke();
     }
 
     private bool IsNeedRemoveNode(float minDistance, float minCurveLength)
