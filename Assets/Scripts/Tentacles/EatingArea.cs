@@ -11,7 +11,7 @@ public class EatingArea : MonoBehaviour
     {
         if(other.TryGetComponent(out Enemy enemy))
         {
-            Instantiate(_eatingEffect, enemy.transform.position + transform.forward * 2f - Vector3.forward * 2f + Vector3.up, Quaternion.identity);
+            Instantiate(_eatingEffect, other.ClosestPoint(enemy.transform.position) + Vector3.up * 3f - Vector3.forward * 5f, Quaternion.identity);
 
             Eating?.Invoke();
             Destroy(enemy.gameObject);
