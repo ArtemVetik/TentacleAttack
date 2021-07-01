@@ -7,11 +7,6 @@ public class CharactersCountView : MonoBehaviour
     [SerializeField] private TMP_Text _countView;
     [SerializeField] private EnemyContainer _container;
 
-    private void OnEnable()
-    {
-        _container.EnemyStucked += ShowCount;
-    }
-
     private void OnDisable()
     {
         _container.EnemyStucked -= ShowCount;
@@ -19,6 +14,8 @@ public class CharactersCountView : MonoBehaviour
 
     private void Start()
     {
+        _container = FindObjectOfType<EnemyContainer>();
+        _container.EnemyStucked += ShowCount;
         ShowCount(null);
     }
 
