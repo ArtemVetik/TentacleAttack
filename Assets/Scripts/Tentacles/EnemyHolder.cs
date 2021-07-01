@@ -15,6 +15,9 @@ class EnemyHolder : MonoBehaviour
     private List<Hug> _enemies;
     private const float _correctionFactor = 1.5f;
 
+    public event Action EnemyHold;
+    public event Action EnemyLeave;
+
     private void Awake()
     {
         _spline = GetComponent<Spline>();
@@ -51,6 +54,7 @@ class EnemyHolder : MonoBehaviour
             Hug hug = new Hug(enemy.transform, hugTentacle);
             hug.HugCompleat += RemoveEnemy;
             _enemies.Add(hug);
+            EnemyHold?.Invoke();
         }
     }
 
@@ -95,6 +99,7 @@ class EnemyHolder : MonoBehaviour
     private void RemoveEnemy(Hug hug)
     {
         _enemies.Remove(hug);
+        EnemyLeave?.Invoke();
     }
 
     private class Hug
@@ -135,7 +140,7 @@ class EnemyHolder : MonoBehaviour
 
         public bool Equals(Enemy enemy)
         {
-            return _enemy.GetComponent<Enemy>().Equals(enemy);
+            return enemy != null && _enemy.GetComponent<Enemy>().Equals(enemy);
         }
 
         public void DestroyWithEnemy()

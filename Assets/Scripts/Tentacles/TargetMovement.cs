@@ -17,15 +17,23 @@ public class TargetMovement : MonoBehaviour
     public event Action<Transform> RewindFinished;
 
     private Rigidbody _body;
+    private EnemyContainer _enemyContainer;
+
+    private void Awake()
+    {
+        _enemyContainer = FindObjectOfType<EnemyContainer>();
+    }
 
     private void Start()
     {
         GlobalEventStorage.TentacleAddDamageAddListener(ToggleUsed);
+        _enemyContainer.EnemyEnded += OnLevelCompleted;
     }
 
     private void OnDisable()
     {
         GlobalEventStorage.TentacleAddDamageRemoveListener(ToggleUsed);
+        _enemyContainer.EnemyEnded -= OnLevelCompleted;
     }
 
     private void Update()

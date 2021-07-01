@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class StartMovementTrigger : MonoBehaviour
 {
     [SerializeField] private TargetMovement _targetMovement;
+    [SerializeField] private GameObject[] _hiddenObjects;
 
     public event UnityAction MoveStarted;
 
@@ -28,5 +29,10 @@ public class StartMovementTrigger : MonoBehaviour
 
         _isStarted = true;
         MoveStarted?.Invoke();
+
+        foreach (var hiddenObject in _hiddenObjects)
+            hiddenObject.SetActive(false);
+
+        _targetMovement.TragetMoved -= OnTargetMoved;
     }
 }
