@@ -140,7 +140,9 @@ class EnemyHolder : MonoBehaviour
 
         public bool Equals(Enemy enemy)
         {
-            return enemy != null && _enemy.GetComponent<Enemy>().Equals(enemy);
+            if (enemy != null)
+                return _enemy.GetComponent<Enemy>().Equals(enemy);
+            return false;
         }
 
         public void DestroyWithEnemy()

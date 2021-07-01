@@ -19,6 +19,8 @@ public class TargetMovement : MonoBehaviour
     private Rigidbody _body;
     private EnemyContainer _enemyContainer;
 
+    public bool IsUsed => _isUsed;
+
     private void Awake()
     {
         _enemyContainer = FindObjectOfType<EnemyContainer>();
