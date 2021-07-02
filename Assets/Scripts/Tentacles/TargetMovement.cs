@@ -13,7 +13,7 @@ public class TargetMovement : MonoBehaviour
     private bool _isUsed = true;
 
     public event Action<Vector3> TragetMoved;
-    public event Action<Transform> Rewinding;
+    public event Action<Transform, float> Rewinding;
     public event Action<Transform> RewindFinished;
 
     private Rigidbody _body;
@@ -72,11 +72,11 @@ public class TargetMovement : MonoBehaviour
         }
     }
 
-    private void Rewind()
+    private void Rewind(float speedRate = 1f)
     {
         _body.velocity = Vector3.zero;
         _isRewind = true;
-        Rewinding?.Invoke(transform);
+        Rewinding?.Invoke(transform, speedRate);
     }
 
     private void ToggleUsed()
@@ -90,6 +90,6 @@ public class TargetMovement : MonoBehaviour
     private void OnLevelCompleted()
     {
         _isUsed = false;
-        Rewind();
+        Rewind(2f);
     }
 }

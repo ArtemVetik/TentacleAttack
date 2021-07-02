@@ -71,7 +71,7 @@ public class SplineMovement : MonoBehaviour
 
         if (_spline.curves[_lastNodeIndex - 1].Length > (_stepBetweenSplineNodes + 1f))
             AddNode(position);
-        if (IsNeedRemoveNode(1.0f, _stepBetweenSplineNodes / 2))
+        if (IsNeedRemoveNode(2.0f, _stepBetweenSplineNodes))
             RemoveNode();
     }
 
@@ -92,10 +92,10 @@ public class SplineMovement : MonoBehaviour
         _spline.nodes[_lastNodeIndex].Position = lastPosition;
     }
 
-    private void OnTargetRewining(Transform target)
+    private void OnTargetRewining(Transform target, float speedRate = 1f)
     {
         _isRewind = true;
-        StartCoroutine(RewindSpline(target));
+        StartCoroutine(RewindSpline(target, speedRate));
     }
 
     private void OnTargetRewindFinished(Transform targetTransform)
@@ -104,12 +104,12 @@ public class SplineMovement : MonoBehaviour
         targetTransform.position = _spline.nodes[_lastNodeIndex].Position;
     }
 
-    private IEnumerator RewindSpline(Transform target)
+    private IEnumerator RewindSpline(Transform target, float speedRate = 1f)
     {
 
         while (_isRewind)
         {
-            Vector3 position = GetPositionByDistance(_spline.Length - _rewindSpeed * Time.deltaTime);
+            Vector3 position = GetPositionByDistance(_spline.Length - _rewindSpeed * speedRate * Time.deltaTime);
             position.z = 0;
             _spline.nodes[_lastNodeIndex].Position = position;
             SplineChanged?.Invoke();
