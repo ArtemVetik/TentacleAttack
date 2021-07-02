@@ -24,6 +24,7 @@ public class TargetMovement : MonoBehaviour
     private void Awake()
     {
         _enemyContainer = FindObjectOfType<EnemyContainer>();
+        _body = GetComponent<Rigidbody>();
     }
 
     private void Start()
@@ -61,17 +62,19 @@ public class TargetMovement : MonoBehaviour
         }
 
         Vector3 translation = _joystick.Direction * _moveSpeed * Time.deltaTime;
-        var hitColliders = Physics.OverlapSphere(transform.position + translation, 0.25f, 1 << LayerMask.NameToLayer("Map"));
+        //var hitColliders = Physics.OverlapSphere(transform.position + translation, 0.25f, 1 << LayerMask.NameToLayer("Map"));
 
-        if (hitColliders == null || hitColliders.Length == 0)
+        //if (hitColliders == null || hitColliders.Length == 0)
         {
-            transform.Translate(translation);
+            //transform.Translate(translation / 50f);
+            _body.velocity = translation;
             TragetMoved?.Invoke(transform.position);
         }
     }
 
     private void Rewind()
     {
+        _body.velocity = Vector3.zero;
         _isRewind = true;
         Rewinding?.Invoke(transform);
     }

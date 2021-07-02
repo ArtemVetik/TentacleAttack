@@ -66,17 +66,18 @@ public class TentacleWithBone : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < activeBones.Count - 1; i++)
+        for (int i = 1; i < activeBones.Count; i++)
         {
-            var joint = activeBones[i].gameObject.AddComponent<HingeJoint>();
-            var body = activeBones[i + 1].GetComponent<Rigidbody>();
+            var joint = activeBones[i].gameObject.AddComponent<CharacterJoint>();
+            var body = activeBones[i - 1].GetComponent<Rigidbody>();
             joint.connectedBody = body;
-            joint.useSpring = true;
-            var spring = joint.spring;
-            spring.spring = 100;
-            spring.damper = 5;
-            spring.targetPosition = 0;
-            joint.spring = spring;
+
+            //joint.useSpring = true;
+            //var spring = joint.spring;
+            //spring.spring = 100;
+            //spring.damper = 5;
+            //spring.targetPosition = 0;
+            //joint.spring = spring;
 
             joint.axis = Vector3.forward;
         }
