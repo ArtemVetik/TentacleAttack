@@ -25,5 +25,6 @@ public class Bone : MonoBehaviour
         _selfRigidbody.mass = 1f;
         _selfCollider.material = material;
         _selfCollider.size = _coliderSize;
+        _selfCollider.center = Vector3.up * 0.5f;
     }
 }
