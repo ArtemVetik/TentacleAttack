@@ -23,7 +23,7 @@ public class CameraFolowing : MonoBehaviour
         _started = true;
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         if (_started == false)
             return;
