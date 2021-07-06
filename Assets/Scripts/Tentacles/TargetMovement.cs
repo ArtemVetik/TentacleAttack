@@ -61,7 +61,7 @@ public class TargetMovement : MonoBehaviour
             RewindFinished?.Invoke(transform);
         }
 
-        Vector3 translation = _joystick.Direction * _moveSpeed * Time.deltaTime;
+        Vector3 translation = _joystick.Direction * _moveSpeed * Time.fixedDeltaTime;
         //var hitColliders = Physics.OverlapSphere(transform.position + translation, 0.25f, 1 << LayerMask.NameToLayer("Map"));
 
         //if (hitColliders == null || hitColliders.Length == 0)

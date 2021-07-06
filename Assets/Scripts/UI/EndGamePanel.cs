@@ -21,6 +21,7 @@ public class EndGamePanel : MonoBehaviour
 
     private Animator _selfAnimator;
     private SplineMovement _spline;
+    private KrakenAnimations _krakenAnimations;
     private const string _openPanel = "OpeningPanel";
 
 
@@ -45,6 +46,7 @@ public class EndGamePanel : MonoBehaviour
     {
         _selfAnimator = GetComponent<Animator>();
         _spline = FindObjectOfType<SplineMovement>();
+        _krakenAnimations = FindObjectOfType<KrakenAnimations>();
         _spline.SplineRewinded += OnEnemyEnded;
     }
 
@@ -66,7 +68,10 @@ public class EndGamePanel : MonoBehaviour
     private void OnEnemyEnded()
     {
         if (_enemyContainer.AliveEnemyCount == 0)
+        {
             StartCoroutine(ShowEndPanel(true));
+            _krakenAnimations.PlayDancing();
+        }
     }
 
     private void OnKrakenDead()

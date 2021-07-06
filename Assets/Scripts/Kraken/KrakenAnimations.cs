@@ -6,6 +6,7 @@ public class KrakenAnimations : MonoBehaviour
     private Animator _selfAnimator;
     private EatingArea _eatingArea;
     private const string Eating = nameof(Eating);
+    private const string Dancing = nameof(Dancing);
 
     private void Awake()
     {
@@ -28,4 +29,8 @@ public class KrakenAnimations : MonoBehaviour
         _selfAnimator.SetTrigger(Eating);
     }
 
+    public void PlayDancing()
+    {
+        _selfAnimator.SetTrigger(Dancing);
+    }
 }
