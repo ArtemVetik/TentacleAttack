@@ -5,7 +5,7 @@ using SplineMesh;
 public class Bone : MonoBehaviour
 {
     private Rigidbody _selfRigidbody;
-    private BoxCollider _selfCollider;
+    private CapsuleCollider _selfCollider;
 
     private readonly Vector3 _coliderSize = new Vector3(0.5f, 0.5f, 0.5f);
 
@@ -14,16 +14,16 @@ public class Bone : MonoBehaviour
     public void SetPosition(CurveSample sample, bool isActive)
     {
         transform.position = sample.location;
-        transform.rotation = sample.Rotation * Quaternion.Euler(-90,0,90);
+        transform.rotation = sample.Rotation * Quaternion.Euler(90,0,0);
     }
 
     public void FillingBone(PhysicMaterial material)
     {
         _selfRigidbody = gameObject.AddComponent<Rigidbody>();
-        _selfCollider = gameObject.AddComponent<BoxCollider>();
+        _selfCollider = gameObject.AddComponent<CapsuleCollider>();
 
         _selfRigidbody.mass = 1f;
         _selfCollider.material = material;
-        _selfCollider.size = _coliderSize;
+        _selfCollider.radius = 0.3f;
     }
 }

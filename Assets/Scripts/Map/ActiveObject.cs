@@ -1,11 +1,8 @@
 ﻿using System;
 using UnityEngine;
 
-public class ActiveObject : MonoBehaviour
+public abstract class ActiveObject : MonoBehaviour
 {
-    public virtual void Action()
-    {
-
-    }
+    public abstract void Action();
 }
 

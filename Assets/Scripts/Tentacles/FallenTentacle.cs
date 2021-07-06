@@ -14,22 +14,15 @@ public class FallenTentacle : MonoBehaviour
 
         for(int i = 1; i < _bones.Count; i++)
         {
-            var joint = _bones[i].gameObject.AddComponent<HingeJoint>();
+            var joint = _bones[i].gameObject.AddComponent<CharacterJoint>();
             joint.connectedBody = _bones[i - 1].GetComponent<Rigidbody>();
-            //joint.useSpring = true;
-            //var spring = joint.spring;
-            //spring.spring = 100;
-            //spring.damper = 10;
-            //joint.spring = spring;
         }
     }
 
     private void FillingBones(Transform parent)
     {
-        var collider = parent.gameObject.AddComponent<BoxCollider>();
+        parent.gameObject.AddComponent<BoxCollider>();
         parent.gameObject.AddComponent<Rigidbody>();
-
-        //collider.size = new Vector3(0.2f, 0.2f, 0.2f);
 
         _bones.Add(parent);
 
