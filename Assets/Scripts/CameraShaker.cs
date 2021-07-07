@@ -17,14 +17,21 @@ public class CameraShaker : MonoBehaviour
 
     private void OnEnable()
     {
+        GlobalEventStorage.TentacleAddDamageAddListener(OnTentacleAddDamage);
         _enemyContainer.EnemyStucked += OnEnemyStucked;
         _obstacleContainer.ObstacleActivated += OnObstacleActivated;
     }
 
     private void OnDisable()
     {
+        GlobalEventStorage.TentacleAddDamageRemoveListener(OnTentacleAddDamage);
         _enemyContainer.EnemyStucked -= OnEnemyStucked;
         _obstacleContainer.ObstacleActivated -= OnObstacleActivated;
+    }
+
+    private void OnTentacleAddDamage(TentacleSegment segment)
+    {
+        _animator.SetTrigger("Shake");
     }
 
     private void OnEnemyStucked(Enemy enemy)

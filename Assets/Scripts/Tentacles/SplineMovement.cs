@@ -18,6 +18,7 @@ public class SplineMovement : MonoBehaviour
     public event Action AddedNode;
     public event Action SplineChanged;
     public event Action SplineRewinded;
+    public event Action FullRewinded;
 
     public float SplineLength
     {
@@ -120,7 +121,12 @@ public class SplineMovement : MonoBehaviour
                 RemoveNode();
 
             target.position = _spline.nodes[_lastNodeIndex].Position;
-            _isRewind = _spline.nodes.Count > 3;
+
+            if (_spline.nodes.Count <= 3)
+            {
+                _isRewind = false;
+                FullRewinded?.Invoke();
+            }
 
             currentSpeed = Mathf.MoveTowards(currentSpeed, _endRewindSpeed, 3f * Time.deltaTime);
             yield return new WaitForFixedUpdate();
@@ -139,6 +145,4 @@ public class SplineMovement : MonoBehaviour
     {
         gameObject.GetComponent<SplineMeshTiling>().enabled = false;
     }
-
-
 }
