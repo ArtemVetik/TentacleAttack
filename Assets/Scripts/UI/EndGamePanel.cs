@@ -27,7 +27,7 @@ public class EndGamePanel : MonoBehaviour
 
     private void OnEnable()
     {
-        GlobalEventStorage.TentacleAddDamageAddListener(OnKrakenDead);
+        GlobalEventStorage.TentacleDiedAddListener(OnKrakenDead);
 
         _repeat.onClick.AddListener(RepeatScene);
         _nextLevel.onClick.AddListener(NextScene);
@@ -35,7 +35,7 @@ public class EndGamePanel : MonoBehaviour
 
     private void OnDisable()
     {
-        GlobalEventStorage.TentacleAddDamageRemoveListener(OnKrakenDead);
+        GlobalEventStorage.TentacleDiedRemoveListener(OnKrakenDead);
         _spline.SplineRewinded -= OnEnemyEnded;
 
         _repeat.onClick.RemoveListener(RepeatScene);

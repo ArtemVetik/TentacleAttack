@@ -9,9 +9,9 @@ public abstract class Obstacle : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out TentacleSegment player))
+        if (other.TryGetComponent(out TentacleSegment segment))
         {
-            GlobalEventStorage.TentacleAddDamageInvoke();
+            GlobalEventStorage.TentacleAddDamageInvoke(segment);
             Activated?.Invoke(this);
             Activate();
         }

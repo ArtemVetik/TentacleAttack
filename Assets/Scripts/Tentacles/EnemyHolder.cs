@@ -32,7 +32,7 @@ class EnemyHolder : MonoBehaviour
 
     private void OnEnable()
     {
-        GlobalEventStorage.TentacleAddDamageAddListener(OnTentacleDamaged);
+        GlobalEventStorage.TentacleDiedAddListener(OnTentacleDied);
         _damager.EnemyFounded += AddEnemy;
         _movement.SplineChanged += OnChangePosition;
     }
@@ -41,7 +41,7 @@ class EnemyHolder : MonoBehaviour
 
     private void OnDisable()
     {
-        GlobalEventStorage.TentacleAddDamageRemoveListener(OnTentacleDamaged);
+        GlobalEventStorage.TentacleDiedRemoveListener(OnTentacleDied);
         _damager.EnemyFounded -= AddEnemy;
         _movement.SplineChanged -= OnChangePosition;
     }
@@ -72,7 +72,7 @@ class EnemyHolder : MonoBehaviour
         }
     }
 
-    private void OnTentacleDamaged()
+    private void OnTentacleDied()
     {
         foreach (var enemy in _enemies)
         {

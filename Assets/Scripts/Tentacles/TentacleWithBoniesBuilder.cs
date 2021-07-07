@@ -15,9 +15,14 @@ public class TentacleWithBoniesBuilder : MonoBehaviour
     private List<Transform> _activeBones;
     private TentacleMeshBuilder _meshBuilder;
 
+    private void OnEnable()
+    {
+        GlobalEventStorage.TentacleDiedAddListener(BuildTentacle);
+    }
+
     private void OnDisable()
     {
-        GlobalEventStorage.TentacleAddDamageRemoveListener(BuildTentacle);
+        GlobalEventStorage.TentacleDiedRemoveListener(BuildTentacle);
     }
 
     private void Start()
@@ -27,7 +32,6 @@ public class TentacleWithBoniesBuilder : MonoBehaviour
         _meshRenderer = GetComponent<SkinnedMeshRenderer>();
         _activeBones = new List<Transform>();
         _meshBuilder = new TentacleMeshBuilder(transform);
-        GlobalEventStorage.TentacleAddDamageAddListener(BuildTentacle);
     }
 
     private void BuildTentacle()

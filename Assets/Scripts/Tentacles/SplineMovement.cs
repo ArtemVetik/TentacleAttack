@@ -8,7 +8,8 @@ public class SplineMovement : MonoBehaviour
 {
     [SerializeField] private float _stepBetweenSplineNodes;
     [SerializeField] private TargetMovement _target;
-    [SerializeField] private float _rewindSpeed;
+    [SerializeField] private float _startRewindSpeed = 10;
+    [SerializeField] private float _endRewindSpeed = 30;
 
     private Spline _spline;
     private int _lastNodeIndex;
@@ -17,6 +18,7 @@ public class SplineMovement : MonoBehaviour
     public event Action AddedNode;
     public event Action SplineChanged;
     public event Action SplineRewinded;
+    public event Action FullRewinded;
 
     public float SplineLength
     {
@@ -33,7 +35,7 @@ public class SplineMovement : MonoBehaviour
         _target.TragetMoved += OnTargetMoved;
         _target.Rewinding += OnTargetRewining;
         _target.RewindFinished += OnTargetRewindFinished;
-        GlobalEventStorage.TentacleAddDamageAddListener(OnTentacleAddDamage);
+        GlobalEventStorage.TentacleDiedAddListener(OnTentacleDied);
     }
 
     private void OnDisable()
@@ -41,7 +43,7 @@ public class SplineMovement : MonoBehaviour
         _target.TragetMoved -= OnTargetMoved;
         _target.Rewinding -= OnTargetRewining;
         _target.RewindFinished -= OnTargetRewindFinished;
-        GlobalEventStorage.TentacleAddDamageRemoveListener(OnTentacleAddDamage);
+        GlobalEventStorage.TentacleDiedRemoveListener(OnTentacleDied);
     }
 
     private void Start()
@@ -106,10 +108,11 @@ public class SplineMovement : MonoBehaviour
 
     private IEnumerator RewindSpline(Transform target, float speedRate = 1f)
     {
+        var currentSpeed = _startRewindSpeed;
 
         while (_isRewind)
         {
-            Vector3 position = GetPositionByDistance(_spline.Length - _rewindSpeed * speedRate * Time.deltaTime);
+            Vector3 position = GetPositionByDistance(_spline.Length - currentSpeed * speedRate * Time.deltaTime);
             position.z = 0;
             _spline.nodes[_lastNodeIndex].Position = position;
             SplineChanged?.Invoke();
@@ -118,8 +121,14 @@ public class SplineMovement : MonoBehaviour
                 RemoveNode();
 
             target.position = _spline.nodes[_lastNodeIndex].Position;
-            _isRewind = _spline.nodes.Count > 3;
 
+            if (_spline.nodes.Count <= 3)
+            {
+                _isRewind = false;
+                FullRewinded?.Invoke();
+            }
+
+            currentSpeed = Mathf.MoveTowards(currentSpeed, _endRewindSpeed, 3f * Time.deltaTime);
             yield return new WaitForFixedUpdate();
         }
 
@@ -132,10 +141,8 @@ public class SplineMovement : MonoBehaviour
         return distance < minDistance && _spline.curves[_lastNodeIndex - 1].Length < minCurveLength;
     }
 
-    private void OnTentacleAddDamage()
+    private void OnTentacleDied()
     {
         gameObject.GetComponent<SplineMeshTiling>().enabled = false;
     }
-
-
 }
