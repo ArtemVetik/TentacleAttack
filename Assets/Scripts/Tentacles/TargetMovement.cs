@@ -18,24 +18,29 @@ public class TargetMovement : MonoBehaviour
 
     private Rigidbody _body;
     private EnemyContainer _enemyContainer;
+    private Health _health;
+    private Coroutine _damageCoroutine;
 
     public bool IsUsed => _isUsed;
 
     private void Awake()
     {
         _enemyContainer = FindObjectOfType<EnemyContainer>();
+        _health = FindObjectOfType<Health>();
         _body = GetComponent<Rigidbody>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        GlobalEventStorage.TentacleAddDamageAddListener(ToggleUsed);
+        GlobalEventStorage.TentacleAddDamageAddListener(OnAddDamage);
+        GlobalEventStorage.TentacleDiedAddListener(OnTentacleDied);
         _enemyContainer.EnemyEnded += OnLevelCompleted;
     }
 
     private void OnDisable()
     {
-        GlobalEventStorage.TentacleAddDamageRemoveListener(ToggleUsed);
+        GlobalEventStorage.TentacleAddDamageRemoveListener(OnAddDamage);
+        GlobalEventStorage.TentacleDiedRemoveListener(OnTentacleDied);
         _enemyContainer.EnemyEnded -= OnLevelCompleted;
     }
 
@@ -56,10 +61,7 @@ public class TargetMovement : MonoBehaviour
     private void Movement()
     {
         if (_isRewind)
-        {
-            _isRewind = false;
-            RewindFinished?.Invoke(transform);
-        }
+            StopRewind();
 
         Vector3 translation = _joystick.Direction * _moveSpeed * Time.fixedDeltaTime;
         //var hitColliders = Physics.OverlapSphere(transform.position + translation, 0.25f, 1 << LayerMask.NameToLayer("Map"));
@@ -79,17 +81,45 @@ public class TargetMovement : MonoBehaviour
         Rewinding?.Invoke(transform, speedRate);
     }
 
-    private void ToggleUsed()
+    private void StopRewind()
     {
-        _isUsed = !_isUsed;
-        var rb = GetComponent<Rigidbody>();
-        rb.useGravity = true;
-        rb.drag = 0.5f;
+        _isRewind = false;
+        RewindFinished?.Invoke(transform);
+    }
+
+    private void OnAddDamage()
+    {
+        if (_damageCoroutine != null)
+            return;
+
+        if (_health.TakeDamage() == false)
+            return;
+
+        _damageCoroutine = StartCoroutine(DamageRewind());
     }
 
     private void OnLevelCompleted()
     {
         _isUsed = false;
         Rewind(2f);
+    }
+
+    private void OnTentacleDied()
+    {
+        _isUsed = false;
+        var rb = GetComponent<Rigidbody>();
+        rb.useGravity = true;
+        rb.drag = 0.5f;
+    }
+
+    private IEnumerator DamageRewind()
+    {
+        _isUsed = false;
+        Rewind();
+        yield return new WaitForSeconds(2f);
+        StopRewind();
+        _isUsed = true;
+
+        _damageCoroutine = null;
     }
 }
