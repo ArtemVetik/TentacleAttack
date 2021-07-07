@@ -9,7 +9,7 @@ public class SplineMovement : MonoBehaviour
     [SerializeField] private float _stepBetweenSplineNodes;
     [SerializeField] private TargetMovement _target;
     [SerializeField] private float _startRewindSpeed = 10;
-    [SerializeField] private float _endRewindSpeed = 20;
+    [SerializeField] private float _endRewindSpeed = 30;
 
     private Spline _spline;
     private int _lastNodeIndex;
@@ -122,7 +122,7 @@ public class SplineMovement : MonoBehaviour
             target.position = _spline.nodes[_lastNodeIndex].Position;
             _isRewind = _spline.nodes.Count > 3;
 
-            currentSpeed = Mathf.MoveTowards(currentSpeed, _endRewindSpeed, 2f * Time.deltaTime);
+            currentSpeed = Mathf.MoveTowards(currentSpeed, _endRewindSpeed, 3f * Time.deltaTime);
             yield return new WaitForFixedUpdate();
         }
 

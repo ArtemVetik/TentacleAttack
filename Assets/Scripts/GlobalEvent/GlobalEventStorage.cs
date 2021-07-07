@@ -3,23 +3,23 @@ using UnityEngine;
 
 public static class GlobalEventStorage
 {
-    private static event Action TentacleAddDamage;
+    private static event Action<TentacleSegment> TentacleAddDamage;
     private static event Action TentacleDied;
 
     #region TentacleAddDamage
-    public static void TentacleAddDamageAddListener(Action method)
+    public static void TentacleAddDamageAddListener(Action<TentacleSegment> method)
     {
         TentacleAddDamage += method;
     }
 
-    public static void TentacleAddDamageRemoveListener(Action method)
+    public static void TentacleAddDamageRemoveListener(Action<TentacleSegment> method)
     {
         TentacleAddDamage -= method;
     }
 
-    public static void TentacleAddDamageInvoke()
+    public static void TentacleAddDamageInvoke(TentacleSegment segment)
     {
-        TentacleAddDamage?.Invoke();
+        TentacleAddDamage?.Invoke(segment);
     }
     #endregion
 

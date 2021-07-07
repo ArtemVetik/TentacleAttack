@@ -64,14 +64,9 @@ public class TargetMovement : MonoBehaviour
             StopRewind();
 
         Vector3 translation = _joystick.Direction * _moveSpeed * Time.fixedDeltaTime;
-        //var hitColliders = Physics.OverlapSphere(transform.position + translation, 0.25f, 1 << LayerMask.NameToLayer("Map"));
 
-        //if (hitColliders == null || hitColliders.Length == 0)
-        {
-            //transform.Translate(translation / 50f);
-            _body.velocity = translation;
-            TragetMoved?.Invoke(transform.position);
-        }
+        _body.velocity = translation;
+        TragetMoved?.Invoke(transform.position);
     }
 
     private void Rewind(float speedRate = 1f)
@@ -87,7 +82,7 @@ public class TargetMovement : MonoBehaviour
         RewindFinished?.Invoke(transform);
     }
 
-    private void OnAddDamage()
+    private void OnAddDamage(TentacleSegment segment)
     {
         if (_damageCoroutine != null)
             return;
@@ -95,7 +90,7 @@ public class TargetMovement : MonoBehaviour
         if (_health.TakeDamage() == false)
             return;
 
-        _damageCoroutine = StartCoroutine(DamageRewind());
+        _damageCoroutine = StartCoroutine(DamageRewind(segment));
     }
 
     private void OnLevelCompleted()
@@ -112,11 +107,15 @@ public class TargetMovement : MonoBehaviour
         rb.drag = 0.5f;
     }
 
-    private IEnumerator DamageRewind()
+    private IEnumerator DamageRewind(TentacleSegment segment)
     {
         _isUsed = false;
         Rewind();
-        yield return new WaitForSeconds(2f);
+        while (segment != null)
+            yield return null;
+
+        yield return new WaitForSeconds(0.3f);
+
         StopRewind();
         _isUsed = true;
 
