@@ -37,6 +37,6 @@ public enum EnemyTransitState
 {
     Patrol,
     Attack,
-    Sleep
+    Sleep,
 }
 

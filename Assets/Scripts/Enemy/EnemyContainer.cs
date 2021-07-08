@@ -12,11 +12,6 @@ public class EnemyContainer : MonoBehaviour
 
     private List<Enemy> _allEnemies;
 
-    private void OnEnable()
-    {
-        
-    }
-
     private void Awake()
     {
         _allEnemies = FindObjectsOfType<Enemy>().ToList();

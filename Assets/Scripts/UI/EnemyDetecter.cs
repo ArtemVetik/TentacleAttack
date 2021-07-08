@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -61,6 +60,7 @@ public class EnemyDetecter : MonoBehaviour
             _detecter = detecter;
 
             enemy.Transitioned += TransiteState;
+            enemy.Stucked += OnEnemyStucked;
         }
 
         public bool Equals(Enemy enemy)
@@ -78,12 +78,18 @@ public class EnemyDetecter : MonoBehaviour
 
             _detecter.transform.position = new Vector3(Mathf.Clamp(screenPosition.x, rect.xMin + _rectOffset.x, rect.xMax - _rectOffset.x),
                 Mathf.Clamp(screenPosition.y, rect.yMin + _rectOffset.y, rect.yMax - _rectOffset.y));
-
         }
 
         private void TransiteState(EnemyTransitState state)
         {
             _detecter.ChangeIcon(state); 
+        }
+
+        private void OnEnemyStucked(Enemy enemy)
+        {
+            enemy.Transitioned -= TransiteState;
+            enemy.Stucked -= OnEnemyStucked;
+            Destroy(_detecter.gameObject);
         }
     }
 }

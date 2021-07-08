@@ -50,6 +50,7 @@ public class SplineMovement : MonoBehaviour
     {
         _spline = GetComponent<Spline>();
         _lastNodeIndex = _spline.nodes.Count - 1;
+        _target.transform.position = _spline.nodes[_lastNodeIndex].Position;
     }
 
     public Vector3 GetPositionByDistance(float length)
