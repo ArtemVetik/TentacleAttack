@@ -103,6 +103,7 @@ public class TargetMovement : MonoBehaviour
     {
         _isUsed = false;
         var rb = GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
         rb.useGravity = true;
         rb.drag = 0.5f;
     }
