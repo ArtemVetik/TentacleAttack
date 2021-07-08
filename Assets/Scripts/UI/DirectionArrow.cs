@@ -16,7 +16,21 @@ public class DirectionArrow : MonoBehaviour
         _rectTransform = GetComponent<RectTransform>();
     }
 
-    private void Update()
+    private void OnEnable()
+    {
+        GlobalEventStorage.TentacleDiedAddListener(OnTentacleDied);
+        _targetMovement.TragetMoved += OnTargetMoved;
+        _targetMovement.Rewinding += OnTargetRewinding;
+    }
+
+    private void OnDisable()
+    {
+        GlobalEventStorage.TentacleDiedRemoveListener(OnTentacleDied);
+        _targetMovement.TragetMoved -= OnTargetMoved;
+        _targetMovement.Rewinding -= OnTargetRewinding;
+    }
+
+    private void OnTargetMoved(Vector3 position)
     {
         transform.position = Camera.main.WorldToScreenPoint(_targetMovement.transform.position);
 
@@ -24,5 +38,15 @@ public class DirectionArrow : MonoBehaviour
         transform.eulerAngles = Vector3.forward * angle;
 
         _rectTransform.sizeDelta = new Vector2(_maxWidth * _joystick.Direction.magnitude, _rectTransform.sizeDelta.y);
+    }
+
+    private void OnTargetRewinding(Transform target, float speedRate)
+    {
+        _rectTransform.sizeDelta *= Vector2.up; 
+    }
+
+    private void OnTentacleDied()
+    {
+        _rectTransform.sizeDelta *= Vector2.up;
     }
 }

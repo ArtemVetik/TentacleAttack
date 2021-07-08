@@ -7,12 +7,14 @@ using TMPro;
 public class DragToMovePresenter : MonoBehaviour
 {
     private SplineMovement _splineMovement;
+    private EnemyContainer _enemyContainer;
     private TMP_Text _text;
     private Coroutine _presentCoroutine;
 
     private void Awake()
     {
         _splineMovement = FindObjectOfType<SplineMovement>();
+        _enemyContainer = FindObjectOfType<EnemyContainer>();
         _text = GetComponent<TMP_Text>();
     }
 
@@ -30,6 +32,9 @@ public class DragToMovePresenter : MonoBehaviour
 
     private void OnFullRewinded()
     {
+        if (_enemyContainer.AliveEnemyCount == 0)
+            return;
+
         _presentCoroutine = StartCoroutine(PresentText(2f));
     }
 
