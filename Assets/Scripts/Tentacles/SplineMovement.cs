@@ -73,7 +73,7 @@ public class SplineMovement : MonoBehaviour
 
         if (_spline.curves[_lastNodeIndex - 1].Length > (_stepBetweenSplineNodes + 1f))
             AddNode(position);
-        if (IsNeedRemoveNode(2.0f, _stepBetweenSplineNodes))
+        if (_spline.nodes.Count > 3 && IsNeedRemoveNode(2.0f, _stepBetweenSplineNodes))
             RemoveNode();
     }
 
@@ -109,6 +109,12 @@ public class SplineMovement : MonoBehaviour
     private IEnumerator RewindSpline(Transform target, float speedRate = 1f)
     {
         var currentSpeed = _startRewindSpeed;
+
+        if (_spline.nodes.Count <= 3)
+        {
+            _isRewind = false;
+            FullRewinded?.Invoke();
+        }
 
         while (_isRewind)
         {
