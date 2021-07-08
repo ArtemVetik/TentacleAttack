@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private State _firstState;
 
     public event UnityAction<Enemy> Stucked;
+    public event UnityAction<EnemyTransitState> Transitioned;
 
     public bool IsStucked => _currentState is StuckState;
 
@@ -13,8 +14,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        _currentState = _firstState;
-        _firstState.Enter();
+        Transit(_firstState);
     }
 
     private void Update()
@@ -34,8 +34,27 @@ public class Enemy : MonoBehaviour
 
         _currentState = nextState;
 
+        ChangeStateEvent(nextState);
+
         if (_currentState != null)
             _currentState.Enter();
+    }
+
+    private void ChangeStateEvent(State nextState)
+    {
+        if(nextState is AttackState)
+        {
+            Transitioned?.Invoke(EnemyTransitState.Attack);
+        }
+        else if(nextState is IdleState)
+        {
+            Transitioned?.Invoke(EnemyTransitState.Sleep);
+        }
+        else if(nextState is PatrolState)
+        {
+            Transitioned?.Invoke(EnemyTransitState.Patrol);
+        }
+
     }
 
     public void ApplyDamage()
