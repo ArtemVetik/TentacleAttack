@@ -41,4 +41,14 @@ public class EnemyAnimations : MonoBehaviour
     {
         _animator.SetTrigger(EnemyAnimationParameter.Idle);
     }
+
+    public void PlayRotating()
+    {
+        _animator.SetBool(EnemyAnimationParameter.Rotating, true);
+    }
+
+    public void StopRotating()
+    {
+        _animator.SetBool(EnemyAnimationParameter.Rotating, false);
+    }
 }
