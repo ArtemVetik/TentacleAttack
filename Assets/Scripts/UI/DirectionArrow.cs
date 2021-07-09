@@ -14,6 +14,7 @@ public class DirectionArrow : MonoBehaviour
     {
         _targetMovement = FindObjectOfType<TargetMovement>();
         _rectTransform = GetComponent<RectTransform>();
+        OnTentacleDied();
     }
 
     private void OnEnable()
@@ -37,16 +38,16 @@ public class DirectionArrow : MonoBehaviour
         float angle = Vector2.SignedAngle(Vector2.left, _joystick.Direction);
         transform.eulerAngles = Vector3.forward * angle;
 
-        _rectTransform.sizeDelta = new Vector2(_maxWidth * _joystick.Direction.magnitude, _rectTransform.sizeDelta.y);
+        _rectTransform.sizeDelta = new Vector2(_maxWidth * _joystick.Direction.magnitude, 65.0f);
     }
 
     private void OnTargetRewinding(Transform target, float speedRate)
     {
-        _rectTransform.sizeDelta *= Vector2.up; 
+        _rectTransform.sizeDelta *= Vector2.zero; 
     }
 
     private void OnTentacleDied()
     {
-        _rectTransform.sizeDelta *= Vector2.up;
+        _rectTransform.sizeDelta *= Vector2.zero;
     }
 }

@@ -128,8 +128,8 @@ class EnemyHolder : MonoBehaviour
                 _enemy.position = enemyPosition;
                 _enemy.localPosition -= _enemy.up * _correctionFactor;
                 _hug.position = sample.location;
-                _enemy.rotation = sample.Rotation;
-                _hug.rotation = sample.Rotation;
+                _enemy.rotation = sample.Rotation /** Quaternion.Euler(-90, 0, 0)*/;
+                _hug.rotation = sample.Rotation * Quaternion.Euler(-45, 0, 0);
             }
             else
             {
