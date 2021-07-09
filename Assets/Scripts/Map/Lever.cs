@@ -7,6 +7,7 @@ public class Lever : MonoBehaviour
 {
     [SerializeField] private TriggerSpeaker _trigger;
     [SerializeField] private ActiveObject[] _activeObjects;
+    [SerializeField] private ParticleSystem _pointer;
 
     private Animator _selfAnimator;
     private bool _isUsed;
@@ -35,8 +36,10 @@ public class Lever : MonoBehaviour
             foreach (var activeObject in _activeObjects)
             {
                 activeObject.Action();
-                _selfAnimator.Play(_using);
             }
+
+            _selfAnimator.Play(_using);
+            _pointer.Stop();
         }
     }
 
