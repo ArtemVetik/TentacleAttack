@@ -209,7 +209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &186224706495218522
 Transform:
   m_ObjectHideFlags: 0
@@ -243,7 +243,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 75a95c1a6b684504c93637e35347c475, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -632,33 +632,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodes:
-  - position: {x: 3.6544192, y: -7.2, z: 0}
-    direction: {x: 2.7522645, y: -7.2, z: 0}
+  - position: {x: 5.594874, y: 7.7963, z: 0}
+    direction: {x: 3.6095526, y: 7.796855, z: 0}
     up: {x: 0, y: 1, z: 0}
     scale: {x: 1, y: 1}
     roll: 0
-  - position: {x: -2.359946, y: -7.2, z: 0}
-    direction: {x: -3.2621007, y: -7.2, z: 0}
+  - position: {x: -7.6406007, y: 7.8, z: 0}
+    direction: {x: -9.625922, y: 7.800555, z: 0}
     up: {x: 0, y: 1, z: 0}
     scale: {x: 1, y: 1}
     roll: 0
   curves:
   - n1:
-      position: {x: 3.6544192, y: -7.2, z: 0}
-      direction: {x: 2.7522645, y: -7.2, z: 0}
+      position: {x: 5.594874, y: 7.7963, z: 0}
+      direction: {x: 3.6095526, y: 7.796855, z: 0}
       up: {x: 0, y: 1, z: 0}
       scale: {x: 1, y: 1}
       roll: 0
     n2:
-      position: {x: -2.359946, y: -7.2, z: 0}
-      direction: {x: -3.2621007, y: -7.2, z: 0}
+      position: {x: -7.6406007, y: 7.8, z: 0}
+      direction: {x: -9.625922, y: 7.800555, z: 0}
       up: {x: 0, y: 1, z: 0}
       scale: {x: 1, y: 1}
       roll: 0
     Changed:
       m_PersistentCalls:
         m_Calls: []
-  Length: 6.0143657
+  Length: 13.2354765
   isLoop: 0
   CurveChanged:
     m_PersistentCalls:
@@ -705,7 +705,7 @@ Transform:
   m_GameObject: {fileID: 1306703430224955423}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1, z: 1.5}
   m_Children:
   - {fileID: 7945432281018503187}
   - {fileID: 6014003726387040900}
@@ -726,7 +726,7 @@ Animator:
   m_GameObject: {fileID: 1306703430224955423}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4a896d2a81703e14a807d650d71774a2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 51d340f625509fb46b22d78dca9fa46d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -866,7 +866,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1306703430578486983}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.01, y: -7.18, z: 0}
+  m_LocalPosition: {x: -6.25, y: 7.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1306703430224955422}
@@ -1316,7 +1316,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 84d244f5382d34e4ea928b070302fb7b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1733,7 +1733,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 396f7abc9b4541548968e21a142b20d0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2795,7 +2795,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 84d244f5382d34e4ea928b070302fb7b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2924,7 +2924,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7945432281018503187
 Transform:
   m_ObjectHideFlags: 0
