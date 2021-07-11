@@ -36,6 +36,7 @@ public class SplineMovement : MonoBehaviour
         _target.Rewinding += OnTargetRewining;
         _target.RewindFinished += OnTargetRewindFinished;
         GlobalEventStorage.TentacleDiedAddListener(OnTentacleDied);
+        GlobalEventStorage.GameEndedAddListener(OnGameEnding);
     }
 
     private void OnDisable()
@@ -44,6 +45,7 @@ public class SplineMovement : MonoBehaviour
         _target.Rewinding -= OnTargetRewining;
         _target.RewindFinished -= OnTargetRewindFinished;
         GlobalEventStorage.TentacleDiedRemoveListener(OnTentacleDied);
+        GlobalEventStorage.GameEndedRemoveListener(OnGameEnding);
     }
 
     private void Start()
@@ -151,5 +153,10 @@ public class SplineMovement : MonoBehaviour
     private void OnTentacleDied()
     {
         gameObject.GetComponent<SplineMeshTiling>().enabled = false;
+    }
+
+    private void OnGameEnding(bool isWin)
+    {
+        gameObject.SetActive(!isWin);
     }
 }

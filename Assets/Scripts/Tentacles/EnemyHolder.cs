@@ -13,7 +13,7 @@ class EnemyHolder : MonoBehaviour
     private SplineMovement _movement;
     private TargetDamager _damager;
     private List<Hug> _enemies;
-    private const float _correctionFactor = 1.5f;
+    private const float _correctionFactor = 1.75f;
 
     public event Action EnemyHold;
     public event Action EnemyLeave;
@@ -37,8 +37,6 @@ class EnemyHolder : MonoBehaviour
         _movement.SplineChanged += OnChangePosition;
     }
 
-    private void Update() { }
-
     private void OnDisable()
     {
         GlobalEventStorage.TentacleDiedRemoveListener(OnTentacleDied);
@@ -50,6 +48,7 @@ class EnemyHolder : MonoBehaviour
     {
         if (!ContainsEnemy(enemy))
         {
+            enemy.transform.localScale *= 1.25f;
             var hugTentacle = Instantiate(_tentacleHug, enemy.transform.position, Quaternion.Euler(-90, 90, 0));
             Hug hug = new Hug(enemy.transform, hugTentacle);
             hug.HugCompleat += RemoveEnemy;
@@ -62,8 +61,9 @@ class EnemyHolder : MonoBehaviour
     {
         for (int i = _enemies.Count - 1; i >= 0; i--)
         {
-            int stepNumber = (_enemies.Count - 1) - i;
-            float distance = _spline.Length - (_startIndent + _stepBetweenEnemy * i);
+            int enemyCounter = (_enemies.Count - 1) - i;
+
+            float distance = _spline.Length - (_startIndent + _stepBetweenEnemy * enemyCounter);
 
             var sample = distance > 0 ? _spline.GetSampleAtDistance(distance) : _spline.GetSampleAtDistance(0.01f);
 
