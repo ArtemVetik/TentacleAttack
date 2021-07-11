@@ -25,12 +25,12 @@ public class AttackState : State
 
     private void OnEnable()
     {
+        _weapon.gameObject.SetActive(true);
+        
         _tentacle = _container.Player;
 
         _aimIK.solver.target = _tentacle.CenterTransform;
         _aimIK.enabled = true;
-
-        _weapon.gameObject.SetActive(true);
 
         _animations.EnableAttack();
     }
@@ -52,8 +52,8 @@ public class AttackState : State
 
     private void OnDisable()
     {
-        _animations.DisableAttack();
         _weapon.gameObject.SetActive(false);
+        _animations.DisableAttack();
         _aimIK.enabled = false;
     }
 }
