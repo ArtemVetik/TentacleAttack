@@ -5,12 +5,13 @@ using UnityEngine;
 public class EnemyDetecter : MonoBehaviour
 {
     [SerializeField] private EnemyDetectorIcon _enemyDetecterIcon;
-    [SerializeField] private EnemyContainer _enemyContainer;
 
+    private EnemyContainer _enemyContainer;
     private List<Detecter> _detecters;
 
     private void Start()
     {
+        _enemyContainer = FindObjectOfType<EnemyContainer>();
         _enemyContainer.EnemyStucked += OnEnemyStickeed;
         _detecters = new List<Detecter>();
 

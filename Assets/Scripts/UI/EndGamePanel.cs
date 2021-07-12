@@ -8,7 +8,6 @@ public class EndGamePanel : MonoBehaviour
 {
     [SerializeField] private string _winMessage;
     [SerializeField] private string _looseMissage;
-    [SerializeField] private EnemyContainer _enemyContainer;
 
     [SerializeField] private TMP_Text _endMessage;
     [SerializeField] private Button _repeat;
@@ -19,9 +18,14 @@ public class EndGamePanel : MonoBehaviour
     [SerializeField] private float _delayTime;
 
     private Animator _selfAnimator;
+    private EnemyContainer _enemyContainer;
     private SplineMovement _spline;
     private const string _openPanel = "OpeningPanel";
 
+    private void Awake()
+    {
+        _enemyContainer = FindObjectOfType<EnemyContainer>();
+    }
 
     private void OnEnable()
     {
