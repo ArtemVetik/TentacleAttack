@@ -6,12 +6,6 @@ using UnityEngine;
 
 public class PatrolState : State
 {
-    private enum Direction : int
-    {
-        Left = -1,
-        Right = 1,
-    };
-
     [SerializeField] private ViewZoneDetector _viewZone;
     [SerializeField] private float _speed;
 
@@ -98,3 +92,9 @@ public class PatrolState : State
         _viewZone.Disable();
     }
 }
+public enum Direction : int
+{
+    Left = -1,
+    Right = 1,
+};
+
