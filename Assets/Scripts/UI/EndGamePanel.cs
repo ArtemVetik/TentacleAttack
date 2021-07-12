@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -26,7 +25,7 @@ public class EndGamePanel : MonoBehaviour
 
     private void OnEnable()
     {
-        GlobalEventStorage.TentacleDiedAddListener(OnKrakenDead);
+        GlobalEventStorage.GameOvering += OnLevelCompleat;
 
         _repeat.onClick.AddListener(RepeatScene);
         _nextLevel.onClick.AddListener(NextScene);
@@ -34,8 +33,8 @@ public class EndGamePanel : MonoBehaviour
 
     private void OnDisable()
     {
-        GlobalEventStorage.TentacleDiedRemoveListener(OnKrakenDead);
-        _spline.SplineRewinded -= OnEnemyEnded;
+        GlobalEventStorage.GameOvering -= OnLevelCompleat;
+        _spline.SplineRewinded -= OnLevelCompleat;
 
         _repeat.onClick.RemoveListener(RepeatScene);
         _nextLevel.onClick.RemoveListener(NextScene);
@@ -45,7 +44,7 @@ public class EndGamePanel : MonoBehaviour
     {
         _selfAnimator = GetComponent<Animator>();
         _spline = FindObjectOfType<SplineMovement>();
-        _spline.SplineRewinded += OnEnemyEnded;
+        _spline.SplineRewinded += OnLevelCompleat;
     }
 
     private void RepeatScene()
@@ -63,19 +62,13 @@ public class EndGamePanel : MonoBehaviour
         SceneManager.LoadScene(index);
     }
 
-    private void OnEnemyEnded()
+    private void OnLevelCompleat(bool isWin)
     {
-        if (_enemyContainer.AliveEnemyCount == 0)
+        if (!isWin || _enemyContainer.AliveEnemyCount == 0)
         {
-            StartCoroutine(ShowEndPanel(true));
-            GlobalEventStorage.GameEndedInvoke(true);
+            StartCoroutine(ShowEndPanel(isWin));
+            GlobalEventStorage.GameEndedInvoke(isWin);
         }
-    }
-
-    private void OnKrakenDead()
-    {
-        StartCoroutine(ShowEndPanel(false));
-        GlobalEventStorage.GameEndedInvoke(false);
     }
 
     private IEnumerator ShowEndPanel(bool isWin)

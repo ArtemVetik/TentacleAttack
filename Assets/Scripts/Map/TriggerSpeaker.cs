@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class TriggerSpeaker : MonoBehaviour
 {
     public event Action TriggerEnter;

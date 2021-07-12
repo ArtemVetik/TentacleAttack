@@ -32,7 +32,7 @@ class EnemyHolder : MonoBehaviour
 
     private void OnEnable()
     {
-        GlobalEventStorage.TentacleDiedAddListener(OnTentacleDied);
+        GlobalEventStorage.GameOvering += OnTentacleDied;
         _damager.EnemyFounded += AddEnemy;
         _movement.SplineChanged += OnChangePosition;
         _movement.FullRewinded += OnFullRewinded;
@@ -40,7 +40,7 @@ class EnemyHolder : MonoBehaviour
 
     private void OnDisable()
     {
-        GlobalEventStorage.TentacleDiedRemoveListener(OnTentacleDied);
+        GlobalEventStorage.GameOvering -= OnTentacleDied;
         _damager.EnemyFounded -= AddEnemy;
         _movement.SplineChanged -= OnChangePosition;
         _movement.FullRewinded -= OnFullRewinded;
@@ -84,14 +84,17 @@ class EnemyHolder : MonoBehaviour
         _enemies.Clear();
     }
 
-    private void OnTentacleDied()
+    private void OnTentacleDied(bool isWin)
     {
-        foreach (var enemy in _enemies)
+        if (!isWin)
         {
-            var ragdollTemplate = enemy.RagdollModel;
-            var inst = ragdollTemplate.InstRagdollEnemy(enemy.EnemyPosition, enemy.EnemyRotation);
-            inst.EnableRagdoll();
-            enemy.DestroyWithEnemy();
+            foreach (var enemy in _enemies)
+            {
+                var ragdollTemplate = enemy.RagdollModel;
+                var inst = ragdollTemplate.InstRagdollEnemy(enemy.EnemyPosition, enemy.EnemyRotation);
+                inst.EnableRagdoll();
+                enemy.DestroyWithEnemy();
+            }
         }
     }
 

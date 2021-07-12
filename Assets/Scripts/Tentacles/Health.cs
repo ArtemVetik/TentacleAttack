@@ -24,7 +24,7 @@ public class Health : MonoBehaviour
 
         if (Value == 0)
         {
-            GlobalEventStorage.TentacleDiedInvoke();
+            GlobalEventStorage.GameOveringInvoke(false);
             return false;
         }
 

@@ -14,19 +14,19 @@ public class DirectionArrow : MonoBehaviour
     {
         _targetMovement = FindObjectOfType<TargetMovement>();
         _rectTransform = GetComponent<RectTransform>();
-        OnTentacleDied();
+        OnTentacleDied(false);
     }
 
     private void OnEnable()
     {
-        GlobalEventStorage.TentacleDiedAddListener(OnTentacleDied);
+        GlobalEventStorage.GameOvering += OnTentacleDied;
         _targetMovement.TragetMoved += OnTargetMoved;
         _targetMovement.Rewinding += OnTargetRewinding;
     }
 
     private void OnDisable()
     {
-        GlobalEventStorage.TentacleDiedRemoveListener(OnTentacleDied);
+        GlobalEventStorage.GameOvering -= OnTentacleDied;
         _targetMovement.TragetMoved -= OnTargetMoved;
         _targetMovement.Rewinding -= OnTargetRewinding;
     }
@@ -46,7 +46,7 @@ public class DirectionArrow : MonoBehaviour
         _rectTransform.sizeDelta *= Vector2.zero; 
     }
 
-    private void OnTentacleDied()
+    private void OnTentacleDied(bool isWin)
     {
         _rectTransform.sizeDelta *= Vector2.zero;
     }
