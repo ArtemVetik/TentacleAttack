@@ -13,7 +13,7 @@ public class HidingSawTrap : ActiveObject
     [SerializeField] private HideSide _hideSide;
     [SerializeField] private bool _isMoving;
     [SerializeField] private float _speed;
-    
+
     private Animator _selfAnimator;
     private Spline _spline;
     private Coroutine _moving;
@@ -24,10 +24,13 @@ public class HidingSawTrap : ActiveObject
     {
         _selfAnimator = GetComponent<Animator>();
         _spline = GetComponentInParent<Spline>();
+    }
 
-        if(_isMoving && _spline != null)
+    private void Start()
+    {
+        if (_isMoving && _spline != null)
         {
-            _distanceCovered = 0.01f;
+            _distanceCovered = 0f;
             _direction = Direction.Right;
             transform.position = _spline.GetSampleAtDistance(_distanceCovered).location;
 
@@ -38,17 +41,22 @@ public class HidingSawTrap : ActiveObject
     public override void Action()
     {
         string stringValue = Enum.GetName(typeof(HideSide), _hideSide);
-        StopCoroutine(_moving);
+        if (_moving != null)
+        {
+            StopCoroutine(_moving);
+            _moving = null;
+        }
+
         _selfAnimator.SetTrigger(stringValue);
     }
 
     private IEnumerator Moving()
-    {     
-        while(true)
+    {
+        while (true)
         {
             _distanceCovered += _speed * Time.deltaTime * (int)_direction;
 
-            if(_distanceCovered >= _spline.Length || _distanceCovered < 0)
+            if (_distanceCovered >= _spline.Length || _distanceCovered < 0)
             {
                 _direction = _direction == Direction.Left ? Direction.Right : Direction.Left;
                 _distanceCovered = _distanceCovered < 0 ? 0 : _spline.Length - 0.01f;
