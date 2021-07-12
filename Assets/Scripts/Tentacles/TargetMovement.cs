@@ -32,15 +32,15 @@ public class TargetMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        GlobalEventStorage.TentacleAddDamageAddListener(OnAddDamage);
-        GlobalEventStorage.TentacleDiedAddListener(OnTentacleDied);
+        GlobalEventStorage.TentacleAddDamage += OnAddDamage;
+        GlobalEventStorage.GameOvering += OnTentacleDied;
         _enemyContainer.EnemyEnded += OnLevelCompleted;
     }
 
     private void OnDisable()
     {
-        GlobalEventStorage.TentacleAddDamageRemoveListener(OnAddDamage);
-        GlobalEventStorage.TentacleDiedRemoveListener(OnTentacleDied);
+        GlobalEventStorage.TentacleAddDamage -= OnAddDamage;
+        GlobalEventStorage.GameOvering -= OnTentacleDied;
         _enemyContainer.EnemyEnded -= OnLevelCompleted;
     }
 
@@ -99,13 +99,16 @@ public class TargetMovement : MonoBehaviour
         Rewind(2f, 2f);
     }
 
-    private void OnTentacleDied()
+    private void OnTentacleDied(bool isWin)
     {
-        _isUsed = false;
-        var rb = GetComponent<Rigidbody>();
-        rb.velocity = Vector3.zero;
-        rb.useGravity = true;
-        rb.drag = 0.5f;
+        if (!isWin)
+        {
+            _isUsed = false;
+            var rb = GetComponent<Rigidbody>();
+            rb.velocity = Vector3.zero;
+            rb.useGravity = true;
+            rb.drag = 0.5f;
+        }
     }
 
     private IEnumerator DamageRewind(TentacleSegment segment)

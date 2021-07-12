@@ -3,21 +3,12 @@ using UnityEngine;
 
 public static class GlobalEventStorage
 {
-    private static event Action<TentacleSegment> TentacleAddDamage;
-    private static event Action TentacleDied;
-    private static event Action<bool> GameEnding;
+    public static event Action<TentacleSegment> TentacleAddDamage;
+    public static event Action<bool> GameOvering;
+    public static event Action<bool> GameEnded;
+
 
     #region TentacleAddDamage
-    public static void TentacleAddDamageAddListener(Action<TentacleSegment> method)
-    {
-        TentacleAddDamage += method;
-    }
-
-    public static void TentacleAddDamageRemoveListener(Action<TentacleSegment> method)
-    {
-        TentacleAddDamage -= method;
-    }
-
     public static void TentacleAddDamageInvoke(TentacleSegment segment)
     {
         TentacleAddDamage?.Invoke(segment);
@@ -25,37 +16,18 @@ public static class GlobalEventStorage
     #endregion
 
     #region TentacleDied
-    public static void TentacleDiedAddListener(Action method)
-    {
-        TentacleDied += method;
-    }
 
-    public static void TentacleDiedRemoveListener(Action method)
+    public static void GameOveringInvoke(bool isWin)
     {
-        TentacleDied -= method;
-    }
-
-    public static void TentacleDiedInvoke()
-    {
-        TentacleDied?.Invoke();
+        GameOvering?.Invoke(isWin);
     }
     #endregion
 
     #region EndGame
 
-    public static void GameEndedAddListener(Action<bool> method)
-    {
-        GameEnding += method;
-    }
-
-    public static void GameEndedRemoveListener(Action<bool> method)
-    {
-        GameEnding -= method;
-    }
-
     public static void GameEndedInvoke(bool isWin)
     {
-        GameEnding?.Invoke(isWin);
+        GameEnded?.Invoke(isWin);
     }
 
     #endregion

@@ -17,13 +17,13 @@ public class KrakenAnimations : MonoBehaviour
     private void OnEnable()
     {
         _eatingArea.Eating += OnEating;
-        GlobalEventStorage.GameEndedAddListener(PlayDancing);
+        GlobalEventStorage.GameEnded += PlayDancing;
     }
 
     private void OnDisable()
     {
         _eatingArea.Eating -= OnEating;
-        GlobalEventStorage.GameEndedRemoveListener(PlayDancing);
+        GlobalEventStorage.GameEnded -= PlayDancing;
     }
 
     private void OnEating()

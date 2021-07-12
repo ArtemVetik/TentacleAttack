@@ -17,7 +17,7 @@ public class SplineMovement : MonoBehaviour
 
     public event Action AddedNode;
     public event Action SplineChanged;
-    public event Action SplineRewinded;
+    public event Action<bool> SplineRewinded;
     public event Action FullRewinded;
 
     public float SplineLength
@@ -35,8 +35,8 @@ public class SplineMovement : MonoBehaviour
         _target.TragetMoved += OnTargetMoved;
         _target.Rewinding += OnTargetRewining;
         _target.RewindFinished += OnTargetRewindFinished;
-        GlobalEventStorage.TentacleDiedAddListener(OnTentacleDied);
-        GlobalEventStorage.GameEndedAddListener(OnGameEnding);
+        GlobalEventStorage.GameOvering += OnTentacleDied;
+        GlobalEventStorage.GameEnded += OnGameEnding;
     }
 
     private void OnDisable()
@@ -44,8 +44,8 @@ public class SplineMovement : MonoBehaviour
         _target.TragetMoved -= OnTargetMoved;
         _target.Rewinding -= OnTargetRewining;
         _target.RewindFinished -= OnTargetRewindFinished;
-        GlobalEventStorage.TentacleDiedRemoveListener(OnTentacleDied);
-        GlobalEventStorage.GameEndedRemoveListener(OnGameEnding);
+        GlobalEventStorage.GameOvering -= OnTentacleDied;
+        GlobalEventStorage.GameEnded -= OnGameEnding;
     }
 
     private void Start()
@@ -141,7 +141,7 @@ public class SplineMovement : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        SplineRewinded?.Invoke();
+        SplineRewinded?.Invoke(true);
     }
 
     private bool IsNeedRemoveNode(float minDistance, float minCurveLength)
@@ -150,9 +150,12 @@ public class SplineMovement : MonoBehaviour
         return distance < minDistance && _spline.curves[_lastNodeIndex - 1].Length < minCurveLength;
     }
 
-    private void OnTentacleDied()
+    private void OnTentacleDied(bool isWin)
     {
-        gameObject.GetComponent<SplineMeshTiling>().enabled = false;
+        if (!isWin)
+        {
+            gameObject.GetComponent<SplineMeshTiling>().enabled = false;
+        }
     }
 
     private void OnGameEnding(bool isWin)
