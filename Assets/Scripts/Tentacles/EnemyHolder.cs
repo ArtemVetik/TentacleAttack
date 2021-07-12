@@ -35,6 +35,7 @@ class EnemyHolder : MonoBehaviour
         GlobalEventStorage.TentacleDiedAddListener(OnTentacleDied);
         _damager.EnemyFounded += AddEnemy;
         _movement.SplineChanged += OnChangePosition;
+        _movement.FullRewinded += OnFullRewinded;
     }
 
     private void OnDisable()
@@ -42,6 +43,7 @@ class EnemyHolder : MonoBehaviour
         GlobalEventStorage.TentacleDiedRemoveListener(OnTentacleDied);
         _damager.EnemyFounded -= AddEnemy;
         _movement.SplineChanged -= OnChangePosition;
+        _movement.FullRewinded -= OnFullRewinded;
     }
 
     public void AddEnemy(Enemy enemy)
@@ -51,7 +53,6 @@ class EnemyHolder : MonoBehaviour
             enemy.transform.localScale *= 1.25f;
             var hugTentacle = Instantiate(_tentacleHug, enemy.transform.position, Quaternion.Euler(-90, 90, 0));
             Hug hug = new Hug(enemy.transform, hugTentacle);
-            hug.HugCompleat += RemoveEnemy;
             _enemies.Add(hug);
             EnemyHold?.Invoke();
         }
@@ -70,6 +71,17 @@ class EnemyHolder : MonoBehaviour
             if (_enemies[i] != null)
                 _enemies[i].SetTransform(sample);
         }
+    }
+
+    private void OnFullRewinded()
+    {
+        for (int i = 0; i < _enemies.Count; i++)
+        {
+            _enemies[i].DestroyHug();
+            EnemyLeave?.Invoke();
+        }
+
+        _enemies.Clear();
     }
 
     private void OnTentacleDied()
@@ -96,18 +108,10 @@ class EnemyHolder : MonoBehaviour
         return false;
     }
 
-    private void RemoveEnemy(Hug hug)
-    {
-        _enemies.Remove(hug);
-        EnemyLeave?.Invoke();
-    }
-
     private class Hug
     {
         private Transform _enemy;
         private Transform _hug;
-
-        public event Action<Hug> HugCompleat;
 
         public Vector3 EnemyPosition => _enemy.position;
         public Quaternion EnemyRotation => _enemy.rotation;
@@ -128,13 +132,8 @@ class EnemyHolder : MonoBehaviour
                 _enemy.position = enemyPosition;
                 _enemy.localPosition -= _enemy.up * _correctionFactor;
                 _hug.position = sample.location;
-                _enemy.rotation = sample.Rotation /** Quaternion.Euler(-90, 0, 0)*/;
+                _enemy.rotation = sample.Rotation;
                 _hug.rotation = sample.Rotation * Quaternion.Euler(-45, 0, 0);
-            }
-            else
-            {
-                Destroy(_hug.gameObject);
-                HugCompleat?.Invoke(this);
             }
         }
 
@@ -143,6 +142,11 @@ class EnemyHolder : MonoBehaviour
             if (enemy != null)
                 return _enemy.GetComponent<Enemy>().Equals(enemy);
             return false;
+        }
+
+        public void DestroyHug()
+        {
+            Destroy(_hug.gameObject);
         }
 
         public void DestroyWithEnemy()

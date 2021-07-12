@@ -97,10 +97,10 @@ public class SplineMovement : MonoBehaviour
         _spline.nodes[_lastNodeIndex].Position = lastPosition;
     }
 
-    private void OnTargetRewining(Transform target, float speedRate = 1f)
+    private void OnTargetRewining(Transform target, float speedRate = 1f, float accelerationRate = 1f)
     {
         _isRewind = true;
-        StartCoroutine(RewindSpline(target, speedRate));
+        StartCoroutine(RewindSpline(target, speedRate, accelerationRate));
     }
 
     private void OnTargetRewindFinished(Transform targetTransform)
@@ -109,7 +109,7 @@ public class SplineMovement : MonoBehaviour
         targetTransform.position = _spline.nodes[_lastNodeIndex].Position;
     }
 
-    private IEnumerator RewindSpline(Transform target, float speedRate = 1f)
+    private IEnumerator RewindSpline(Transform target, float speedRate = 1f, float accelerationRate = 1f)
     {
         var currentSpeed = _startRewindSpeed;
 
@@ -121,7 +121,7 @@ public class SplineMovement : MonoBehaviour
 
         while (_isRewind)
         {
-            Vector3 position = GetPositionByDistance(_spline.Length - currentSpeed * speedRate * Time.deltaTime);
+            Vector3 position = GetPositionByDistance(_spline.Length - currentSpeed * Time.deltaTime);
             position.z = 0;
             _spline.nodes[_lastNodeIndex].Position = position;
             SplineChanged?.Invoke();
@@ -137,7 +137,7 @@ public class SplineMovement : MonoBehaviour
                 FullRewinded?.Invoke();
             }
 
-            currentSpeed = Mathf.MoveTowards(currentSpeed, _endRewindSpeed, 3f * Time.deltaTime);
+            currentSpeed = Mathf.MoveTowards(currentSpeed, _endRewindSpeed * speedRate, 3f * accelerationRate * Time.deltaTime);
             yield return new WaitForFixedUpdate();
         }
 

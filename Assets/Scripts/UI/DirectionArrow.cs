@@ -41,7 +41,7 @@ public class DirectionArrow : MonoBehaviour
         _rectTransform.sizeDelta = new Vector2(_maxWidth * _joystick.Direction.magnitude, 65.0f);
     }
 
-    private void OnTargetRewinding(Transform target, float speedRate)
+    private void OnTargetRewinding(Transform target, float speedRate, float accelerationRate)
     {
         _rectTransform.sizeDelta *= Vector2.zero; 
     }
