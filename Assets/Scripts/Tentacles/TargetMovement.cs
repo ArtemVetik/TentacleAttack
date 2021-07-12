@@ -20,6 +20,7 @@ public class TargetMovement : MonoBehaviour
     private EnemyContainer _enemyContainer;
     private Health _health;
     private Coroutine _damageCoroutine;
+    private bool _isLastLevel;
 
     public bool IsUsed => _isUsed;
 
@@ -28,20 +29,25 @@ public class TargetMovement : MonoBehaviour
         _enemyContainer = FindObjectOfType<EnemyContainer>();
         _health = FindObjectOfType<Health>();
         _body = GetComponent<Rigidbody>();
+        _isLastLevel = FindObjectOfType<KrakenChild>();
     }
 
     private void OnEnable()
     {
         GlobalEventStorage.TentacleAddDamage += OnAddDamage;
         GlobalEventStorage.GameOvering += OnTentacleDied;
-        _enemyContainer.EnemyEnded += OnLevelCompleted;
+
+        if (!_isLastLevel)
+            _enemyContainer.EnemyEnded += OnLevelCompleted;
     }
 
     private void OnDisable()
     {
         GlobalEventStorage.TentacleAddDamage -= OnAddDamage;
         GlobalEventStorage.GameOvering -= OnTentacleDied;
-        _enemyContainer.EnemyEnded -= OnLevelCompleted;
+
+        if (!_isLastLevel)
+            _enemyContainer.EnemyEnded -= OnLevelCompleted;
     }
 
     private void Update()

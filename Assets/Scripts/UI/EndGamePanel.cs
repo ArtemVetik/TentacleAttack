@@ -20,6 +20,7 @@ public class EndGamePanel : MonoBehaviour
 
     private Animator _selfAnimator;
     private SplineMovement _spline;
+    private bool _isLastLevel;
     private const string _openPanel = "OpeningPanel";
 
 
@@ -43,8 +44,11 @@ public class EndGamePanel : MonoBehaviour
     private void Start()
     {
         _selfAnimator = GetComponent<Animator>();
+        _isLastLevel = FindObjectOfType<KrakenChild>();
         _spline = FindObjectOfType<SplineMovement>();
-        _spline.SplineRewinded += OnLevelCompleat;
+
+        if (!_isLastLevel)
+            _spline.SplineRewinded += OnLevelCompleat;
     }
 
     private void RepeatScene()
@@ -64,7 +68,7 @@ public class EndGamePanel : MonoBehaviour
 
     private void OnLevelCompleat(bool isWin)
     {
-        if (!isWin || _enemyContainer.AliveEnemyCount == 0)
+        if (EndGameConditions(isWin))
         {
             StartCoroutine(ShowEndPanel(isWin));
             GlobalEventStorage.GameEndedInvoke(isWin);
@@ -78,5 +82,10 @@ public class EndGamePanel : MonoBehaviour
         _endMessage.SetText(isWin ? _winMessage : _looseMissage);
         _endMessage.color = isWin ? _winColor : _looseColor;
         _selfAnimator.Play(_openPanel);
+    }
+
+    private bool EndGameConditions(bool isWin)
+    {
+        return !isWin || _isLastLevel || _enemyContainer.AliveEnemyCount == 0;
     }
 }
