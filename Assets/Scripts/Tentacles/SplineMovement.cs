@@ -119,9 +119,10 @@ public class SplineMovement : MonoBehaviour
             FullRewinded?.Invoke();
         }
 
+        Vector3 position;
         while (_isRewind)
         {
-            Vector3 position = GetPositionByDistance(_spline.Length - currentSpeed * Time.deltaTime);
+            position = GetPositionByDistance(_spline.Length - currentSpeed * Time.deltaTime);
             position.z = 0;
             _spline.nodes[_lastNodeIndex].Position = position;
             SplineChanged?.Invoke();
@@ -138,7 +139,7 @@ public class SplineMovement : MonoBehaviour
             }
 
             currentSpeed = Mathf.MoveTowards(currentSpeed, _endRewindSpeed * speedRate, 3f * accelerationRate * Time.deltaTime);
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForEndOfFrame();
         }
 
         SplineRewinded?.Invoke(true);

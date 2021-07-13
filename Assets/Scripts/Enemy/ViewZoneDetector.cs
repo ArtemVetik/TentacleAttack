@@ -7,7 +7,7 @@ public class ViewZoneDetector : MonoBehaviour
 {
     [SerializeField] private ViewZoneMeshGenerator _meshGenerator;
     [SerializeField] private float _maxDistance;
-    [SerializeField] private uint _angleDelta = 1;
+    [SerializeField] private uint _angleDelta = 2;
     [SerializeField] private float _fov;
 
     public event UnityAction<RaycastHit[]> ObjectsDetected;
@@ -22,7 +22,7 @@ public class ViewZoneDetector : MonoBehaviour
         _lookTransform.rotation = Quaternion.identity;
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         var hitPointList = new List<RaycastHit>((int)(_fov * 2 / _angleDelta));
 

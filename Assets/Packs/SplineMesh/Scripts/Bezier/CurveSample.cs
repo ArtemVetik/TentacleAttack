@@ -20,6 +20,7 @@ namespace SplineMesh {
         public readonly CubicBezierCurve curve;
 
         private Quaternion rotation;
+        private static Quaternion Yrotation = Quaternion.Euler(0, -90, 0);
 
         /// <summary>
         /// Rotation is a look-at quaternion calculated from the tangent, roll and up vector. Mixing non zero roll and custom up vector is not advised.
@@ -31,12 +32,12 @@ namespace SplineMesh {
 
                 return second * first;
 
-                if (rotation == Quaternion.identity) {
-                    var upVector = Vector3.Cross(tangent, Vector3.Cross(Quaternion.AngleAxis(roll, Vector3.forward) * up, tangent).normalized);
-                    rotation = Quaternion.LookRotation(tangent, upVector);
-                }
+                //if (rotation == Quaternion.identity) {
+                //    var upVector = Vector3.Cross(tangent, Vector3.Cross(Quaternion.AngleAxis(roll, Vector3.forward) * up, tangent).normalized);
+                //    rotation = Quaternion.LookRotation(tangent, upVector);
+                //}
 
-                return rotation;
+                //return rotation;
             }
         }
 
@@ -105,14 +106,15 @@ namespace SplineMesh {
             res.position = Vector3.Scale(res.position, new Vector3(0, scale.y, scale.x));
 
             // application of roll
-            res.position = Quaternion.AngleAxis(roll, Vector3.right) * res.position;
-            res.normal = Quaternion.AngleAxis(roll, Vector3.right) * res.normal;
+            var angleAxis = Quaternion.AngleAxis(roll, Vector3.right);
+            res.position = angleAxis * res.position;
+            res.normal = angleAxis * res.normal;
 
             // reset X value
             res.position.x = 0;
 
             // application of the rotation + location
-            Quaternion q = Rotation * Quaternion.Euler(0, -90, 0);
+            Quaternion q = Rotation * Yrotation;
             res.position = q * res.position + location;
             res.normal = q * res.normal;
             return res;
