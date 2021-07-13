@@ -33,4 +33,9 @@ public class CameraFolowing : MonoBehaviour
 
         transform.position = nextPosition;
     }
+
+    public void ChangeZPosition(float zPosition)
+    {
+        _targetPositionZ = zPosition;
+    }
 }
