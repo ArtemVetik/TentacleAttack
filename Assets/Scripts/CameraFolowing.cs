@@ -47,7 +47,7 @@ public class CameraFolowing : MonoBehaviour
         if(_endGamePoint != null && isWin)
         {
             _followTarget = _endGamePoint;
-            _targetPositionZ = 0.0f;
+            _targetPositionZ = _endGamePoint.position.z;
         }
     }
 }
