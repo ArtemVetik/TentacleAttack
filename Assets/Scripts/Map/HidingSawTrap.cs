@@ -27,7 +27,7 @@ public class HidingSawTrap : ActiveObject
 
         if(_isMoving && _spline != null)
         {
-            _distanceCovered = 0;
+            _distanceCovered = 0.01f;
             _direction = Direction.Right;
             transform.position = _spline.GetSampleAtDistance(_distanceCovered).location;
 
