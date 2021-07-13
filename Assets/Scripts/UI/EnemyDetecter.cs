@@ -51,7 +51,7 @@ public class EnemyDetecter : MonoBehaviour
         private Transform _enemyTransform;
         private EnemyDetectorIcon _detecter;
 
-        private readonly Vector2 _rectOffset = new Vector2(100, 100);
+        private readonly Vector2 _rectOffset = new Vector2(50, 50);
 
         public bool IsEnemyLife => _enemyTransform != null;
 
