@@ -24,13 +24,13 @@ public class Setting : MonoBehaviour
     {
         _settingPanel.SetActive(!_settingPanel.activeSelf);
 
-        if (!_isFilling)
-        {
-            _level1.onClick.AddListener(LoadScene1);
-            _level2.onClick.AddListener(LoadScene2);
-            _level3.onClick.AddListener(LoadScene3);
-            _isFilling = true;
-        }
+        //if (!_isFilling)
+        //{
+        //    _level1.onClick.AddListener(LoadScene1);
+        //    _level2.onClick.AddListener(LoadScene2);
+        //    _level3.onClick.AddListener(LoadScene3);
+        //    _isFilling = true;
+        //}
     }
 
     private void LoadScene1() => LoadScene(0);
@@ -39,8 +39,13 @@ public class Setting : MonoBehaviour
 
     private void LoadScene3() => LoadScene(2);
 
-    private void LoadScene(int index)
+    public void LoadScene(int index)
     {
         SceneManager.LoadScene(index);
+    }
+
+    public void LoadScene(string name)
+    {
+        SceneManager.LoadScene(name);
     }
 }
