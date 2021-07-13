@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObstacleDamagedTransition : Transition
 {
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.TryGetComponent(out Obstacle obstacle))
             NeedTransit = true;

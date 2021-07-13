@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class KrakenChild : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem _findedEffect;
+
     private Animator _selfAnimator;
     private TriggerSpeaker _triggerSpeaker;
     private const string Happy = nameof(Happy);
@@ -18,6 +20,8 @@ public class KrakenChild : MonoBehaviour
     {
         GlobalEventStorage.GameOveringInvoke(true);
         _selfAnimator.SetTrigger(Happy);
+
+        Instantiate(_findedEffect, transform.position, _findedEffect.transform.rotation);
     }
 
 }
