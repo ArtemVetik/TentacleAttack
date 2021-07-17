@@ -10,6 +10,7 @@ public class EndGamePanel : MonoBehaviour
     [SerializeField] private string _looseMissage;
 
     [SerializeField] private TMP_Text _endMessage;
+    [SerializeField] private TMP_Text _scoreView;
     [SerializeField] private Button _repeat;
     [SerializeField] private Button _nextLevel;
     [SerializeField] private Color _winColor;
@@ -55,6 +56,12 @@ public class EndGamePanel : MonoBehaviour
             _spline.SplineRewinded += OnLevelCompleat;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+            PlayerPrefs.DeleteAll();
+    }
+
     private void RepeatScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -67,6 +74,8 @@ public class EndGamePanel : MonoBehaviour
         index++;
         if (index >= sceneCount)
             index = 0;
+
+        SaveDataBase.SetCurrentLevel(index);
         SceneManager.LoadScene(index);
     }
 
@@ -85,6 +94,10 @@ public class EndGamePanel : MonoBehaviour
 
         _endMessage.SetText(isWin ? _winMessage : _looseMissage);
         _endMessage.color = isWin ? _winColor : _looseColor;
+
+        _nextLevel.gameObject.SetActive(isWin);
+        _scoreView.gameObject.SetActive(isWin);
+
         _selfAnimator.Play(_openPanel);
     }
 

@@ -12,6 +12,7 @@ public class SplineMovement : MonoBehaviour
     [SerializeField] private float _endRewindSpeed = 30;
 
     private Spline _spline;
+    private Coroutine _rewindCoroutine;
     private int _lastNodeIndex;
     private bool _isRewind;
 
@@ -99,8 +100,11 @@ public class SplineMovement : MonoBehaviour
 
     private void OnTargetRewining(Transform target, float speedRate = 1f, float accelerationRate = 1f)
     {
+        if (_rewindCoroutine != null)
+            StopCoroutine(_rewindCoroutine);
+
         _isRewind = true;
-        StartCoroutine(RewindSpline(target, speedRate, accelerationRate));
+        _rewindCoroutine = StartCoroutine(RewindSpline(target, speedRate, accelerationRate));
     }
 
     private void OnTargetRewindFinished(Transform targetTransform)
@@ -139,7 +143,7 @@ public class SplineMovement : MonoBehaviour
             }
 
             currentSpeed = Mathf.MoveTowards(currentSpeed, _endRewindSpeed * speedRate, 3f * accelerationRate * Time.deltaTime);
-            yield return new WaitForEndOfFrame();
+            yield return null;
         }
 
         SplineRewinded?.Invoke(true);

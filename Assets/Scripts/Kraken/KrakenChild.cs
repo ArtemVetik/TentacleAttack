@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class KrakenChild : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem _findedEffect;
+    [SerializeField] private ParticleSystem _foundedEffect;
+
+    public event UnityAction Released;
 
     private Animator _selfAnimator;
     private TriggerSpeaker _triggerSpeaker;
@@ -18,10 +21,11 @@ public class KrakenChild : MonoBehaviour
 
     private void OnTriggerSpeakerEnter()
     {
+        Released?.Invoke();
         GlobalEventStorage.GameOveringInvoke(true);
         _selfAnimator.SetTrigger(Happy);
 
-        Instantiate(_findedEffect, transform.position, _findedEffect.transform.rotation);
+        Instantiate(_foundedEffect, transform.position, _foundedEffect.transform.rotation);
     }
 
 }
