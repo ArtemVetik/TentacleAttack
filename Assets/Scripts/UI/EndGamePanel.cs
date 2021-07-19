@@ -40,7 +40,7 @@ public class EndGamePanel : MonoBehaviour
     private void OnDisable()
     {
         GlobalEventStorage.GameOvering -= OnLevelCompleat;
-        _spline.SplineRewinded -= OnLevelCompleat;
+        _spline.FullRewinded -= OnLevelCompleat;
 
         _repeat.onClick.RemoveListener(RepeatScene);
         _nextLevel.onClick.RemoveListener(NextScene);
@@ -53,7 +53,7 @@ public class EndGamePanel : MonoBehaviour
         _spline = FindObjectOfType<SplineMovement>();
 
         if (!_isLastLevel)
-            _spline.SplineRewinded += OnLevelCompleat;
+            _spline.FullRewinded += OnLevelCompleat;
     }
 
     private void Update()
