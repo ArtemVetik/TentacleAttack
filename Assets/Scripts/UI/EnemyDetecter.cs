@@ -77,8 +77,7 @@ public class EnemyDetecter : MonoBehaviour
         public void UpdateDetecterPosition()
         {
             Vector3 iconPosition = _enemyTransform.position;
-            Quaternion enemyRotation = _enemyTransform.rotation;
-            //iconPosition.y += 2;
+            iconPosition.y += 2;
 
             Vector3 screenPosition = Camera.main.WorldToScreenPoint(iconPosition);
             Vector3 targetPosition = Camera.main.WorldToScreenPoint(_parentDetector._target.position);
@@ -92,11 +91,10 @@ public class EnemyDetecter : MonoBehaviour
                 _detecter.transform.position = new Vector3(Mathf.Clamp(screenPosition.x, rect.xMin + _rectOffset.x, rect.xMax - _rectOffset.x),
                     Mathf.Clamp(screenPosition.y, rect.yMin + _rectOffset.y, rect.yMax - _rectOffset.y));
 
-                Vector3 direction = targetPosition - screenPosition;
-                var rotation = Quaternion.LookRotation(direction, _parentDetector._vectorUp);
-                rotation.eulerAngles = new Vector3(0, 0, rotation.eulerAngles.z - 90);
+                Vector3 direction = (screenPosition - targetPosition).normalized;
+                float angle = Vector2.SignedAngle(Vector2.right, direction);
 
-                _detecter.transform.rotation = Quaternion.Lerp(_detecter.transform.rotation, rotation, 10f * Time.deltaTime);
+                _detecter.transform.eulerAngles = Vector3.forward * angle;
             }
         }
 
