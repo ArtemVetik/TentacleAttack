@@ -17,19 +17,6 @@ public class LevelScorePresenter : MonoBehaviour
 
     private void OnEnable()
     {
-        GlobalEventStorage.GameEnded += OnGameEnded;
-    }
-
-    private void OnDisable()
-    {
-        GlobalEventStorage.GameEnded -= OnGameEnded;
-    }
-
-    private void OnGameEnded(bool isWin)
-    {
-        if (isWin == false)
-            return;
-
         _scoreText.text = _score.Value.ToString();
         _score.SaveScore();
     }

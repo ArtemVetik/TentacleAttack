@@ -523,33 +523,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodes:
-  - position: {x: -4.4217, y: 7.35, z: 0}
-    direction: {x: -4.920176, y: 7.3605676, z: 0}
+  - position: {x: -3.079293, y: 7.35, z: 0}
+    direction: {x: -3.7791302, y: 7.3605676, z: 0}
     up: {x: 0, y: 1, z: 0}
     scale: {x: 1, y: 1}
     roll: 0
   - position: {x: -7.744874, y: 7.4204497, z: 0}
-    direction: {x: -8.24335, y: 7.4310174, z: 0}
+    direction: {x: -8.444711, y: 7.4310174, z: 0}
     up: {x: 0, y: 1, z: 0}
     scale: {x: 1, y: 1}
     roll: 0
   curves:
   - n1:
-      position: {x: -4.4217, y: 7.35, z: 0}
-      direction: {x: -4.920176, y: 7.3605676, z: 0}
+      position: {x: -3.079293, y: 7.35, z: 0}
+      direction: {x: -3.7791302, y: 7.3605676, z: 0}
       up: {x: 0, y: 1, z: 0}
       scale: {x: 1, y: 1}
       roll: 0
     n2:
       position: {x: -7.744874, y: 7.4204497, z: 0}
-      direction: {x: -8.24335, y: 7.4310174, z: 0}
+      direction: {x: -8.444711, y: 7.4310174, z: 0}
       up: {x: 0, y: 1, z: 0}
       scale: {x: 1, y: 1}
       roll: 0
     Changed:
       m_PersistentCalls:
         m_Calls: []
-  Length: 3.3239207
+  Length: 4.666113
   isLoop: 0
   CurveChanged:
     m_PersistentCalls:
@@ -971,7 +971,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1.9, z: 0.5}
-  m_Center: {x: 0, y: 0.9, z: -0.08}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &1495157381634345770
 MonoBehaviour:
   m_ObjectHideFlags: 0

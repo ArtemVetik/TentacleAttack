@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Animator))]
 public class HealthPresenter : MonoBehaviour
 {
     [SerializeField] private Health _health;
-    [SerializeField] private TMP_Text _textValue;
     
     private Animator _selfAnimator;
+    private List<Image> _images;
 
     private void Awake()
     {
         _selfAnimator = GetComponent<Animator>();
+        _images = GetComponentsInChildren<Image>().ToList();
     }
 
     private void OnEnable()
@@ -28,17 +31,23 @@ public class HealthPresenter : MonoBehaviour
 
     private void Start()
     {
-        UpdateTextValue();
+        UpdateHealthRender();
     }
 
     private void OnDamaged()
     {
-        UpdateTextValue();
+        UpdateHealthRender();
         _selfAnimator.SetTrigger("Damaged");
     }
 
-    private void UpdateTextValue()
+    private void UpdateHealthRender()
     {
-        _textValue.text = _health.Value.ToString();
+        var health = _health.Value;
+
+        foreach (var image in _images)
+            image.gameObject.SetActive(false);
+
+        for (int i = 0; i < health; i++)
+            _images[i].gameObject.SetActive(true);
     }
 }

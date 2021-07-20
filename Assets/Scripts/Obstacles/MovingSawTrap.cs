@@ -6,6 +6,8 @@ public class MovingSawTrap : ActiveObject
 {
     [SerializeField] private float _speed;
     [SerializeField] private ParticleSystem _destroyEffect;
+    [SerializeField] private bool _moveAwake = false;
+    [SerializeField] private bool _destroyWnenActivate = false;
 
     private Spline _spline;
     private Coroutine _moving;
@@ -22,11 +24,33 @@ public class MovingSawTrap : ActiveObject
         transform.position = _spline.GetSampleAtDistance(0).location;
         _distanceCovered = 0f;
         _direction = Direction.Right;
+
+        if (_moveAwake)
+            enabled = true;
+    }
+
+    private void Update()
+    {
+        _distanceCovered += _speed * Time.deltaTime * (int)_direction;
+
+        if (_distanceCovered >= _spline.Length)
+            _direction = Direction.Left;
+        else if (_distanceCovered <= 0)
+            _direction = Direction.Right;
+
+        _distanceCovered = Mathf.Clamp(_distanceCovered, 0, _spline.Length);
+
+        transform.position = _spline.GetSampleAtDistance(_distanceCovered).location;
     }
 
     public override void Action()
     {
-        _moving = StartCoroutine(Moving());
+        enabled = false;
+
+        if (_destroyWnenActivate)
+            DestroySaw();
+        else
+            _moving = StartCoroutine(Moving());
     }
 
     private IEnumerator Moving()
