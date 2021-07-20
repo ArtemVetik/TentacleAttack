@@ -25,8 +25,7 @@ public class MovingSawTrap : ActiveObject
         _distanceCovered = 0f;
         _direction = Direction.Right;
 
-        if (_moveAwake)
-            enabled = true;
+        enabled = _moveAwake;
     }
 
     private void Update()

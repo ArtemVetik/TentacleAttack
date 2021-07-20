@@ -33,11 +33,13 @@ public class DirectionArrow : MonoBehaviour
 
     private void OnTargetMoved(Vector3 position)
     {
+        if (Time.timeScale == 0)
+            return;
+
         transform.position = Camera.main.WorldToScreenPoint(_targetMovement.transform.position);
 
         float angle = Vector2.SignedAngle(Vector2.left, _joystick.Direction);
         transform.eulerAngles = Vector3.forward * angle;
-
         _rectTransform.sizeDelta = new Vector2(_maxWidth * _joystick.Direction.magnitude, 65.0f);
     }
 

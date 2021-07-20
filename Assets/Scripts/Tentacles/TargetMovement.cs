@@ -6,9 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class TargetMovement : MonoBehaviour
 {
-    [SerializeField] private float _moveSpeed;
     [SerializeField] private Joystick _joystick;
 
+    private float _moveSpeed = 5;
     private bool _isRewind;
     private bool _isUsed = true;
 
@@ -52,6 +52,8 @@ public class TargetMovement : MonoBehaviour
 
     private void Update()
     {
+        //Application.targetFrameRate = 10;
+
         if (_isUsed)
         {
             if (Input.GetMouseButton(0))
@@ -69,7 +71,7 @@ public class TargetMovement : MonoBehaviour
         if (_isRewind)
             StopRewind();
 
-        Vector3 translation = _joystick.Direction * _moveSpeed * Time.fixedDeltaTime;
+        Vector3 translation = _joystick.Direction * _moveSpeed;
 
         _body.velocity = translation;
         TragetMoved?.Invoke(transform.position);

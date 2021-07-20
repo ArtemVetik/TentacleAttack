@@ -3,41 +3,60 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(Button))]
 public class Setting : MonoBehaviour
 {
     [SerializeField] private GameObject _settingPanel;
-    [SerializeField] private Button _level1;
-    [SerializeField] private Button _level2;
-    [SerializeField] private Button _level3;
+    [SerializeField] private Toggle _soundToggle;
+    [SerializeField] private Toggle _vibrationToggle;
 
     private Button _settingBtn;
-    private bool _isFilling;
+
+    private void Awake()
+    {
+        _settingBtn = GetComponent<Button>();
+    }
+
+    private void OnEnable()
+    {
+        _settingBtn.onClick.AddListener(ShowSettingPanel);
+        _soundToggle.onValueChanged.AddListener(OnSoundSettingsChanged);
+        _vibrationToggle.onValueChanged.AddListener(OnVibrationSettingsChanged);
+    }
+
+    private void OnDisable()
+    {
+        _settingBtn.onClick.RemoveListener(ShowSettingPanel);
+        _soundToggle.onValueChanged.RemoveListener(OnSoundSettingsChanged);
+        _vibrationToggle.onValueChanged.RemoveListener(OnVibrationSettingsChanged);
+    }
 
     private void Start()
     {
-        _settingBtn = GetComponent<Button>();
-        _settingBtn.onClick.AddListener(ShowSettingPanel);
-
+        _soundToggle.isOn = SaveDataBase.GetSoundSetting();
     }
 
     private void ShowSettingPanel()
     {
-        _settingPanel.SetActive(!_settingPanel.activeSelf);
-
-        //if (!_isFilling)
-        //{
-        //    _level1.onClick.AddListener(LoadScene1);
-        //    _level2.onClick.AddListener(LoadScene2);
-        //    _level3.onClick.AddListener(LoadScene3);
-        //    _isFilling = true;
-        //}
+        Time.timeScale = 0;
+        _settingPanel.SetActive(true);
     }
 
-    private void LoadScene1() => LoadScene(0);
+    public void CloseSettingsPanel()
+    {
+        Time.timeScale = 1;
+        _settingPanel.SetActive(false);
+    }
 
-    private void LoadScene2() => LoadScene(1);
+    private void OnSoundSettingsChanged(bool isActive)
+    {
+        SaveDataBase.SetSound(isActive);
+    }
 
-    private void LoadScene3() => LoadScene(2);
+    private void OnVibrationSettingsChanged(bool isActive)
+    {
+        SaveDataBase.SetVibration(isActive);
+    }
 
     public void LoadScene(int index)
     {

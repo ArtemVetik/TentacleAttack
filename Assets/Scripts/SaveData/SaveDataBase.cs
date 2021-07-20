@@ -7,6 +7,8 @@ public static class SaveDataBase
 {
     private const string ScoreKey = nameof(ScoreKey);
     private const string CurrentLevel = nameof(CurrentLevel);
+    private const string SoundSetting = nameof(SoundSetting);
+    private const string VibrationSetting = nameof(VibrationSetting);
 
     public static int GetScore()
     {
@@ -32,5 +34,31 @@ public static class SaveDataBase
     public static void SetCurrentLevel(int buildIndex)
     {
         PlayerPrefs.SetInt(CurrentLevel, buildIndex);
+    }
+
+    public static void SetSound(bool isActive)
+    {
+        PlayerPrefs.SetInt(SoundSetting, isActive ? 1 : 0);
+    }
+
+    public static bool GetSoundSetting()
+    {
+        if (PlayerPrefs.HasKey(SoundSetting) == false)
+            return true;
+
+        return PlayerPrefs.GetInt(SoundSetting) == 1;
+    }
+
+    public static void SetVibration(bool isActive)
+    {
+        PlayerPrefs.SetInt(VibrationSetting, isActive ? 1 : 0);
+    }
+
+    public static bool GetVibrationSetting()
+    {
+        if (PlayerPrefs.HasKey(VibrationSetting) == false)
+            return true;
+
+        return PlayerPrefs.GetInt(VibrationSetting) == 1;
     }
 }
