@@ -8,17 +8,20 @@ public class EnemyDetecter : MonoBehaviour
 
     private EnemyContainer _enemyContainer;
     private List<Detecter> _detecters;
+    private Transform _target;
+    [SerializeField] private Vector3 _vectorUp;
 
     private void Start()
     {
         _enemyContainer = FindObjectOfType<EnemyContainer>();
         _enemyContainer.EnemyStucked += OnEnemyStickeed;
         _detecters = new List<Detecter>();
+        _target = FindObjectOfType<TargetMovement>().transform;
 
         for (int i = 0; i < _enemyContainer.AliveEnemyCount; i++)
         {
             Enemy enemy = _enemyContainer.GetEnemy(i);
-            Detecter detecter = new Detecter(enemy, Instantiate(_enemyDetecterIcon, this.transform));
+            Detecter detecter = new Detecter(enemy, Instantiate(_enemyDetecterIcon, this.transform), this);
 
             _detecters.Add(detecter);
         }
@@ -50,15 +53,17 @@ public class EnemyDetecter : MonoBehaviour
     {
         private Transform _enemyTransform;
         private EnemyDetectorIcon _detecter;
+        private EnemyDetecter _parentDetector;
 
         private readonly Vector2 _rectOffset = new Vector2(50, 50);
 
         public bool IsEnemyLife => _enemyTransform != null;
 
-        public Detecter(Enemy enemy, EnemyDetectorIcon detecter)
+        public Detecter(Enemy enemy, EnemyDetectorIcon detecter, EnemyDetecter parentDetector)
         {
             _enemyTransform = enemy.transform;
             _detecter = detecter;
+            _parentDetector = parentDetector;
 
             enemy.Transitioned += TransiteState;
             enemy.Stucked += OnEnemyStucked;
@@ -72,18 +77,32 @@ public class EnemyDetecter : MonoBehaviour
         public void UpdateDetecterPosition()
         {
             Vector3 iconPosition = _enemyTransform.position;
-            iconPosition.y += 2;
+            Quaternion enemyRotation = _enemyTransform.rotation;
+            //iconPosition.y += 2;
 
             Vector3 screenPosition = Camera.main.WorldToScreenPoint(iconPosition);
+            Vector3 targetPosition = Camera.main.WorldToScreenPoint(_parentDetector._target.position);
             Rect rect = Camera.main.pixelRect;
 
-            _detecter.transform.position = new Vector3(Mathf.Clamp(screenPosition.x, rect.xMin + _rectOffset.x, rect.xMax - _rectOffset.x),
-                Mathf.Clamp(screenPosition.y, rect.yMin + _rectOffset.y, rect.yMax - _rectOffset.y));
+            _detecter.gameObject.SetActive(!rect.Contains(screenPosition));
+
+            if (_detecter.gameObject.activeSelf)
+            {
+                _detecter.gameObject.SetActive(true);
+                _detecter.transform.position = new Vector3(Mathf.Clamp(screenPosition.x, rect.xMin + _rectOffset.x, rect.xMax - _rectOffset.x),
+                    Mathf.Clamp(screenPosition.y, rect.yMin + _rectOffset.y, rect.yMax - _rectOffset.y));
+
+                Vector3 direction = targetPosition - screenPosition;
+                var rotation = Quaternion.LookRotation(direction, _parentDetector._vectorUp);
+                rotation.eulerAngles = new Vector3(0, 0, rotation.eulerAngles.z - 90);
+
+                _detecter.transform.rotation = Quaternion.Lerp(_detecter.transform.rotation, rotation, 10f * Time.deltaTime);
+            }
         }
 
         private void TransiteState(EnemyTransitState state)
         {
-            _detecter.ChangeIcon(state); 
+            _detecter.ChangeIcon(state);
         }
 
         private void OnEnemyStucked(Enemy enemy)
