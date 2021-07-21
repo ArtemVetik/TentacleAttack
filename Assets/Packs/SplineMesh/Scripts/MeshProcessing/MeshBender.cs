@@ -360,6 +360,7 @@ namespace SplineMesh
             foreach (var vert in source.Vertices)
             {
                 distanceRate = source.Length == 0 ? 0 : Math.Abs(vert.position.x - source.MinX) / source.Length;
+
                 if (!sampleCache.TryGetValue(distanceRate, out sample))
                 {
                     if (!useSpline)
