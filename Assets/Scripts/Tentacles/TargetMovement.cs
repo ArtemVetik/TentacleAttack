@@ -52,8 +52,6 @@ public class TargetMovement : MonoBehaviour
 
     private void Update()
     {
-        //Application.targetFrameRate = 10;
-
         if (_isUsed)
         {
             if (Input.GetMouseButton(0))
@@ -72,8 +70,8 @@ public class TargetMovement : MonoBehaviour
             StopRewind();
 
         Vector3 translation = _joystick.Direction * _moveSpeed;
-
         _body.velocity = translation;
+
         TragetMoved?.Invoke(transform.position);
     }
 
