@@ -244,8 +244,8 @@ namespace SplineMesh
             MeshUtility.Update(result,
                 source.Mesh,
                 source.Triangles,
-                bentVertices.Select(b => b.position),
-                bentVertices.Select(b => b.normal));
+                bentVertices.Select(b => b.position).ToArray(),
+                bentVertices.Select(b => b.normal).ToArray());
         }
 
         private void FillRepeat()
@@ -323,11 +323,20 @@ namespace SplineMesh
                 offset += source.Length;
             }
 
+            Vector3[] positions = new Vector3[bentVertices.Count];
+            Vector3[] normals = new Vector3[bentVertices.Count];
+
+            for (int i = 0; i < bentVertices.Count; i++)
+            {
+                positions[i] = bentVertices[i].position;
+                normals[i] = bentVertices[i].normal;
+            }
+
             MeshUtility.Update(result,
                 source.Mesh,
-                triangles,
-                bentVertices.Select(b => b.position),
-                bentVertices.Select(b => b.normal),
+                triangles.ToArray(),
+                positions,
+                normals,
                 uv,
                 uv2,
                 uv3,
@@ -351,6 +360,7 @@ namespace SplineMesh
             foreach (var vert in source.Vertices)
             {
                 distanceRate = source.Length == 0 ? 0 : Math.Abs(vert.position.x - source.MinX) / source.Length;
+
                 if (!sampleCache.TryGetValue(distanceRate, out sample))
                 {
                     if (!useSpline)
@@ -375,11 +385,20 @@ namespace SplineMesh
                 bentVertices.Add(sample.GetBent(vert));
             }
 
+            Vector3[] positions = new Vector3[bentVertices.Count];
+            Vector3[] normals = new Vector3[bentVertices.Count];
+
+            for (int i = 0; i < bentVertices.Count; i++)
+            {
+                positions[i] = bentVertices[i].position;
+                normals[i] = bentVertices[i].normal;
+            }
+
             MeshUtility.Update(result,
                 source.Mesh,
                 source.Triangles,
-                bentVertices.Select(b => b.position),
-                bentVertices.Select(b => b.normal));
+                positions,
+                normals);
             if (TryGetComponent(out MeshCollider collider))
             {
                 collider.sharedMesh = result;

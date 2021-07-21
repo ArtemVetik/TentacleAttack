@@ -195,11 +195,20 @@ namespace SplineMesh {
                 }
             }
 
+            Vector3[] positions = new Vector3[bentVertices.Count];
+            Vector3[] normals = new Vector3[bentVertices.Count];
+
+            for (int i = 0; i < bentVertices.Count; i++)
+            {
+                positions[i] = bentVertices[i].position;
+                normals[i] = bentVertices[i].normal;
+            }
+
             MeshUtility.Update(mf.sharedMesh,
                 mf.sharedMesh,
-                triangleIndices,
-                bentVertices.Select(b => b.position),
-                bentVertices.Select(b => b.normal),
+                triangleIndices.ToArray(),
+                positions,
+                normals,
                 bentVertices.Select(b => b.uv));
             var mc = GetComponent<MeshCollider>();
             if(mc != null) {

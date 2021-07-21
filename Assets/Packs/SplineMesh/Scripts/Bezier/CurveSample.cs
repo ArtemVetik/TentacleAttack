@@ -52,8 +52,10 @@ namespace SplineMesh {
             rotation = Quaternion.identity;
         }
 
-        public override bool Equals(object obj) {
-            if (obj == null || GetType() != obj.GetType()) {
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
                 return false;
             }
             CurveSample other = (CurveSample)obj;
@@ -72,11 +74,19 @@ namespace SplineMesh {
         }
 
         public static bool operator ==(CurveSample cs1, CurveSample cs2) {
-            return cs1.Equals(cs2);
+            return cs1.location == cs2.location &&
+                cs1.tangent == cs2.tangent &&
+                cs1.up == cs2.up &&
+                cs1.scale == cs2.scale &&
+                cs1.roll == cs2.roll &&
+                cs1.distanceInCurve == cs2.distanceInCurve &&
+                cs1.timeInCurve == cs2.timeInCurve;
+            //return cs1.Equals(cs2);
         }
 
         public static bool operator !=(CurveSample cs1, CurveSample cs2) {
-            return !cs1.Equals(cs2);
+            return !(cs1 == cs2);
+            //return !cs1.Equals(cs2);
         }
 
         /// <summary>

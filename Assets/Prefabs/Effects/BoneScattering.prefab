@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5511037330727657495}
   - component: {fileID: 5069550984277020009}
   - component: {fileID: 3854016214708002957}
+  - component: {fileID: 6316165651359110457}
   m_Layer: 0
   m_Name: BoneScattering
   m_TagString: Untagged
@@ -5042,3 +5043,15 @@ MonoBehaviour:
   _sounds:
   - {fileID: 8300000, guid: 525eebbc8fdaba446a34b622f2059e32, type: 3}
   - {fileID: 8300000, guid: 2b32cca1a96d25543a752efc8a13245c, type: 3}
+--- !u!114 &6316165651359110457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5511037330727657494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcc32c6654cfdb3479de8dd16c22e6a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
