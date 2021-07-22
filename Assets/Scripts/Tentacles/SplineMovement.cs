@@ -12,13 +12,17 @@ public class SplineMovement : MonoBehaviour
     [SerializeField] private float _endRewindSpeed = 30;
 
     private Spline _spline;
+    private Coroutine _rewindCoroutine;
     private int _lastNodeIndex;
     private bool _isRewind;
+    private float _currentRewindSpeed;
+    private float _speedRate;
+    private float _accelerationRate;
 
     public event Action AddedNode;
     public event Action SplineChanged;
-    public event Action<bool> SplineRewinded;
-    public event Action FullRewinded;
+    //public event Action<bool> SplineRewinded;
+    public event Action<bool> FullRewinded;
 
     public float SplineLength
     {
@@ -99,14 +103,58 @@ public class SplineMovement : MonoBehaviour
 
     private void OnTargetRewining(Transform target, float speedRate = 1f, float accelerationRate = 1f)
     {
+        _currentRewindSpeed = _startRewindSpeed;
+        _speedRate = speedRate;
+        _accelerationRate = accelerationRate;
+
+        if (_spline.nodes.Count <= 3)
+        {
+            FullRewinded?.Invoke(true);
+            //SplineRewinded?.Invoke(true);
+            return;
+        }
+
         _isRewind = true;
-        StartCoroutine(RewindSpline(target, speedRate, accelerationRate));
     }
 
     private void OnTargetRewindFinished(Transform targetTransform)
     {
         _isRewind = false;
         targetTransform.position = _spline.nodes[_lastNodeIndex].Position;
+        //SplineRewinded?.Invoke(true);
+    }
+
+    private void Update()
+    {
+        Vector3 position;
+        if (_isRewind)
+        {
+            var rewindDistance = _currentRewindSpeed * Time.deltaTime;
+            position = GetPositionByDistance(_spline.Length - rewindDistance);
+            position.z = 0;
+
+            while (rewindDistance > _spline.curves[_lastNodeIndex - 1].Length && _spline.nodes.Count > 3)
+            {
+                rewindDistance -= _spline.curves[_lastNodeIndex - 1].Length;
+                RemoveNode();
+            }
+
+            _spline.nodes[_lastNodeIndex].Position = position;
+            _target.transform.position = _spline.nodes[_lastNodeIndex].Position;
+
+            SplineChanged?.Invoke();
+
+            if (_spline.nodes.Count <= 3)
+            {
+                _isRewind = false;
+                FullRewinded?.Invoke(true);
+            }
+
+            if (IsNeedRemoveNode(1f, 0.5f))
+                RemoveNode();
+
+            _currentRewindSpeed = Mathf.MoveTowards(_currentRewindSpeed, _endRewindSpeed * _speedRate, 3f * _accelerationRate * Time.deltaTime);
+        }
     }
 
     private IEnumerator RewindSpline(Transform target, float speedRate = 1f, float accelerationRate = 1f)
@@ -116,12 +164,13 @@ public class SplineMovement : MonoBehaviour
         if (_spline.nodes.Count <= 3)
         {
             _isRewind = false;
-            FullRewinded?.Invoke();
+            FullRewinded?.Invoke(true);
         }
 
+        Vector3 position;
         while (_isRewind)
         {
-            Vector3 position = GetPositionByDistance(_spline.Length - currentSpeed * Time.deltaTime);
+            position = GetPositionByDistance(_spline.Length - currentSpeed * Time.deltaTime);
             position.z = 0;
             _spline.nodes[_lastNodeIndex].Position = position;
             SplineChanged?.Invoke();
@@ -134,14 +183,14 @@ public class SplineMovement : MonoBehaviour
             if (_spline.nodes.Count <= 3)
             {
                 _isRewind = false;
-                FullRewinded?.Invoke();
+                FullRewinded?.Invoke(true);
             }
 
             currentSpeed = Mathf.MoveTowards(currentSpeed, _endRewindSpeed * speedRate, 3f * accelerationRate * Time.deltaTime);
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
 
-        SplineRewinded?.Invoke(true);
+        //SplineRewinded?.Invoke(true);
     }
 
     private bool IsNeedRemoveNode(float minDistance, float minCurveLength)

@@ -20,23 +20,23 @@ namespace SplineMesh {
         public readonly CubicBezierCurve curve;
 
         private Quaternion rotation;
+        private static Quaternion Yrotation = Quaternion.Euler(0, -90, 0);
+        private static Quaternion MxMzrotation = Quaternion.Euler(-90f, 0f, -90f);
 
         /// <summary>
         /// Rotation is a look-at quaternion calculated from the tangent, roll and up vector. Mixing non zero roll and custom up vector is not advised.
         /// </summary>
         public Quaternion Rotation {
             get {
-                Quaternion first = Quaternion.Euler(-90f, 0f, -90f);
-                Quaternion second = Quaternion.LookRotation(Vector3.forward, tangent);
+                Quaternion look = Quaternion.LookRotation(Vector3.forward, tangent);
+                return look * MxMzrotation;
 
-                return second * first;
+                //if (rotation == Quaternion.identity) {
+                //    var upVector = Vector3.Cross(tangent, Vector3.Cross(Quaternion.AngleAxis(roll, Vector3.forward) * up, tangent).normalized);
+                //    rotation = Quaternion.LookRotation(tangent, upVector);
+                //}
 
-                if (rotation == Quaternion.identity) {
-                    var upVector = Vector3.Cross(tangent, Vector3.Cross(Quaternion.AngleAxis(roll, Vector3.forward) * up, tangent).normalized);
-                    rotation = Quaternion.LookRotation(tangent, upVector);
-                }
-
-                return rotation;
+                //return rotation;
             }
         }
 
@@ -52,8 +52,10 @@ namespace SplineMesh {
             rotation = Quaternion.identity;
         }
 
-        public override bool Equals(object obj) {
-            if (obj == null || GetType() != obj.GetType()) {
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
                 return false;
             }
             CurveSample other = (CurveSample)obj;
@@ -72,11 +74,19 @@ namespace SplineMesh {
         }
 
         public static bool operator ==(CurveSample cs1, CurveSample cs2) {
-            return cs1.Equals(cs2);
+            return cs1.location == cs2.location &&
+                cs1.tangent == cs2.tangent &&
+                cs1.up == cs2.up &&
+                cs1.scale == cs2.scale &&
+                cs1.roll == cs2.roll &&
+                cs1.distanceInCurve == cs2.distanceInCurve &&
+                cs1.timeInCurve == cs2.timeInCurve;
+            //return cs1.Equals(cs2);
         }
 
         public static bool operator !=(CurveSample cs1, CurveSample cs2) {
-            return !cs1.Equals(cs2);
+            return !(cs1 == cs2);
+            //return !cs1.Equals(cs2);
         }
 
         /// <summary>
@@ -105,14 +115,15 @@ namespace SplineMesh {
             res.position = Vector3.Scale(res.position, new Vector3(0, scale.y, scale.x));
 
             // application of roll
-            res.position = Quaternion.AngleAxis(roll, Vector3.right) * res.position;
-            res.normal = Quaternion.AngleAxis(roll, Vector3.right) * res.normal;
+            var angleAxis = Quaternion.AngleAxis(roll, Vector3.right);
+            res.position = angleAxis * res.position;
+            res.normal = angleAxis * res.normal;
 
             // reset X value
             res.position.x = 0;
 
             // application of the rotation + location
-            Quaternion q = Rotation * Quaternion.Euler(0, -90, 0);
+            Quaternion q = Rotation * Yrotation;
             res.position = q * res.position + location;
             res.normal = q * res.normal;
             return res;

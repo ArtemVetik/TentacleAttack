@@ -30,7 +30,7 @@ public class DragToMovePresenter : MonoBehaviour
         _splineMovement.SplineChanged -= OnSplineChanged;
     }
 
-    private void OnFullRewinded()
+    private void OnFullRewinded(bool isWin)
     {
         if (_enemyContainer.AliveEnemyCount == 0)
             return;

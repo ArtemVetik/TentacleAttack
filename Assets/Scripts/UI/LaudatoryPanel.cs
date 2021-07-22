@@ -7,16 +7,20 @@ public class LaudatoryPanel : MonoBehaviour
 {
     [SerializeField] private MessagesForLaudatoryPanel _messgaes;
     [SerializeField] private TMP_Text _messageView;
-    [SerializeField] private EnemyHolder _enemyHolder;
     [SerializeField] private float _showingTime;
 
     private Animator _selfAnimator;
     private int _enemyHoldingCount;
     private Coroutine _showingPanel;
+    private EnemyHolder _enemyHolder;
 
     private const string _showPanel = "ShowPanel";
     private const string _hiddenPanel = "HiddenPanel";
 
+    private void Awake()
+    {
+        _enemyHolder = FindObjectOfType<EnemyHolder>();
+    }
 
     private void OnEnable()
     {

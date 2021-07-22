@@ -42,9 +42,9 @@ namespace SplineMesh {
         /// <param name="uv8"></param>
         public static void Update(Mesh mesh,
             Mesh source,
-            IEnumerable<int> triangles = null,
-            IEnumerable<Vector3> vertices = null,
-            IEnumerable<Vector3> normals = null,
+            int[] triangles = null,
+            Vector3[] vertices = null,
+            Vector3[] normals = null,
             IEnumerable<Vector2> uv = null,
             IEnumerable<Vector2> uv2 = null,
             IEnumerable<Vector2> uv3 = null,
@@ -59,8 +59,8 @@ namespace SplineMesh {
 #endif
 
             mesh.triangles = new int[0];
-            mesh.vertices = vertices == null ? source.vertices : vertices.ToArray();
-            mesh.normals = normals == null ? source.normals : normals.ToArray();
+            mesh.vertices = vertices == null ? source.vertices : vertices;
+            mesh.normals = normals == null ? source.normals : normals;
             mesh.uv = uv == null? source.uv : uv.ToArray();
             mesh.uv2 = uv2 == null ? source.uv2 : uv2.ToArray();
             mesh.uv3 = uv3 == null ? source.uv3 : uv3.ToArray();
@@ -71,7 +71,7 @@ namespace SplineMesh {
             mesh.uv7 = uv7 == null ? source.uv7 : uv7.ToArray();
             mesh.uv8 = uv8 == null ? source.uv8 : uv8.ToArray();
 #endif
-            mesh.triangles = triangles == null ? source.triangles : triangles.ToArray();
+            mesh.triangles = triangles == null ? source.triangles : triangles;
             mesh.RecalculateBounds();
             mesh.RecalculateTangents();
         }

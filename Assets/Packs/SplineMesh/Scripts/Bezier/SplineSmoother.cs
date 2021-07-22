@@ -54,19 +54,19 @@ namespace SplineMesh {
 
         private void OnNodeChanged(object sender, EventArgs e) {
             var node = (SplineNode)sender;
-            SmoothNode(node);
             var index = Spline.nodes.IndexOf(node);
+            SmoothNode(node, index);
             if(index > 0) {
-                SmoothNode(Spline.nodes[index - 1]);
+                SmoothNode(Spline.nodes[index - 1], index - 1);
             }
             if(index < Spline.nodes.Count - 1) {
-                SmoothNode(Spline.nodes[index + 1]);
+                SmoothNode(Spline.nodes[index + 1], index + 1);
 
             }
         }
 
-        private void SmoothNode(SplineNode node) {
-            var index = Spline.nodes.IndexOf(node);
+        private void SmoothNode(SplineNode node, int index) {
+            //var index = Spline.nodes.IndexOf(node);
             var pos = node.Position;
             // For the direction, we need to compute a smooth vector.
             // Orientation is obtained by substracting the vectors to the previous and next way points,
@@ -99,8 +99,9 @@ namespace SplineMesh {
 
 
         private void SmoothAll() {
+            int index = 0;
             foreach(var node in Spline.nodes) {
-                SmoothNode(node);
+                SmoothNode(node, index++);
             }
         }
     }

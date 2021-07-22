@@ -6,63 +6,60 @@ using TMPro;
 
 public class EndGamePanel : MonoBehaviour
 {
-    [SerializeField] private string _winMessage;
-    [SerializeField] private string _looseMissage;
-    [SerializeField] private EnemyContainer _enemyContainer;
-
-    [SerializeField] private TMP_Text _endMessage;
-    [SerializeField] private Button _repeat;
-    [SerializeField] private Button _nextLevel;
-    [SerializeField] private Color _winColor;
-    [SerializeField] private Color _looseColor;
-
+    [SerializeField] private GameObject _winWindow;
+    [SerializeField] private GameObject _looseWindow;
+    [SerializeField] private Animator _topPanel;
     [SerializeField] private float _delayTime;
 
-    private Animator _selfAnimator;
+    private EnemyContainer _enemyContainer;
     private SplineMovement _spline;
     private bool _isLastLevel;
-    private const string _openPanel = "OpeningPanel";
 
+    private void Awake()
+    {
+        _enemyContainer = FindObjectOfType<EnemyContainer>();
+    }
 
     private void OnEnable()
     {
         GlobalEventStorage.GameOvering += OnLevelCompleat;
-
-        _repeat.onClick.AddListener(RepeatScene);
-        _nextLevel.onClick.AddListener(NextScene);
     }
 
     private void OnDisable()
     {
         GlobalEventStorage.GameOvering -= OnLevelCompleat;
-        _spline.SplineRewinded -= OnLevelCompleat;
-
-        _repeat.onClick.RemoveListener(RepeatScene);
-        _nextLevel.onClick.RemoveListener(NextScene);
+        _spline.FullRewinded -= OnLevelCompleat;
     }
 
     private void Start()
     {
-        _selfAnimator = GetComponent<Animator>();
         _isLastLevel = FindObjectOfType<KrakenChild>();
         _spline = FindObjectOfType<SplineMovement>();
 
         if (!_isLastLevel)
-            _spline.SplineRewinded += OnLevelCompleat;
+            _spline.FullRewinded += OnLevelCompleat;
     }
 
-    private void RepeatScene()
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+            PlayerPrefs.DeleteAll();
+    }
+
+    public void RepeatScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    private void NextScene()
+    public void NextScene()
     {
         int index = SceneManager.GetActiveScene().buildIndex;
         int sceneCount = SceneManager.sceneCountInBuildSettings;
         index++;
         if (index >= sceneCount)
             index = 0;
+
+        SaveDataBase.SetCurrentLevel(index);
         SceneManager.LoadScene(index);
     }
 
@@ -77,11 +74,14 @@ public class EndGamePanel : MonoBehaviour
 
     private IEnumerator ShowEndPanel(bool isWin)
     {
+        _topPanel.SetTrigger("Hide");
+
         yield return new WaitForSeconds(_delayTime);
 
-        _endMessage.SetText(isWin ? _winMessage : _looseMissage);
-        _endMessage.color = isWin ? _winColor : _looseColor;
-        _selfAnimator.Play(_openPanel);
+        if (isWin)
+            _winWindow.SetActive(true);
+        else
+            _looseWindow.SetActive(true);
     }
 
     private bool EndGameConditions(bool isWin)

@@ -6,8 +6,9 @@ public class RagdollSingleMesh : RagdollEnemy
 {
     [SerializeField] private SkinnedMeshRenderer _skinnedMesh;
 
-    public void InitializeMesh(Mesh mesh)
+    public void InitializeMesh(Mesh mesh, Material material)
     {
         _skinnedMesh.sharedMesh = mesh;
+        _skinnedMesh.material = material;
     }
 }

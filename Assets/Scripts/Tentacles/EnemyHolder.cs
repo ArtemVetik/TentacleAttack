@@ -73,7 +73,7 @@ class EnemyHolder : MonoBehaviour
         }
     }
 
-    private void OnFullRewinded()
+    private void OnFullRewinded(bool isWin)
     {
         for (int i = 0; i < _enemies.Count; i++)
         {

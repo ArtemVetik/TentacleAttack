@@ -16,7 +16,7 @@ public class SingleMeshRagdollContainer : RagdollContainer
     public override RagdollEnemy InstRagdollEnemy(Vector3 position, Quaternion rotation)
     {
         var inst = Instantiate(_ragdollTemplate, position, rotation);
-        inst.InitializeMesh(_skinnedMesh.sharedMesh);
+        inst.InitializeMesh(_skinnedMesh.sharedMesh, _skinnedMesh.material);
         return inst;
     }
 }

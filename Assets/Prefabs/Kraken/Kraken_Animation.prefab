@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &185883600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 185883601}
+  m_Layer: 8
+  m_Name: EatingContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &185883601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 185883600}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.05, y: 3.57, z: -1.92}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 52366350714562426}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &30396811914139882
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,9 +88,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52366350714562427}
   m_LocalRotation: {x: -0, y: -0.96005, z: -0, w: -0.27982888}
-  m_LocalPosition: {x: -0.43000013, y: -1.662, z: 1.506001}
-  m_LocalScale: {x: 0.4999998, y: 0.5, z: 0.4999998}
-  m_Children: []
+  m_LocalPosition: {x: -0.18, y: -1.662, z: 1.67}
+  m_LocalScale: {x: 0.8238496, y: 0.5, z: 0.4999998}
+  m_Children:
+  - {fileID: 185883601}
   m_Father: {fileID: 3347730683938038648}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -90,6 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _eatingEffect: {fileID: 5511037330727657488, guid: eb39aca7253994b4184f8bd9af3682a3, type: 3}
+  _eatingContainer: {fileID: 185883601}
 --- !u!54 &52366350714562425
 Rigidbody:
   m_ObjectHideFlags: 0

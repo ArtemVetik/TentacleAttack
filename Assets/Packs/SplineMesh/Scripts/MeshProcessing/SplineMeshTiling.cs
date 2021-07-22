@@ -84,10 +84,12 @@ namespace SplineMesh {
             var used = new List<GameObject>();
 
             if (curveSpace) {
+                GameObject go;
                 int i = 0;
-                foreach (var curve in spline.curves) {
-                    var go = FindOrCreate("segment " + i++ + " mesh", i == spline.curves.Count);
-                    go.GetComponent<MeshBender>().SetInterval(curve);
+                for (int j = 0; j < spline.curves.Count; j++)
+                {
+                    go = FindOrCreate((i++).ToString(), i == spline.curves.Count);
+                    go.GetComponent<MeshBender>().SetInterval(spline.curves[j]);
                     go.GetComponent<MeshCollider>().enabled = generateCollider;
                     used.Add(go);
                 }

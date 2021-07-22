@@ -5,17 +5,20 @@ public class CameraFolowing : MonoBehaviour
     [SerializeField] private Transform _followTarget;
     [SerializeField] private StartMovementTrigger _startTrigger;
     [SerializeField] private float _targetPositionZ = -16;
+    [SerializeField] private Transform _endGamePoint;
 
     private bool _started = false;
 
     private void OnEnable()
     {
         _startTrigger.MoveStarted += OnMoveStarted;
+        GlobalEventStorage.GameEnded += OnGameEnded;
     }
 
     private void OnDisable()
     {
         _startTrigger.MoveStarted -= OnMoveStarted;
+        GlobalEventStorage.GameEnded -= OnGameEnded;
     }
 
     private void OnMoveStarted()
@@ -32,5 +35,19 @@ public class CameraFolowing : MonoBehaviour
         nextPosition.z = Mathf.Lerp(transform.position.z, _targetPositionZ, 5f * Time.deltaTime);
 
         transform.position = nextPosition;
+    }
+
+    public void ChangeZPosition(float zPosition)
+    {
+        _targetPositionZ = zPosition;
+    }
+
+    public void OnGameEnded(bool isWin)
+    {
+        if(_endGamePoint != null && isWin)
+        {
+            _followTarget = _endGamePoint;
+            _targetPositionZ = _endGamePoint.position.z;
+        }
     }
 }

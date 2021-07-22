@@ -15,7 +15,7 @@ namespace SplineMesh {
     [Serializable]
     public class CubicBezierCurve {
 
-        private const int STEP_COUNT = 30;
+        private const int STEP_COUNT = 5;
         private const float T_STEP = 1.0f / STEP_COUNT;
 
         private readonly List<CurveSample> samples = new List<CurveSample>(STEP_COUNT);
@@ -181,17 +181,36 @@ namespace SplineMesh {
             if (d < 0 || d > Length)
                 throw new ArgumentException("Distance must be positive and less than curve length. Length = " + Length + ", given distance was " + d);
 
-            CurveSample previous = samples[0];
-            CurveSample next = default(CurveSample);
+            //CurveSample previous = samples[0];
+            //CurveSample previous;
+            int previousIndex = 0;
+            int nextIndex = 0;
+            //CurveSample next;
+            //CurveSample next = default(CurveSample);
             bool found = false;
-            foreach (CurveSample cp in samples) {
-                if (cp.distanceInCurve >= d) {
-                    next = cp;
+
+            for (int i = 0; i < samples.Count; i++)
+            {
+                if (samples[i].distanceInCurve >= d)
+                {
+                    nextIndex = i;
                     found = true;
                     break;
                 }
-                previous = cp;
+                previousIndex = i;
             }
+
+            CurveSample next = samples[nextIndex];
+            CurveSample previous = samples[previousIndex];
+
+            //foreach (CurveSample cp in samples) {
+            //    if (cp.distanceInCurve >= d) {
+            //        next = cp;
+            //        found = true;
+            //        break;
+            //    }
+            //    previous = cp;
+            //}
             if (!found) throw new Exception("Can't find curve samples.");
             float t = next == previous ? 0 : (d - previous.distanceInCurve) / (next.distanceInCurve - previous.distanceInCurve);
 

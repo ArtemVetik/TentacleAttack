@@ -16,6 +16,8 @@ public class PatrolState : State
     private Direction _directon;
     private bool _rotating;
 
+    public bool Rotating => _rotating;
+
     private void Awake()
     {
         _moveSpline = GetComponentInParent<Spline>();
@@ -29,6 +31,7 @@ public class PatrolState : State
         _directon = transform.eulerAngles.y > 180 ? Direction.Right : Direction.Left;
         _targetRotation = GetRotationByDirection(_directon);
         _rotating = false;
+        _enemyAnimations.StopRotating();
     }
 
     private void Update()
@@ -41,6 +44,7 @@ public class PatrolState : State
                 return;
 
             _enemyAnimations.StopRotating();
+            _viewZone.Enable();
             _rotating = false;
         }
 
@@ -53,6 +57,7 @@ public class PatrolState : State
             _targetRotation = GetRotationByDirection(_directon);
             _rotating = true;
             _enemyAnimations.PlayRotating();
+            _viewZone.Disable();
             return;
         }
 
