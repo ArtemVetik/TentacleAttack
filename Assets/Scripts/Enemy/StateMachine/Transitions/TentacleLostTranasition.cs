@@ -1,0 +1,28 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TentacleLostTranasition : Transition
+{
+    [SerializeField] private PlayerContainer _container;
+    [SerializeField] private float _lostDistance;
+
+    private TentacleSegment _player;
+    
+    protected override void Enable()
+    {
+        _player = _container.Player;
+    }
+
+    private void Update()
+    {
+        if (_player == null)
+        {
+            NeedTransit = true;
+            return;
+        }
+
+        if (Vector3.Distance(transform.position, _player.MeshCenterPosition) > _lostDistance)
+            NeedTransit = true;
+    }
+}
