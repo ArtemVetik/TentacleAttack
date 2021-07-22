@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -17,7 +15,7 @@ public class LevelScorePresenter : MonoBehaviour
 
     private void OnEnable()
     {
-        _scoreText.text = _score.Value.ToString();
+        _scoreText.text = "+ " + _score.Value.ToString();
         _score.SaveScore();
     }
 }

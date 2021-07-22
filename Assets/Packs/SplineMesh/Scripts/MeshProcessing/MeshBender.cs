@@ -356,6 +356,7 @@ namespace SplineMesh
             float distanceRate;
             float intervalLength;
             float distOnSpline;
+
             // for each mesh vertex, we found its projection on the curve
             foreach (var vert in source.Vertices)
             {
@@ -365,7 +366,21 @@ namespace SplineMesh
                 {
                     if (!useSpline)
                     {
+                        if (curve.Length < source.Length || source.Vertices.Count != 92)
+                        {
                             sample = curve.GetSampleAtDistance(curve.Length * distanceRate);
+                        }
+                        else
+                        {
+                            if (distanceRate <= 0.5f)
+                            {
+                                sample = curve.GetSampleAtDistance((curve.Length - source.Length / 2f) * distanceRate * 2f);
+                            }
+                            else
+                            {
+                                sample = curve.GetSampleAtDistance(curve.Length - (source.Length - distanceRate * source.Length));
+                            }
+                        }
                     }
                     else
                     {

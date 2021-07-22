@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Android))]
@@ -9,6 +7,7 @@ public class VibrationActivator : MonoBehaviour
     private EatingArea _eatingArea;
     private TargetDamager _targetDamager;
     private KrakenChild _child;
+    private EnemyHolder _enemyHolder;
 
     private void Awake()
     {
@@ -16,13 +15,15 @@ public class VibrationActivator : MonoBehaviour
         _eatingArea = FindObjectOfType<EatingArea>();
         _targetDamager = FindObjectOfType<TargetDamager>();
         _child = FindObjectOfType<KrakenChild>();
+        _enemyHolder = FindObjectOfType<EnemyHolder>();
     }
 
     private void OnEnable()
     {
         GlobalEventStorage.TentacleAddDamage += OnTentacleDamaged;
         _eatingArea.Eating += OnEating;
-        _targetDamager.EnemyFounded += OnEnemyFounded;
+        //_targetDamager.EnemyFounded += OnEnemyFounded;
+        _enemyHolder.EnemyHold += OnEnemyFounded;
         
         if (_child)
             _child.Released += OnChildReleased;
@@ -32,7 +33,8 @@ public class VibrationActivator : MonoBehaviour
     {
         GlobalEventStorage.TentacleAddDamage -= OnTentacleDamaged;
         _eatingArea.Eating -= OnEating;
-        _targetDamager.EnemyFounded -= OnEnemyFounded;
+        //_targetDamager.EnemyFounded -= OnEnemyFounded;
+        _enemyHolder.EnemyHold -= OnEnemyFounded;
 
         if (_child)
             _child.Released -= OnChildReleased;
@@ -48,9 +50,9 @@ public class VibrationActivator : MonoBehaviour
         Vibrate(200);
     }
 
-    private void OnEnemyFounded(Enemy enemy)
+    private void OnEnemyFounded()
     {
-        Vibrate(500);
+        Vibrate(100);
     }
 
     private void OnChildReleased()
