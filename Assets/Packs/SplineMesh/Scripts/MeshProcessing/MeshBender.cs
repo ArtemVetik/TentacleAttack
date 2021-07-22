@@ -360,12 +360,16 @@ namespace SplineMesh
             foreach (var vert in source.Vertices)
             {
                 distanceRate = source.Length == 0 ? 0 : Math.Abs(vert.position.x - source.MinX) / source.Length;
+                distanceRate *= 0.5f;
 
                 if (!sampleCache.TryGetValue(distanceRate, out sample))
                 {
                     if (!useSpline)
                     {
-                        sample = curve.GetSampleAtDistance(curve.Length * distanceRate);
+                        //if (curve.Length < source.Length)
+                            sample = curve.GetSampleAtDistance(curve.Length * distanceRate);
+                        //else
+                        //    sample = curve.GetSampleAtDistance(source.Length * distanceRate);
                     }
                     else
                     {
