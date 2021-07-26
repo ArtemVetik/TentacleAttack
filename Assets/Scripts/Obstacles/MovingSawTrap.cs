@@ -21,7 +21,7 @@ public class MovingSawTrap : ActiveObject
 
     private void Start()
     {
-        transform.position = _spline.GetSampleAtDistance(0).location;
+        transform.position = _spline.GetProjectionSample(transform.position).location;
         _distanceCovered = 0f;
         _direction = Direction.Right;
 

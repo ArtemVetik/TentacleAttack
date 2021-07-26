@@ -88,7 +88,7 @@ MonoBehaviour:
     Changed:
       m_PersistentCalls:
         m_Calls: []
-  Length: 3.464562
+  Length: 3.4645617
   isLoop: 0
   CurveChanged:
     m_PersistentCalls:
@@ -113,6 +113,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5551551107050924726}
     m_Modifications:
+    - target: {fileID: 5207604887437328043, guid: 2bbce3bd94e028042a271151dd662ffb, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5308234442624151151, guid: 2bbce3bd94e028042a271151dd662ffb, type: 3}
       propertyPath: _speed
       value: 4
