@@ -8,6 +8,7 @@ public class VibrationActivator : MonoBehaviour
     private TargetDamager _targetDamager;
     private KrakenChild _child;
     private EnemyHolder _enemyHolder;
+    private TriggerSpeaker[] _triggerSpeakers;
 
     private void Awake()
     {
@@ -16,6 +17,7 @@ public class VibrationActivator : MonoBehaviour
         _targetDamager = FindObjectOfType<TargetDamager>();
         _child = FindObjectOfType<KrakenChild>();
         _enemyHolder = FindObjectOfType<EnemyHolder>();
+        _triggerSpeakers = FindObjectsOfType<TriggerSpeaker>();
     }
 
     private void OnEnable()
@@ -24,6 +26,14 @@ public class VibrationActivator : MonoBehaviour
         _eatingArea.Eating += OnEating;
         //_targetDamager.EnemyFounded += OnEnemyFounded;
         _enemyHolder.EnemyHold += OnEnemyFounded;
+
+        if(_triggerSpeakers != null)
+        {
+            foreach(var speaker in _triggerSpeakers)
+            {
+                speaker.TriggerEnter += OnTriggerSpeakerEnter;
+            }
+        }
         
         if (_child)
             _child.Released += OnChildReleased;
@@ -35,6 +45,14 @@ public class VibrationActivator : MonoBehaviour
         _eatingArea.Eating -= OnEating;
         //_targetDamager.EnemyFounded -= OnEnemyFounded;
         _enemyHolder.EnemyHold -= OnEnemyFounded;
+
+        if (_triggerSpeakers != null)
+        {
+            foreach (var speaker in _triggerSpeakers)
+            {
+                speaker.TriggerEnter -= OnTriggerSpeakerEnter;
+            }
+        }
 
         if (_child)
             _child.Released -= OnChildReleased;
@@ -58,6 +76,11 @@ public class VibrationActivator : MonoBehaviour
     private void OnChildReleased()
     {
         Vibrate(500);
+    }
+
+    private void OnTriggerSpeakerEnter()
+    {
+        Vibrate(50);
     }
 
     private void Vibrate(int ms)
