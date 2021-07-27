@@ -66,6 +66,7 @@ public class Setting : MonoBehaviour
     public void LoadScene(string name)
     {
         Time.timeScale = 1f;
+        SaveDataBase.SetCurrentLevel(SceneManager.GetSceneByName(name).buildIndex);
         SceneManager.LoadScene(name);
     }
 }
