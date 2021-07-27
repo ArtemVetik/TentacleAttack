@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using TMPro;
 
 [RequireComponent(typeof(TMP_Text))]
@@ -15,7 +16,25 @@ public class LevelScorePresenter : MonoBehaviour
 
     private void OnEnable()
     {
-        _scoreText.text = "+ " + _score.Value.ToString();
+        StartCoroutine(PresentScore(_score.Value));
         _score.SaveScore();
+    }
+
+    private IEnumerator PresentScore(int value)
+    {
+        var delay = new WaitForSeconds(2f / value);
+
+        int score = 0;
+        SetScoreText(score);
+        while (score < value)
+        {
+            yield return delay;
+            SetScoreText(++score);
+        }
+    }
+
+    private void SetScoreText(int score)
+    {
+        _scoreText.text = "+ " + score.ToString();
     }
 }
