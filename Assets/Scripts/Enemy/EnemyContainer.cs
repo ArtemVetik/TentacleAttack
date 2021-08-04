@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class EnemyContainer : MonoBehaviour
 {
     public int AliveEnemyCount { get; private set; }
+    public int StartEnemyCount { get; private set; }
 
     public event UnityAction<Enemy> EnemyStucked;
     public event UnityAction EnemyEnded;
@@ -16,6 +17,7 @@ public class EnemyContainer : MonoBehaviour
     {
         _allEnemies = FindObjectsOfType<Enemy>().ToList();
         AliveEnemyCount = _allEnemies.Count;
+        StartEnemyCount = _allEnemies.Count;
 
         foreach (var enemy in _allEnemies)
             enemy.Stucked += OnEnemyStucked;

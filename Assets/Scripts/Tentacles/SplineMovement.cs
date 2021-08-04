@@ -207,7 +207,7 @@ public class SplineMovement : MonoBehaviour
         }
     }
 
-    private void OnGameEnding(bool isWin)
+    private void OnGameEnding(bool isWin, int progress)
     {
         gameObject.SetActive(!isWin);
     }

@@ -9,6 +9,7 @@ public static class SaveDataBase
     private const string CurrentLevel = nameof(CurrentLevel);
     private const string SoundSetting = nameof(SoundSetting);
     private const string VibrationSetting = nameof(VibrationSetting);
+    private const string LevelLoopCount = nameof(LevelLoopCount);
 
     public static int GetScore()
     {
@@ -60,5 +61,19 @@ public static class SaveDataBase
             return true;
 
         return PlayerPrefs.GetInt(VibrationSetting) == 1;
+    }
+
+    public static void AddLevelLoopCount()
+    {
+        var levelLoop = GetLevelLoopCount();
+        PlayerPrefs.SetInt(LevelLoopCount, levelLoop + 1);
+    }
+
+    public static int GetLevelLoopCount()
+    {
+        if (PlayerPrefs.HasKey(LevelLoopCount) == false)
+            return 1;
+
+        return PlayerPrefs.GetInt(LevelLoopCount);
     }
 }

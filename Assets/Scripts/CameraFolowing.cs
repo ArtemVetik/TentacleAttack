@@ -42,7 +42,7 @@ public class CameraFolowing : MonoBehaviour
         _targetPositionZ = zPosition;
     }
 
-    public void OnGameEnded(bool isWin)
+    public void OnGameEnded(bool isWin, int progress)
     {
         if(_endGamePoint != null && isWin)
         {

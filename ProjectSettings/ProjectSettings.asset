@@ -152,7 +152,7 @@ PlayerSettings:
     iPhone: 0
     tvOS: 0
   overrideDefaultApplicationIdentifier: 1
-  AndroidBundleVersionCode: 2
+  AndroidBundleVersionCode: 3
   AndroidMinSdkVersion: 21
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -679,7 +679,7 @@ PlayerSettings:
   scriptingDefineSymbols:
     1: OBI_ONI_SUPPORTED
     4: OBI_ONI_SUPPORTED
-    7: DREAMTECK_SPLINES;MOREMOUNTAINS_FEEDBACKS;MOREMOUNTAINS_NICEVIBRATIONS;MOREMOUNTAINS_TOOLS;OBI_ONI_SUPPORTED
+    7: DREAMTECK_SPLINES;MOREMOUNTAINS_FEEDBACKS;MOREMOUNTAINS_NICEVIBRATIONS;MOREMOUNTAINS_TOOLS;OBI_ONI_SUPPORTED;APP_METRICA_TRACK_LOCATION_DISABLED
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
