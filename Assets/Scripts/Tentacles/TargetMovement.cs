@@ -18,7 +18,6 @@ public class TargetMovement : MonoBehaviour
 
     private Rigidbody _body;
     private EnemyContainer _enemyContainer;
-    private Health _health;
     private Coroutine _damageCoroutine;
     private bool _isLastLevel;
 
@@ -27,7 +26,6 @@ public class TargetMovement : MonoBehaviour
     private void Awake()
     {
         _enemyContainer = FindObjectOfType<EnemyContainer>();
-        _health = FindObjectOfType<Health>();
         _body = GetComponent<Rigidbody>();
         _isLastLevel = FindObjectOfType<KrakenChild>();
     }
@@ -57,7 +55,7 @@ public class TargetMovement : MonoBehaviour
             if (Input.GetMouseButton(0))
                 Movement();
             if (Input.GetMouseButtonUp(0))
-                Rewind();
+                _body.velocity = Vector3.zero;
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -90,13 +88,12 @@ public class TargetMovement : MonoBehaviour
 
     private void OnAddDamage(TentacleSegment segment)
     {
-        if (_damageCoroutine != null)
-            return;
+        GlobalEventStorage.GameOveringInvoke(false);
 
-        if (_health.TakeDamage() == false)
-            return;
+        //if (_damageCoroutine != null)
+        //    return;
 
-        _damageCoroutine = StartCoroutine(DamageRewind(segment));
+        //_damageCoroutine = StartCoroutine(DamageRewind(segment));
     }
 
     private void OnLevelCompleted()
