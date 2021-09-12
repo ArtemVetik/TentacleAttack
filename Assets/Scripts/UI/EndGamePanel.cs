@@ -40,12 +40,6 @@ public class EndGamePanel : MonoBehaviour
             _spline.FullRewinded += OnLevelCompleat;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-            PlayerPrefs.DeleteAll();
-    }
-
     public void RepeatScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Rigidbody))]
 public class TargetMovement : MonoBehaviour
@@ -50,9 +51,10 @@ public class TargetMovement : MonoBehaviour
 
     private void Update()
     {
+
         if (_isUsed)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && IsPointerOverIgoreObject(Input.mousePosition) == false)
                 Movement();
             if (Input.GetMouseButtonUp(0))
                 _body.velocity = Vector3.zero;
@@ -60,6 +62,22 @@ public class TargetMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
             Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+    }
+
+    public bool IsPointerOverIgoreObject(Vector2 inputPosition)
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = inputPosition;
+        var results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+
+        for (int i = 0; i < results.Count; i++)
+        {
+            if (results[i].gameObject.layer == LayerMask.NameToLayer("IgnoreStart"))
+                return true;
+        }
+
+        return false;
     }
 
     private void Movement()
