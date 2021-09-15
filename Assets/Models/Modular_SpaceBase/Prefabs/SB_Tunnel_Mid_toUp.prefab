@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4887567715510915930}
   - component: {fileID: 8393578739006250239}
   - component: {fileID: 6025548216922925109}
-  m_Layer: 0
+  - component: {fileID: 8408463800778485626}
+  m_Layer: 6
   m_Name: SB_Tunnel_Mid_toUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8408463800778485626
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5233165576398064096}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -21206531759558719, guid: 36c7b6f24ce861f43a52e7f26d2b08f6, type: 3}

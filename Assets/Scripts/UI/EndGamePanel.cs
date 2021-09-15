@@ -40,12 +40,6 @@ public class EndGamePanel : MonoBehaviour
             _spline.FullRewinded += OnLevelCompleat;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-            PlayerPrefs.DeleteAll();
-    }
-
     public void RepeatScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -57,7 +51,10 @@ public class EndGamePanel : MonoBehaviour
         int sceneCount = SceneManager.sceneCountInBuildSettings;
         index++;
         if (index >= sceneCount)
+        {
+            SaveDataBase.AddLevelLoopCount();
             index = 0;
+        }
 
         SaveDataBase.SetCurrentLevel(index);
         SceneManager.LoadScene(index);
@@ -68,7 +65,7 @@ public class EndGamePanel : MonoBehaviour
         if (EndGameConditions(isWin))
         {
             StartCoroutine(ShowEndPanel(isWin));
-            GlobalEventStorage.GameEndedInvoke(isWin);
+            GlobalEventStorage.GameEndedInvoke(isWin, GetProgress(isWin));
         }
     }
 
@@ -87,5 +84,20 @@ public class EndGamePanel : MonoBehaviour
     private bool EndGameConditions(bool isWin)
     {
         return !isWin || _isLastLevel || _enemyContainer.AliveEnemyCount == 0;
+    }
+
+    public int GetProgress(bool isWin)
+    {
+        if (isWin)
+            return 100;
+
+        if (_isLastLevel)
+        {
+            return 50;
+        }
+        else
+        {
+            return (int)(100 - (float)_enemyContainer.AliveEnemyCount / _enemyContainer.StartEnemyCount * 100);
+        }
     }
 }

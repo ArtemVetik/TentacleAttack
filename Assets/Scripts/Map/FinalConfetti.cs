@@ -39,7 +39,7 @@ public class FinalConfetti : MonoBehaviour
         GlobalEventStorage.GameEnded -= OnGameEnded;
     }
 
-    private void OnGameEnded(bool isWin)
+    private void OnGameEnded(bool isWin, int progress)
     {
         if (isWin)
             StartSpawner();

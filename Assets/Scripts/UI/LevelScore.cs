@@ -2,8 +2,14 @@ using UnityEngine;
 
 public class LevelScore : MonoBehaviour
 {
-    [SerializeField] private TargetDamager _damager;
-    [SerializeField] private KrakenChild _krakenChild;
+    private TargetDamager _damager;
+    private KrakenChild _krakenChild;
+
+    private void Awake()
+    {
+        _damager = FindObjectOfType<TargetDamager>();
+        _krakenChild = FindObjectOfType<KrakenChild>();
+    }
 
     public int Value { get; private set; }
 

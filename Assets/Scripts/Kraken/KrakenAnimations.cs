@@ -31,7 +31,7 @@ public class KrakenAnimations : MonoBehaviour
         _selfAnimator.SetTrigger(Eating);
     }
 
-    private void PlayDancing(bool isWork)
+    private void PlayDancing(bool isWork, int progress)
     {
         if (isWork)
             _selfAnimator.SetTrigger(Dancing);

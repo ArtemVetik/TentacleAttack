@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Rigidbody))]
 public class TargetMovement : MonoBehaviour
@@ -18,7 +19,6 @@ public class TargetMovement : MonoBehaviour
 
     private Rigidbody _body;
     private EnemyContainer _enemyContainer;
-    private Health _health;
     private Coroutine _damageCoroutine;
     private bool _isLastLevel;
 
@@ -27,7 +27,6 @@ public class TargetMovement : MonoBehaviour
     private void Awake()
     {
         _enemyContainer = FindObjectOfType<EnemyContainer>();
-        _health = FindObjectOfType<Health>();
         _body = GetComponent<Rigidbody>();
         _isLastLevel = FindObjectOfType<KrakenChild>();
     }
@@ -52,16 +51,33 @@ public class TargetMovement : MonoBehaviour
 
     private void Update()
     {
+
         if (_isUsed)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) && IsPointerOverIgoreObject(Input.mousePosition) == false)
                 Movement();
             if (Input.GetMouseButtonUp(0))
-                Rewind();
+                _body.velocity = Vector3.zero;
         }
 
         if (Input.GetKeyDown(KeyCode.Escape))
             Time.timeScale = Time.timeScale == 0 ? 1 : 0;
+    }
+
+    public bool IsPointerOverIgoreObject(Vector2 inputPosition)
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = inputPosition;
+        var results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+
+        for (int i = 0; i < results.Count; i++)
+        {
+            if (results[i].gameObject.layer == LayerMask.NameToLayer("IgnoreStart"))
+                return true;
+        }
+
+        return false;
     }
 
     private void Movement()
@@ -90,13 +106,12 @@ public class TargetMovement : MonoBehaviour
 
     private void OnAddDamage(TentacleSegment segment)
     {
-        if (_damageCoroutine != null)
-            return;
+        GlobalEventStorage.GameOveringInvoke(false);
 
-        if (_health.TakeDamage() == false)
-            return;
+        //if (_damageCoroutine != null)
+        //    return;
 
-        _damageCoroutine = StartCoroutine(DamageRewind(segment));
+        //_damageCoroutine = StartCoroutine(DamageRewind(segment));
     }
 
     private void OnLevelCompleted()

@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class PatrolState : State
 {
-    [SerializeField] private ViewZoneDetector _viewZone;
     [SerializeField] private float _speed;
 
     private EnemyAnimations _enemyAnimations;
@@ -26,7 +25,6 @@ public class PatrolState : State
 
     private void OnEnable()
     {
-        _viewZone.Enable();
         _distanceCovered = SplineDistanceByPosition(transform.position);
         _directon = transform.eulerAngles.y > 180 ? Direction.Right : Direction.Left;
         _targetRotation = GetRotationByDirection(_directon);
@@ -44,7 +42,6 @@ public class PatrolState : State
                 return;
 
             _enemyAnimations.StopRotating();
-            _viewZone.Enable();
             _rotating = false;
         }
 
@@ -57,7 +54,6 @@ public class PatrolState : State
             _targetRotation = GetRotationByDirection(_directon);
             _rotating = true;
             _enemyAnimations.PlayRotating();
-            _viewZone.Disable();
             return;
         }
 
@@ -90,11 +86,6 @@ public class PatrolState : State
             rotation = Quaternion.Euler(-sample.Rotation.eulerAngles.x, -sample.Rotation.eulerAngles.y, sample.Rotation.eulerAngles.z);
 
         return rotation;
-    }
-
-    private void OnDisable()
-    {
-        _viewZone.Disable();
     }
 }
 public enum Direction : int

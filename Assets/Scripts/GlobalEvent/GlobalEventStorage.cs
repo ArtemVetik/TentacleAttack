@@ -5,7 +5,7 @@ public static class GlobalEventStorage
 {
     public static event Action<TentacleSegment> TentacleAddDamage;
     public static event Action<bool> GameOvering;
-    public static event Action<bool> GameEnded;
+    public static event Action<bool, int> GameEnded;
 
 
     #region TentacleAddDamage
@@ -25,9 +25,9 @@ public static class GlobalEventStorage
 
     #region EndGame
 
-    public static void GameEndedInvoke(bool isWin)
+    public static void GameEndedInvoke(bool isWin, int progress)
     {
-        GameEnded?.Invoke(isWin);
+        GameEnded?.Invoke(isWin, progress);
     }
 
     #endregion
