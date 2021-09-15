@@ -4,22 +4,15 @@ using UnityEngine;
 
 public class BrokenGlass : MonoBehaviour
 {
-    private Rigidbody[] _parts;
-
-    private void Awake()
-    {
-        _parts = GetComponentsInChildren<Rigidbody>();
-    }
+    [SerializeField] private GameObject _normalWindow;
+    [SerializeField] private GameObject _brokenWindow;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out TargetMovement tentacle))
-            EnableGravity();
-    }
-
-    private void EnableGravity()
-    {
-        foreach (var glassPart in _parts)
-            glassPart.isKinematic = false;
+        {
+            _normalWindow.gameObject.SetActive(false);
+            _brokenWindow.gameObject.SetActive(true);
+        }
     }
 }
