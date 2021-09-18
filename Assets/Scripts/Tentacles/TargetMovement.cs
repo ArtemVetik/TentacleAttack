@@ -7,8 +7,7 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(Rigidbody))]
 public class TargetMovement : MonoBehaviour
 {
-    [SerializeField] private Joystick _joystick;
-
+    private Joystick _joystick;
     private float _moveSpeed = 5;
     private bool _isRewind;
     private bool _isUsed = true;
@@ -26,9 +25,10 @@ public class TargetMovement : MonoBehaviour
 
     private void Awake()
     {
+        _joystick = FindObjectOfType<FloatingJoystick>();
         _enemyContainer = FindObjectOfType<EnemyContainer>();
-        _body = GetComponent<Rigidbody>();
         _isLastLevel = FindObjectOfType<KrakenChild>();
+        _body = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()

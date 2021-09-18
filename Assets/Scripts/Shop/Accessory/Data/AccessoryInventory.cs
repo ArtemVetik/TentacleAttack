@@ -9,14 +9,14 @@ public class AccessoryInventory : IShopSaved
     [SerializeField] private string _selectedGUID;
 
     public string SaveKey => "AccessoryInventorySaveKey";
-    public SkinData SelectedSkin => _dataBase.Data.First((data) => data.GUID == _selectedGUID);
-    public IEnumerable<SkinData> Data => from data in _dataBase.Data
+    public AccessoryData SelectedSkin => _dataBase.Data.First((data) => data.GUID == _selectedGUID);
+    public IEnumerable<AccessoryData> Data => from data in _dataBase.Data
                                          where _buyedGUID.Contains(data.GUID)
                                          select data;
 
-    private SkinDataBase _dataBase;
+    private AccessoryDataBase _dataBase;
 
-    public AccessoryInventory(SkinDataBase dataBase)
+    public AccessoryInventory(AccessoryDataBase dataBase)
     {
         _dataBase = dataBase;
         if (string.IsNullOrEmpty(_selectedGUID))
@@ -26,22 +26,22 @@ public class AccessoryInventory : IShopSaved
         }
     }
 
-    public void Add(SkinData data)
+    public void Add(AccessoryData data)
     {
         _buyedGUID.Add(data.GUID);
     }
 
-    public bool Remove(SkinData data)
+    public bool Remove(AccessoryData data)
     {
         return _buyedGUID.Remove(data.GUID);
     }
 
-    public bool Contains(SkinData data)
+    public bool Contains(AccessoryData data)
     {
         return _buyedGUID.Contains(data.GUID);
     }
 
-    public void SelectAccessory(SkinData data)
+    public void SelectAccessory(AccessoryData data)
     {
         _selectedGUID = data.GUID;
     }

@@ -22,10 +22,12 @@ public class SkinPresenter : MonoBehaviour
     public event UnityAction<SkinPresenter> Clicked;
 
     public SkinData Data => _data;
+    public bool IsRenderSelected { get; private set; }
 
     private void OnEnable()
     {
         _selfButton.onClick.AddListener(OnSelfButtonClicked);
+        IsRenderSelected = false;
     }
 
     private void OnDisable()
@@ -47,6 +49,7 @@ public class SkinPresenter : MonoBehaviour
         _lockImage.enabled = true;
         _shadow.enabled = true;
         _selfButton.interactable = false;
+        IsRenderSelected = false;
     }
 
     public void RenderBuyed(SkinData data)
@@ -58,6 +61,7 @@ public class SkinPresenter : MonoBehaviour
         _lockImage.enabled = false;
         _shadow.enabled = false;
         _selfButton.interactable = true;
+        IsRenderSelected = false;
     }
 
     public void RenderSelected(SkinData data)
@@ -69,5 +73,6 @@ public class SkinPresenter : MonoBehaviour
         _lockImage.enabled = false;
         _shadow.enabled = false;
         _selfButton.interactable = true;
+        IsRenderSelected = true;
     }
 }

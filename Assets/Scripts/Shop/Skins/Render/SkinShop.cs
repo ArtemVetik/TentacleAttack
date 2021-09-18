@@ -20,7 +20,11 @@ public class SkinShop : MonoBehaviour
         inventory.Load();
 
         _presenters = _listView.Render(_dataBase.Data, inventory);
-        _selectedPresenter = _presenters.First(presenter => presenter.Data.Equals(inventory.SelectedSkin));
+
+        if (inventory.SelectedSkin == null)
+            _selectedPresenter = null;
+        else
+            _selectedPresenter = _presenters.First(presenter => presenter.Data.Equals(inventory.SelectedSkin));
 
         foreach (var presenter in _presenters)
             presenter.Clicked += OnPresenterClicked;
@@ -33,7 +37,10 @@ public class SkinShop : MonoBehaviour
 
     private void OnPresenterClicked(SkinPresenter presenter)
     {
-        SelectPresenter(presenter);
+        if (presenter.IsRenderSelected)
+            DeselectPresenter(presenter);
+        else
+            SelectPresenter(presenter);
     }
 
     private void OnDisable()
@@ -49,13 +56,24 @@ public class SkinShop : MonoBehaviour
 
     private void SelectPresenter(SkinPresenter presenter)
     {
-        _selectedPresenter.RenderBuyed(_selectedPresenter.Data);
+        _selectedPresenter?.RenderBuyed(_selectedPresenter.Data);
         presenter.RenderSelected(presenter.Data);
         _selectedPresenter = presenter;
 
         var inventory = new SkinInventory(_dataBase);
         inventory.Load();
         inventory.SelectSkin(presenter.Data);
+        inventory.Save();
+    }
+
+    public void DeselectPresenter(SkinPresenter presenter)
+    {
+        presenter.RenderBuyed(presenter.Data);
+        _selectedPresenter = null;
+
+        var inventory = new SkinInventory(_dataBase);
+        inventory.Load();
+        inventory.DeselectSkin();
         inventory.Save();
     }
 
