@@ -32,7 +32,6 @@ public class VibrationActivator : MonoBehaviour
             foreach(var speaker in _triggerSpeakers)
             {
                 speaker.TriggerEnter += OnTriggerSpeakerEnter;
-                Debug.Log("Trigger name - " + speaker.name);
             }
         }
         

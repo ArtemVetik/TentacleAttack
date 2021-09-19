@@ -11,7 +11,7 @@ public class EnemyDetecter : MonoBehaviour
     private Transform _target;
     [SerializeField] private Vector3 _vectorUp;
 
-    private void Start()
+    private void OnEnable()
     {
         _enemyContainer = FindObjectOfType<EnemyContainer>();
         _enemyContainer.EnemyStucked += OnEnemyStickeed;

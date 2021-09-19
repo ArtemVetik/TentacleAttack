@@ -5,9 +5,14 @@ using SplineMesh;
 public class TentacleWithBoniesBuilder : MonoBehaviour
 {
     [SerializeField] private Transform _segmentsParent;
-    [SerializeField] private TentacleWithBone _tentacle;
 
+    private TentacleWithBone _tentacle;
     private Spline _spline;
+
+    private void Awake()
+    {
+        _tentacle = FindObjectOfType<TentacleWithBone>();
+    }
 
     private void OnEnable()
     {

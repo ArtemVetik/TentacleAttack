@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4234235666159895508}
   - component: {fileID: 4234235666159895506}
   - component: {fileID: 4234235666159895507}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 4234235666804334245}
   - component: {fileID: 4234235666804334243}
   - component: {fileID: 4234235666804334244}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: EnemyPatrol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 4234235667054176380}
   - component: {fileID: 4234235667054176378}
   - component: {fileID: 4234235667054176379}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: EnemyAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 4234235667432018328}
   - component: {fileID: 4234235667432018326}
   - component: {fileID: 4234235667432018327}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 4234235667557178530}
   - component: {fileID: 4234235667557178528}
   - component: {fileID: 4234235667557178529}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 4234235667875522445}
   - component: {fileID: 4234235667875522443}
   - component: {fileID: 4234235667875522444}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: EnemySleep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,13 +463,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4234235667947868436}
   - component: {fileID: 4234235667947868435}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: Detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4234235667947868436
 RectTransform:
   m_ObjectHideFlags: 0

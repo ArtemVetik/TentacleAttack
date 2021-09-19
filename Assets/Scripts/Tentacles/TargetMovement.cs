@@ -54,7 +54,7 @@ public class TargetMovement : MonoBehaviour
 
         if (_isUsed)
         {
-            if (Input.GetMouseButton(0) && IsPointerOverIgoreObject(Input.mousePosition) == false)
+            if (Input.GetMouseButton(0) && IsPointerOverUIObject(Input.mousePosition) == false)
                 Movement();
             if (Input.GetMouseButtonUp(0))
                 _body.velocity = Vector3.zero;
@@ -64,7 +64,7 @@ public class TargetMovement : MonoBehaviour
             Time.timeScale = Time.timeScale == 0 ? 1 : 0;
     }
 
-    public bool IsPointerOverIgoreObject(Vector2 inputPosition)
+    public bool IsPointerOverUIObject(Vector2 inputPosition)
     {
         PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
         eventDataCurrentPosition.position = inputPosition;
@@ -73,7 +73,7 @@ public class TargetMovement : MonoBehaviour
 
         for (int i = 0; i < results.Count; i++)
         {
-            if (results[i].gameObject.layer == LayerMask.NameToLayer("IgnoreStart"))
+            if (results[i].gameObject.layer == LayerMask.NameToLayer("UI"))
                 return true;
         }
 
