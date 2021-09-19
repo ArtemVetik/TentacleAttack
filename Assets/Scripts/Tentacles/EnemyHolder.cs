@@ -63,9 +63,7 @@ class EnemyHolder : MonoBehaviour
         for (int i = _enemies.Count - 1; i >= 0; i--)
         {
             int enemyCounter = (_enemies.Count - 1) - i;
-
             float distance = _spline.Length - (_startIndent + _stepBetweenEnemy * enemyCounter);
-
             var sample = distance > 0 ? _spline.GetSampleAtDistance(distance) : _spline.GetSampleAtDistance(0.01f);
 
             if (_enemies[i] != null)
@@ -142,7 +140,7 @@ class EnemyHolder : MonoBehaviour
 
         public bool Equals(Enemy enemy)
         {
-            if (enemy != null)
+            if (_enemy != null)
                 return _enemy.GetComponent<Enemy>().Equals(enemy);
             return false;
         }

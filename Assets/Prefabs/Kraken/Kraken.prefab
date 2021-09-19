@@ -4499,6 +4499,7 @@ GameObject:
   - component: {fileID: 6987471980614720853}
   - component: {fileID: 6987471980614720854}
   - component: {fileID: 5402791080528203472}
+  - component: {fileID: 8275679818102939758}
   m_Layer: 0
   m_Name: Kraken
   m_TagString: Untagged
@@ -4560,6 +4561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8e4e65924bb7864593c4542e9d2d8b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _accessoryInitializator: {fileID: 8275679818102939758}
 --- !u!114 &5402791080528203472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4574,6 +4576,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bodyMesh: {fileID: 3212408417620966358}
   _dataBase: {fileID: 11400000, guid: 5f167bc7151e15542b326bed97d46e6a, type: 2}
+--- !u!114 &8275679818102939758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6987471980614720852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbe49ef5816ffd04c886bb3bb79a94f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _container: {fileID: 855532873134117319}
+  _dataBase: {fileID: 11400000, guid: 4f7333eac5d37784485cdabb915e9999, type: 2}
 --- !u!1 &7018335618515503190
 GameObject:
   m_ObjectHideFlags: 0

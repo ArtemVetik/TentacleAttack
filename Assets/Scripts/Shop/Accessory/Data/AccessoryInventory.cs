@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AccessoryInventory : IShopSaved
 {
@@ -9,21 +10,27 @@ public class AccessoryInventory : IShopSaved
     [SerializeField] private string _selectedGUID;
 
     public string SaveKey => "AccessoryInventorySaveKey";
-    public AccessoryData SelectedSkin => _dataBase.Data.First((data) => data.GUID == _selectedGUID);
+    public AccessoryData SelectedSkin
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(_selectedGUID))
+                return null;
+
+            return _dataBase.Data.First((data) => data.GUID == _selectedGUID);
+        }
+    }
     public IEnumerable<AccessoryData> Data => from data in _dataBase.Data
                                          where _buyedGUID.Contains(data.GUID)
                                          select data;
+
+    public static event UnityAction<AccessoryData> SelectedAccessoryChanged;
 
     private AccessoryDataBase _dataBase;
 
     public AccessoryInventory(AccessoryDataBase dataBase)
     {
         _dataBase = dataBase;
-        if (string.IsNullOrEmpty(_selectedGUID))
-        {
-            Add(_dataBase.DefaultData);
-            SelectAccessory(_dataBase.DefaultData);
-        }
     }
 
     public void Add(AccessoryData data)
@@ -44,6 +51,13 @@ public class AccessoryInventory : IShopSaved
     public void SelectAccessory(AccessoryData data)
     {
         _selectedGUID = data.GUID;
+        SelectedAccessoryChanged?.Invoke(data);
+    }
+
+    public void DeselectAccessory()
+    {
+        _selectedGUID = string.Empty;
+        SelectedAccessoryChanged?.Invoke(null);
     }
 
     public void Load()

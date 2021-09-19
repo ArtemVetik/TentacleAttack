@@ -5,6 +5,7 @@ using UnityEngine;
 public class TestPanel : MonoBehaviour
 {
     [SerializeField] private SkinDataBase _skinDataBase;
+    [SerializeField] private AccessoryDataBase _accessoryDataBase;
 
     public void AddCoins(int value)
     {
@@ -23,6 +24,12 @@ public class TestPanel : MonoBehaviour
     public void ResetSkins()
     {
         var inventory = new SkinInventory(_skinDataBase);
+        inventory.Save();
+    }
+
+    public void ResetAccessory()
+    {
+        var inventory = new AccessoryInventory(_accessoryDataBase);
         inventory.Save();
     }
 }

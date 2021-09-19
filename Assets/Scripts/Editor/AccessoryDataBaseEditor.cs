@@ -57,7 +57,6 @@ public class AccessoryDataBaseEditor : Editor
             EditorGUILayout.HelpBox("Не вся база заполнена!\nПроверьте следующие элементы:\n" + value, MessageType.Warning);
         }
 
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("_defaultAccessoryIndex"));
         GUILayout.Space(20);
 
         EditorGUILayout.LabelField("Accessory count: " + _dataBaseList.arraySize, defaultTextStyle);
