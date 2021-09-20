@@ -12,6 +12,8 @@ public class StartMovementTrigger : MonoBehaviour
 
     private bool _isStarted = false;
 
+    public bool IsStarted => _isStarted;
+
     private void OnEnable()
     {
         _targetMovement.TragetMoved += OnTargetMoved;

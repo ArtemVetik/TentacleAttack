@@ -104,7 +104,6 @@ public class AppMetricaEventSender : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        Debug.Log("OnAppQuit1 " + _isStarted);
         if (_isStarted == false)
             return;
 

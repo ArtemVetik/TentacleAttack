@@ -5,11 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "AccessoryDataBase", menuName = "Shop/Accessory/AccessoryDataBase", order = 51)]
 public class AccessoryDataBase : ScriptableObject
 {
-    [SerializeField] private int _defaultAccessoryIndex = 0;
     [SerializeField] private List<AccessoryData> _accessories = new List<AccessoryData>();
 
     public IEnumerable<AccessoryData> Data => _accessories;
-    public AccessoryData DefaultData => _accessories[_defaultAccessoryIndex];
 
     public void Add(AccessoryData data)
     {

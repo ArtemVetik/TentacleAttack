@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AccessoryInventory : IShopSaved
 {
@@ -9,41 +10,54 @@ public class AccessoryInventory : IShopSaved
     [SerializeField] private string _selectedGUID;
 
     public string SaveKey => "AccessoryInventorySaveKey";
-    public SkinData SelectedSkin => _dataBase.Data.First((data) => data.GUID == _selectedGUID);
-    public IEnumerable<SkinData> Data => from data in _dataBase.Data
+    public AccessoryData SelectedSkin
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(_selectedGUID))
+                return null;
+
+            return _dataBase.Data.First((data) => data.GUID == _selectedGUID);
+        }
+    }
+    public IEnumerable<AccessoryData> Data => from data in _dataBase.Data
                                          where _buyedGUID.Contains(data.GUID)
                                          select data;
 
-    private SkinDataBase _dataBase;
+    public static event UnityAction<AccessoryData> SelectedAccessoryChanged;
 
-    public AccessoryInventory(SkinDataBase dataBase)
+    private AccessoryDataBase _dataBase;
+
+    public AccessoryInventory(AccessoryDataBase dataBase)
     {
         _dataBase = dataBase;
-        if (string.IsNullOrEmpty(_selectedGUID))
-        {
-            Add(_dataBase.DefaultData);
-            SelectAccessory(_dataBase.DefaultData);
-        }
     }
 
-    public void Add(SkinData data)
+    public void Add(AccessoryData data)
     {
         _buyedGUID.Add(data.GUID);
     }
 
-    public bool Remove(SkinData data)
+    public bool Remove(AccessoryData data)
     {
         return _buyedGUID.Remove(data.GUID);
     }
 
-    public bool Contains(SkinData data)
+    public bool Contains(AccessoryData data)
     {
         return _buyedGUID.Contains(data.GUID);
     }
 
-    public void SelectAccessory(SkinData data)
+    public void SelectAccessory(AccessoryData data)
     {
         _selectedGUID = data.GUID;
+        SelectedAccessoryChanged?.Invoke(data);
+    }
+
+    public void DeselectAccessory()
+    {
+        _selectedGUID = string.Empty;
+        SelectedAccessoryChanged?.Invoke(null);
     }
 
     public void Load()

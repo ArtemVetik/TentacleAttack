@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class KrakenAnimations : MonoBehaviour
 {
+    [SerializeField] private KrakenAccessoryInitializator _accessoryInitializator;
+
     private Animator _selfAnimator;
     private EatingArea _eatingArea;
     private const string Eating = nameof(Eating);
@@ -29,12 +31,16 @@ public class KrakenAnimations : MonoBehaviour
     private void OnEating()
     {
         _selfAnimator.SetTrigger(Eating);
+        _accessoryInitializator.InstAccessory?.Animator.SetTrigger(Eating);
     }
 
     private void PlayDancing(bool isWork, int progress)
     {
         if (isWork)
+        {
             _selfAnimator.SetTrigger(Dancing);
+            _accessoryInitializator.InstAccessory?.Animator.SetTrigger(Dancing);
+        }
     }
 
 }

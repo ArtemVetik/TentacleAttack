@@ -13,36 +13,47 @@ public class EndGamePanel : MonoBehaviour
 
     private EnemyContainer _enemyContainer;
     private SplineMovement _spline;
+    private AdSettings _adSettings;
+    private int _nextSceneIndex;
     private bool _isLastLevel;
 
     private void Awake()
     {
         _enemyContainer = FindObjectOfType<EnemyContainer>();
+        _adSettings = Singleton<AdSettings>.Instance;
     }
 
     private void OnEnable()
-    {
-        GlobalEventStorage.GameOvering += OnLevelCompleat;
-    }
-
-    private void OnDisable()
-    {
-        GlobalEventStorage.GameOvering -= OnLevelCompleat;
-        _spline.FullRewinded -= OnLevelCompleat;
-    }
-
-    private void Start()
     {
         _isLastLevel = FindObjectOfType<KrakenChild>();
         _spline = FindObjectOfType<SplineMovement>();
 
         if (!_isLastLevel)
             _spline.FullRewinded += OnLevelCompleat;
+
+        GlobalEventStorage.GameOvering += OnLevelCompleat;
+        _adSettings.InterstitialShowed += OnInterstitialShowed;
+        _adSettings.InterstitialShowTryed += OnInterstitialShowed;
+    }
+    
+    private void OnDisable()
+    {
+        GlobalEventStorage.GameOvering -= OnLevelCompleat;
+        _spline.FullRewinded -= OnLevelCompleat;
+
+        _adSettings.InterstitialShowed -= OnInterstitialShowed;
+        _adSettings.InterstitialShowTryed -= OnInterstitialShowed;
+    }
+
+    private void OnInterstitialShowed()
+    {
+        SceneManager.LoadScene(_nextSceneIndex);
     }
 
     public void RepeatScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        _nextSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        _adSettings.ShowInterstitial();
     }
 
     public void NextScene()
@@ -57,7 +68,9 @@ public class EndGamePanel : MonoBehaviour
         }
 
         SaveDataBase.SetCurrentLevel(index);
-        SceneManager.LoadScene(index);
+        _nextSceneIndex = index;
+
+        _adSettings.ShowInterstitial();
     }
 
     private void OnLevelCompleat(bool isWin)

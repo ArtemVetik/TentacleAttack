@@ -56,7 +56,6 @@ public class SkinDataBaseEditor : Editor
             EditorGUILayout.HelpBox("Не вся база заполнена!\nПроверьте следующие элементы:\n" + value, MessageType.Warning);
         }
 
-        EditorGUILayout.PropertyField(serializedObject.FindProperty("_defaultSkinIndex"));
         GUILayout.Space(20);
 
         EditorGUILayout.LabelField("Skin count: " + _dataBaseList.arraySize, defaultTextStyle);

@@ -5,11 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SkinDataBase", menuName = "Shop/Skin/SkinDataBase", order = 51)]
 public class SkinDataBase : ScriptableObject
 {
-    [SerializeField] private int _defaultSkinIndex = 0;
     [SerializeField] private List<SkinData> _skins = new List<SkinData>();
 
     public IEnumerable<SkinData> Data => _skins;
-    public SkinData DefaultData => _skins[_defaultSkinIndex];
 
     public void Add(SkinData data)
     {

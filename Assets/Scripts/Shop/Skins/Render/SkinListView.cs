@@ -15,7 +15,7 @@ public class SkinListView : MonoBehaviour
         {
             var inst = Instantiate(_template, _container);
 
-            if (inventory.SelectedSkin.Equals(skinData))
+            if (skinData.Equals(inventory.SelectedSkin))
                 inst.RenderSelected(skinData);
             else if (inventory.Contains(skinData))
                 inst.RenderBuyed(skinData);
@@ -26,16 +26,5 @@ public class SkinListView : MonoBehaviour
         }
 
         return presenters;
-    }
-
-    public void InitializePresenters(IEnumerable<SkinPresenter> presenters, SkinInventory inventory)
-    {
-        foreach (var presenter in presenters)
-        {
-            if (inventory.SelectedSkin.Equals(presenter.Data))
-                presenter.RenderSelected(presenter.Data);
-            else if (inventory.Contains(presenter.Data))
-                presenter.RenderBuyed(presenter.Data);
-        }
     }
 }

@@ -12,5 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ce2c6f3112d8fb428509a039abd6330, type: 3}
   m_Name: AccessoryDataBase
   m_EditorClassIdentifier: 
-  _defaultAccessoryIndex: 0
-  _accessories: []
+  _accessories:
+  - _guid: 84593532-d472-401f-900c-2b4f996f5a32
+    _name: Ship
+    _preview: {fileID: 21300000, guid: a62c85d08f1b8a94d842afa7dd4638d3, type: 3}
+    _prefab: {fileID: 586947774388663900, guid: be66c9f11891a4d468baf741ca674ec2, type: 3}
+  - _guid: f4330e6e-1499-4b45-ab51-98c8f8949941
+    _name: Castle
+    _preview: {fileID: 21300000, guid: 0e5fdb15d4a6ea04f8a6dd1659be6fb9, type: 3}
+    _prefab: {fileID: 7918463354681507867, guid: a1d04cff2634c5941a12314d3c2f6cc2, type: 3}
+  - _guid: 6fabb66a-7264-41f1-922f-0d723e3b9151
+    _name: Home
+    _preview: {fileID: 21300000, guid: 260f1c8058ccd424e8a93888f445bedc, type: 3}
+    _prefab: {fileID: 3367975332147941930, guid: 533042ecb4b63a145afa14567e9d025f, type: 3}
+  - _guid: a475c93f-3f40-4e81-abdc-f5635314fa0a
+    _name: Arctic
+    _preview: {fileID: 21300000, guid: 9c5e688eb79432147a7b15acddc32e69, type: 3}
+    _prefab: {fileID: 1871127157544300897, guid: 18267bf18c3cdbf478be1bddae8ecb65, type: 3}
+  - _guid: 9c69bb78-93c6-4bd2-a5fc-97437c2efbae
+    _name: Office
+    _preview: {fileID: 21300000, guid: 11595b778229db54cb741192530f578f, type: 3}
+    _prefab: {fileID: 4938174683169044835, guid: 391861b1f1c297f4287edadc8dc9aa4d, type: 3}
+  - _guid: 24f4b307-a7bd-4d83-91e6-5c19df5c808d
+    _name: Pier
+    _preview: {fileID: 21300000, guid: ff5b52356d42fed48b838ca9a9e1e1c9, type: 3}
+    _prefab: {fileID: 2523100580525977273, guid: bced6de5b3420f14988c3529a72a9743, type: 3}
+  - _guid: fd506c9a-0719-405d-8545-a385977c50cb
+    _name: Space
+    _preview: {fileID: 21300000, guid: 2a5b57ba9c84f4c42b17dc5254d6f12e, type: 3}
+    _prefab: {fileID: 8616392729782100155, guid: 21ffffd738ef7ed4591e4424cf3759f2, type: 3}

@@ -5,6 +5,7 @@ public class CameraFolowing : MonoBehaviour
     [SerializeField] private Transform _followTarget;
     [SerializeField] private StartMovementTrigger _startTrigger;
     [SerializeField] private float _targetPositionZ = -16;
+    [Header("Не обязательно")]
     [SerializeField] private Transform _endGamePoint;
 
     private bool _started = false;

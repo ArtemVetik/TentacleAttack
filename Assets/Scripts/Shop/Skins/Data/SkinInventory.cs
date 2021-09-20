@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SkinInventory : IShopSaved
 {
@@ -9,21 +10,27 @@ public class SkinInventory : IShopSaved
     [SerializeField] private string _selectedGUID;
 
     public string SaveKey => "SkinInventorySaveKey";
-    public SkinData SelectedSkin => _dataBase.Data.First((data) => data.GUID == _selectedGUID);
+    public SkinData SelectedSkin
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(_selectedGUID))
+                return null;
+
+            return _dataBase.Data.First((data) => data.GUID == _selectedGUID);
+        }
+    }
     public IEnumerable<SkinData> Data => from data in _dataBase.Data
                                          where _buyedGUID.Contains(data.GUID)
                                          select data;
+
+    public static event UnityAction<SkinData> SelectedSkinChanged;
 
     private SkinDataBase _dataBase;
 
     public SkinInventory(SkinDataBase dataBase)
     {
         _dataBase = dataBase;
-        if (string.IsNullOrEmpty(_selectedGUID))
-        {
-            Add(_dataBase.DefaultData);
-            SelectSkin(_dataBase.DefaultData);
-        }
     }
 
     public void Add(SkinData data)
@@ -44,6 +51,13 @@ public class SkinInventory : IShopSaved
     public void SelectSkin(SkinData data)
     {
         _selectedGUID = data.GUID;
+        SelectedSkinChanged?.Invoke(data);
+    }
+
+    public void DeselectSkin()
+    {
+        _selectedGUID = string.Empty;
+        SelectedSkinChanged?.Invoke(null);
     }
 
     public void Load()
