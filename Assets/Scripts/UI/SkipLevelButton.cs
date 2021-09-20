@@ -19,23 +19,23 @@ public class SkipLevelButton : MonoBehaviour
 
     private void OnEnable()
     {
-        _adSettings.UserEarnedReward += OnUserEarnedReward;
         _selfButton.onClick.AddListener(OnSelfButtonClicked);
     }
 
     private void OnDestroy()
     {
-        _adSettings.UserEarnedReward -= OnUserEarnedReward;
         _selfButton.onClick.AddListener(OnSelfButtonClicked);
     }
 
     private void OnSelfButtonClicked()
     {
+        _adSettings.UserEarnedReward += OnUserEarnedReward;
         _adSettings.ShowRewarded();
     }
 
     private void OnUserEarnedReward()
     {
-        _endPanel.NextScene();
+        _adSettings.UserEarnedReward -= OnUserEarnedReward;
+        _endPanel.LoadNextWithoutAd();
     }
 }

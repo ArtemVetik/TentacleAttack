@@ -17,7 +17,6 @@ public class LevelScorePresenter : MonoBehaviour
     private void OnEnable()
     {
         StartCoroutine(PresentScore(_score.Value));
-        _score.SaveScore();
     }
 
     private IEnumerator PresentScore(int value)

@@ -41,11 +41,4 @@ public class LevelScore : MonoBehaviour
     {
         Value += 100;
     }
-
-    public void SaveScore()
-    {
-        var allScore = SaveDataBase.GetScore();
-        allScore += Value;
-        SaveDataBase.SetScore(allScore);
-    }
 }
