@@ -2,20 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
 public class KrakenAccessoryInitializator : MonoBehaviour
 {
     [SerializeField] private Transform _container;
     [SerializeField] private AccessoryDataBase _dataBase;
 
     public KrakenAccessory InstAccessory { get; private set; }
-
-    private Animator _animator;
-
-    private void Awake()
-    {
-        _animator = GetComponent<Animator>();
-    }
 
     private void OnEnable()
     {
@@ -45,10 +37,6 @@ public class KrakenAccessoryInitializator : MonoBehaviour
         {
             RemoveAccessory();
             InstAccessory = Instantiate(accessory.Prefab,_container);
-            InstAccessory.transform.localPosition = Vector3.zero;
-            InstAccessory.transform.localRotation = Quaternion.identity;
-
-            InstAccessory.Init(_animator.GetCurrentAnimatorStateInfo(0), 0);
         }
     }
 
