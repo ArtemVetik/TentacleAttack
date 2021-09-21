@@ -3,13 +3,18 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.Events;
 
 public class EndGamePanel : MonoBehaviour
 {
     [SerializeField] private GameObject _winWindow;
     [SerializeField] private GameObject _looseWindow;
     [SerializeField] private Animator _topPanel;
+    [SerializeField] private Button _collectButton;
+    [SerializeField] private LevelScore _levelScore;
     [SerializeField] private float _delayTime;
+
+    public event UnityAction ScoreCollected;
 
     private EnemyContainer _enemyContainer;
     private SplineMovement _spline;
@@ -32,6 +37,7 @@ public class EndGamePanel : MonoBehaviour
             _spline.FullRewinded += OnLevelCompleat;
 
         GlobalEventStorage.GameOvering += OnLevelCompleat;
+        _collectButton.onClick.AddListener(OnCollectButtonClicked);
         _adSettings.InterstitialShowed += OnInterstitialShowed;
         _adSettings.InterstitialShowTryed += OnInterstitialShowed;
     }
@@ -40,7 +46,7 @@ public class EndGamePanel : MonoBehaviour
     {
         GlobalEventStorage.GameOvering -= OnLevelCompleat;
         _spline.FullRewinded -= OnLevelCompleat;
-
+        _collectButton.onClick.RemoveListener(OnCollectButtonClicked);
         _adSettings.InterstitialShowed -= OnInterstitialShowed;
         _adSettings.InterstitialShowTryed -= OnInterstitialShowed;
     }
@@ -54,6 +60,15 @@ public class EndGamePanel : MonoBehaviour
     {
         _nextSceneIndex = SceneManager.GetActiveScene().buildIndex;
         _adSettings.ShowInterstitial();
+    }
+
+    private void OnCollectButtonClicked()
+    {
+        var score = SaveDataBase.GetScore();
+        SaveDataBase.SetScore(score + _levelScore.Value);
+        ScoreCollected?.Invoke();
+
+        NextScene();
     }
 
     public void NextScene()
@@ -71,6 +86,21 @@ public class EndGamePanel : MonoBehaviour
         _nextSceneIndex = index;
 
         _adSettings.ShowInterstitial();
+    }
+
+    public void LoadNextWithoutAd()
+    {
+        int index = SceneManager.GetActiveScene().buildIndex;
+        int sceneCount = SceneManager.sceneCountInBuildSettings;
+        index++;
+        if (index >= sceneCount)
+        {
+            SaveDataBase.AddLevelLoopCount();
+            index = 0;
+        }
+
+        SaveDataBase.SetCurrentLevel(index);
+        SceneManager.LoadScene(index);
     }
 
     private void OnLevelCompleat(bool isWin)
