@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c041f409c7f7de34799786ede11d044f
+guid: 4bef8045b453ab248940e1ad203c65a8
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -8,17 +8,147 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Face
-    second: {fileID: 2100000, guid: b4173cf2047af814cadfd0c0edf1be6e, type: 2}
+    second: {fileID: 2100000, guid: 235293e953f5b8442b83aec2e7e09233, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Main
-    second: {fileID: 2100000, guid: 7a70750a80bee8d4a8e901e171fbfd6e, type: 2}
+    second: {fileID: 2100000, guid: f7b4c2cd3fc1bc442988fd5fa2c2e236, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Tile
-    second: {fileID: 2100000, guid: 2f5f165295b82fd48a71c2cf91cb6471, type: 2}
+      name: Material
+    second: {fileID: 2100000, guid: 056297a6315761e4abc6cfd8ac58680a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.009
+    second: {fileID: 2100000, guid: b595e5c90bccc3547bd4210837eb0e64, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.010
+    second: {fileID: 2100000, guid: 4509280772def1a4892366806cccb9a7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.011
+    second: {fileID: 2100000, guid: 002ceb079b710d24d902cfb5c88600c2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.012
+    second: {fileID: 2100000, guid: d83bdd918a739c242ae27c9f70c93a6b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.013
+    second: {fileID: 2100000, guid: 5d952ccbf26ddbc4a913471a814b8a78, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.014
+    second: {fileID: 2100000, guid: a71796e7bb7a004428ca23b3f1a092d7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.015
+    second: {fileID: 2100000, guid: b4ea4baa5f9c4394f985a12ee6c4580e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.016
+    second: {fileID: 2100000, guid: 5881099a213929c44bf0114fe7721627, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.017
+    second: {fileID: 2100000, guid: 98b6ae85577ad9647b35ed36c3a9e95b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.018
+    second: {fileID: 2100000, guid: 32397f380b596e945895107b52dcf92d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.019
+    second: {fileID: 2100000, guid: b93efd748f0e48c48889b0b03ec2f0f6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.020
+    second: {fileID: 2100000, guid: c5cf8c709c745dd42a3a3c29dc5f8d91, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.021
+    second: {fileID: 2100000, guid: 6b82cb0bafe807541970decf43a17316, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.022
+    second: {fileID: 2100000, guid: 8b79eadf831ee0e43b3ae73ed1d646b2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.023
+    second: {fileID: 2100000, guid: 775c4031a5cb96947a5df633bb160358, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.024
+    second: {fileID: 2100000, guid: 86918f53d2d160448a1578afb57badb5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.025
+    second: {fileID: 2100000, guid: bf12858417e27354d9fcf8018d30095f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.027
+    second: {fileID: 2100000, guid: b987b0671f388cf4c80dbcfbc0dd6521, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shield_01
+    second: {fileID: 2100000, guid: 1fc759821b15dde4d9f5d9e38c12f6c0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shield_02
+    second: {fileID: 2100000, guid: 2fbc2a7b61220d948be75d32e36b75d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shield_03
+    second: {fileID: 2100000, guid: 110f6ae6328269243a83a92b1b898175, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shield_04
+    second: {fileID: 2100000, guid: ab6800c8dce111d4c87b03e603cf79df, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Viking_01
+    second: {fileID: 2100000, guid: 8a45eb2b37a8599489232b93d6b7861d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Viking_02
+    second: {fileID: 2100000, guid: 0d767a2370382e44280206116e81eda7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Viking_03
+    second: {fileID: 2100000, guid: 6aac167ce201c7048ac86b7de31b3a3e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Viking_04
+    second: {fileID: 2100000, guid: a125e52e557960c4e92f51495d204b44, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -38,7 +168,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -46,7 +176,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
@@ -91,394 +221,8 @@ ModelImporter:
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
-    human:
-    - boneName: Hips
-      humanName: Hips
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: LeftUpLeg
-      humanName: LeftUpperLeg
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: RightUpLeg
-      humanName: RightUpperLeg
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: LeftLeg
-      humanName: LeftLowerLeg
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: RightLeg
-      humanName: RightLowerLeg
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: LeftFoot
-      humanName: LeftFoot
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: RightFoot
-      humanName: RightFoot
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: Spine
-      humanName: Spine
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: Spine1
-      humanName: Chest
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: Neck
-      humanName: Neck
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: Head
-      humanName: Head
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: LeftShoulder
-      humanName: LeftShoulder
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: RightShoulder
-      humanName: RightShoulder
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: LeftArm
-      humanName: LeftUpperArm
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: RightArm
-      humanName: RightUpperArm
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: LeftForeArm
-      humanName: LeftLowerArm
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: RightForeArm
-      humanName: RightLowerArm
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: LeftHand
-      humanName: LeftHand
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: RightHand
-      humanName: RightHand
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: LeftToeBase
-      humanName: LeftToes
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: RightToeBase
-      humanName: RightToes
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    - boneName: Spine2
-      humanName: UpperChest
-      limit:
-        min: {x: 0, y: 0, z: 0}
-        max: {x: 0, y: 0, z: 0}
-        value: {x: 0, y: 0, z: 0}
-        length: 0
-        modified: 0
-    skeleton:
-    - name: Stickman(Clone)
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: armature
-      parentName: Stickman(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Hips
-      parentName: armature
-      position: {x: 0.000008613163, y: 0.8848023, z: -0.011447131}
-      rotation: {x: 0.96616215, y: -0.000000061184274, z: 0.00085487694, w: 0.25793427}
-      scale: {x: 0.99999994, y: 1, z: 0.9999999}
-    - name: Spine
-      parentName: Hips
-      position: {x: 0.000046962625, y: -0.0700876, z: -0.05383862}
-      rotation: {x: 0.96703887, y: 0.0000016379245, z: 0.00085610594, w: -0.25462744}
-      scale: {x: 0.99999994, y: 1.0000004, z: 1.0000011}
-    - name: Spine1
-      parentName: Spine
-      position: {x: 6.7801494e-13, y: 0.12754472, z: -2.9107888e-10}
-      rotation: {x: 0.00000003783498, y: -0.000000016354843, z: 0.0000047855156, w: 1}
-      scale: {x: 1, y: 1.0000001, z: 1.0000001}
-    - name: Spine2
-      parentName: Spine1
-      position: {x: 1.7834573e-13, y: 0.14576618, z: -5.820773e-10}
-      rotation: {x: -0.0004428102, y: 0.000000014344807, z: -0.000004192785, w: 0.99999994}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Neck
-      parentName: Spine2
-      position: {x: -0.0000013751279, y: 0.16398726, z: 0.0001452209}
-      rotation: {x: 0.0118704345, y: -0.00000002044748, z: 0.000018171966, w: 0.99992955}
-      scale: {x: 1, y: 0.99999964, z: 0.99999964}
-    - name: Head
-      parentName: Neck
-      position: {x: -4.975992e-12, y: 0.04366203, z: -5.477875e-13}
-      rotation: {x: 0.00000010011716, y: -0.000000111936465, z: -0.000013979088, w: 1}
-      scale: {x: 1, y: 1.0000001, z: 1.0000001}
-    - name: Head_end
-      parentName: Head
-      position: {x: -0, y: 0.5671432, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: LeftShoulder
-      parentName: Spine2
-      position: {x: -0.081956685, y: 0.13579749, z: -0.0004101837}
-      rotation: {x: 0.8021097, y: -0.5757971, z: -0.12675369, w: -0.09492778}
-      scale: {x: 0.99999964, y: 0.9999999, z: 0.99999994}
-    - name: LeftArm
-      parentName: LeftShoulder
-      position: {x: -0.000000114087015, y: 0.1753726, z: -0.000000031199306}
-      rotation: {x: 0.052654, y: 0.16366988, z: 0.1295321, w: 0.97655576}
-      scale: {x: 1, y: 1, z: 0.99999934}
-    - name: LeftForeArm
-      parentName: LeftArm
-      position: {x: 0.000000045256456, y: 0.2834113, z: 0.0000000018626451}
-      rotation: {x: -0.07285877, y: -0.046663556, z: 0.031193256, w: 0.99576163}
-      scale: {x: 0.99999934, y: 1.0000005, z: 0.99999994}
-    - name: LeftHand
-      parentName: LeftForeArm
-      position: {x: 0.00000012086821, y: 0.2832145, z: -0.000000009546056}
-      rotation: {x: 0.000002715562, y: 0.0000027075582, z: -0.00000066077337, w: 1}
-      scale: {x: 1.0000001, y: 0.99999994, z: 1.0000001}
-    - name: LeftHand_end
-      parentName: LeftHand
-      position: {x: -0, y: 0.28321576, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: RightShoulder
-      parentName: Spine2
-      position: {x: 0.08195806, y: 0.13579664, z: 0.00026495932}
-      rotation: {x: 0.800919, y: 0.57559544, z: 0.13438123, w: -0.095710345}
-      scale: {x: 0.9999995, y: 0.99999976, z: 0.99999976}
-    - name: RightArm
-      parentName: RightShoulder
-      position: {x: 0.000000024912879, y: 0.17536679, z: 0.000000028987415}
-      rotation: {x: 0.05542858, y: -0.17104818, z: -0.13315147, w: 0.9746491}
-      scale: {x: 1.0000004, y: 0.99999994, z: 1.0000005}
-    - name: RightForeArm
-      parentName: RightArm
-      position: {x: 0.00000004537287, y: 0.28359842, z: 0.000000008381903}
-      rotation: {x: -0.074615225, y: 0.05205824, z: -0.030651815, w: 0.9953809}
-      scale: {x: 0.9999999, y: 1, z: 0.9999996}
-    - name: RightHand
-      parentName: RightForeArm
-      position: {x: 0.000000048060883, y: 0.28326854, z: -0.000000023157554}
-      rotation: {x: -0.0000015855619, y: 0.000001558481, z: 0.00000044947956, w: 1}
-      scale: {x: 0.99999994, y: 1.0000001, z: 1.0000001}
-    - name: RightHand_end
-      parentName: RightHand
-      position: {x: -0, y: 0.28326434, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: LeftUpLeg
-      parentName: Hips
-      position: {x: -0.16917206, y: 0.079184905, z: 0.027407706}
-      rotation: {x: -0.0943853, y: 0.910514, z: 0.19849597, w: -0.35022143}
-      scale: {x: 0.9999999, y: 0.9999999, z: 1.0000001}
-    - name: LeftLeg
-      parentName: LeftUpLeg
-      position: {x: -0.0000000037252903, y: 0.4155509, z: 0.0000000055879354}
-      rotation: {x: -0.06026743, y: -0.38722023, z: -0.0050161644, w: 0.92000175}
-      scale: {x: 0.9999999, y: 0.9999998, z: 1}
-    - name: LeftFoot
-      parentName: LeftLeg
-      position: {x: 0.000000004831236, y: 0.35096523, z: 0.000000003259629}
-      rotation: {x: 0.6866345, y: -0.070347525, z: 0.07948143, w: 0.7192128}
-      scale: {x: 1.0000004, y: 1.0000001, z: 1.0000002}
-    - name: LeftToeBase
-      parentName: LeftFoot
-      position: {x: -0.0000000016880222, y: 0.033698633, z: 0.0000000018626451}
-      rotation: {x: 0.08335885, y: -0.040783174, z: -0.012411723, w: 0.9956074}
-      scale: {x: 0.99999964, y: 0.99999934, z: 0.9999998}
-    - name: LeftToeBase_end
-      parentName: LeftToeBase
-      position: {x: -0, y: 0.03259321, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: RightUpLeg
-      parentName: Hips
-      position: {x: 0.16912508, y: 0.07991944, z: 0.026430953}
-      rotation: {x: 0.09710241, y: 0.90569013, z: 0.19853745, w: 0.36177272}
-      scale: {x: 0.9999999, y: 0.99999994, z: 1.0000004}
-    - name: RightLeg
-      parentName: RightUpLeg
-      position: {x: 0.000000015832484, y: 0.41544643, z: 0.000000009313226}
-      rotation: {x: -0.05929618, y: 0.39642704, z: 0.005381951, w: 0.9161335}
-      scale: {x: 0.9999997, y: 1.0000002, z: 0.9999995}
-    - name: RightFoot
-      parentName: RightLeg
-      position: {x: 0.000000016298145, y: 0.35098198, z: 0}
-      rotation: {x: 0.68738264, y: 0.075962976, z: -0.0829647, w: 0.7175316}
-      scale: {x: 1.0000005, y: 0.9999996, z: 0.9999996}
-    - name: RightToeBase
-      parentName: RightFoot
-      position: {x: 0.000000026426278, y: 0.034622386, z: 0.0000000013969839}
-      rotation: {x: 0.08204824, y: 0.03962775, z: 0.006348009, w: 0.99582}
-      scale: {x: 0.99999964, y: 1.0000001, z: 0.9999997}
-    - name: RightToeBase_end
-      parentName: RightToeBase
-      position: {x: -0, y: 0.03283041, z: 0}
-      rotation: {x: 0, y: -0, z: -0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: stickman
-      parentName: Stickman(Clone)
-      position: {x: -0.0000000047683715, y: -0.0000000011920909, z: -0.000000012591481}
-      rotation: {x: 0.00000008146034, y: 0.000000006344637, z: -0.0000000065774657, w: 1}
-      scale: {x: 0.01, y: 0.009999999, z: 0.01}
-    - name: Face
-      parentName: Stickman(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.00000008146034, y: 0.000000006344637, z: -0.0000000065774657, w: 1}
-      scale: {x: 0.01, y: 0.009999999, z: 0.01}
-    - name: stickman.001
-      parentName: Stickman(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.00000008146034, y: 0.000000006344637, z: -0.0000000065774657, w: 1}
-      scale: {x: 0.01, y: 0.009999999, z: 0.01}
-    - name: Engineer
-      parentName: Stickman(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Key
-      parentName: Stickman(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Knight
-      parentName: Stickman(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
-      scale: {x: 0.01, y: 0.01, z: 0.01}
-    - name: General
-      parentName: Stickman(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
-      scale: {x: 0.01, y: 0.01, z: 0.01}
-    - name: Capitan
-      parentName: Stickman(Clone)
-      position: {x: 0.000030376732, y: 1.7302761, z: -0.004165132}
-      rotation: {x: 0.000000015454313, y: 0.70710677, z: -0.000000015454312, w: 0.7071068}
-      scale: {x: 0.35003656, y: 0.35003656, z: 0.35003656}
-    - name: Warrior_Cloack
-      parentName: Stickman(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.000000081460335, y: 0, z: -0, w: 1}
-      scale: {x: 0.01, y: 0.01, z: 0.01}
-    - name: Boatswain_longsleeve
-      parentName: Stickman(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.00000008146034, y: 0.000000006344637, z: -0.0000000065774657, w: 1}
-      scale: {x: 0.01, y: 0.009999999, z: 0.01}
-    - name: Boatswain_undershirt
-      parentName: Stickman(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.00000008146034, y: 0.000000006344637, z: -0.0000000065774657, w: 1}
-      scale: {x: 0.01, y: 0.009999999, z: 0.01}
-    - name: Sailor_longsleeve
-      parentName: Stickman(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.00000008146034, y: 0.000000006344637, z: -0.0000000065774657, w: 1}
-      scale: {x: 0.01, y: 0.009999999, z: 0.01}
-    - name: Sailor_undershirt
-      parentName: Stickman(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: 0.00000008146034, y: 0.000000006344637, z: -0.0000000065774657, w: 1}
-      scale: {x: 0.01, y: 0.009999999, z: 0.01}
+    human: []
+    skeleton: []
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -489,13 +233,13 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 1
+    hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
-  animationType: 3
+  animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 1
+  avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
