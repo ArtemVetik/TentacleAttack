@@ -389,6 +389,7 @@ GameObject:
   - component: {fileID: 1794406433626401710}
   - component: {fileID: 1794406433626401711}
   - component: {fileID: 1794406433626401704}
+  - component: {fileID: 2004432389}
   m_Layer: 0
   m_Name: BrokenWindow
   m_TagString: Untagged
@@ -403,9 +404,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1794406433626401709}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 13.35, y: 7.61, z: 1.42}
-  m_LocalScale: {x: 1, y: 1.3096364, z: 1.2502}
+  m_LocalScale: {x: 1, y: 1.5, z: 2}
   m_Children:
   - {fileID: 8547906139026542398}
   - {fileID: 2264671081396046471}
@@ -426,6 +427,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _normalWindow: {fileID: 9073508553213252996}
   _brokenWindow: {fileID: 1451965530658721853}
+  _glasses:
+  - {fileID: 1399318387934977800}
+  - {fileID: 7794492802613226633}
+  - {fileID: 303279950094582045}
+  - {fileID: 941335050804624654}
+  - {fileID: 8154687464046985619}
+  - {fileID: 7016679214600932872}
+  - {fileID: 7349285990792744703}
+  - {fileID: 1949593679271815611}
+  - {fileID: 8897648201684820036}
+  - {fileID: 4235338047413740936}
+  - {fileID: 8632894676143988646}
+  - {fileID: 7865087238505761556}
+  _brokenGlassLifeTime: 4
 --- !u!65 &1794406433626401704
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -439,6 +454,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.12798882, y: 3.3695986, z: 3.8812175}
   m_Center: {x: 0.005264282, y: 0.2717403, z: -0.006408238}
+--- !u!95 &2004432389
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794406433626401709}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7485b6217c5ac6e4ba6c91a680bccab5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1949593679271815611
 GameObject:
   m_ObjectHideFlags: 0
