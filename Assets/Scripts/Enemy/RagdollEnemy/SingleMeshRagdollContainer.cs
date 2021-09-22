@@ -4,19 +4,16 @@ using UnityEngine;
 
 public class SingleMeshRagdollContainer : RagdollContainer
 {
-    [SerializeField] private RagdollSingleMesh _ragdollTemplate;
-    
-    private SkinnedMeshRenderer _skinnedMesh;
-
-    private void Awake()
-    {
-        _skinnedMesh = GetComponentInChildren<SkinnedMeshRenderer>();
-    }
+    [SerializeField] private Transform _skinParent;
+    [SerializeField] private RagdollMultiplyMesh _ragdollTemplate;
 
     public override RagdollEnemy InstRagdollEnemy(Vector3 position, Quaternion rotation)
     {
+        var activeSkins = _skinParent.GetComponentsInChildren<SkinnedMeshRenderer>();
+
         var inst = Instantiate(_ragdollTemplate, position, rotation);
-        inst.InitializeMesh(_skinnedMesh.sharedMesh, _skinnedMesh.material);
+        inst.gameObject.SetActive(true);
+        inst.InitializeMesh(activeSkins);
         return inst;
     }
 }

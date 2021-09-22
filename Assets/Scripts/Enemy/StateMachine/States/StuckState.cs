@@ -1,16 +1,19 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StuckState : State
 {
-    private EnemyAnimations _animations;
-
-    private void Awake()
-    {
-        _animations = GetComponentInChildren<EnemyAnimations>();
-    }
+    [SerializeField] private Transform _skinParent;
+    [SerializeField] private PuppetStickman _template;
 
     private void OnEnable()
     {
-        _animations.EnemyStuck();
+        var activeSkins = _skinParent.GetComponentsInChildren<SkinnedMeshRenderer>();
+
+        _skinParent.gameObject.SetActive(false);
+
+        var inst = Instantiate(_template, transform);
+        inst.transform.localPosition = Vector3.zero;
+        inst.Init(activeSkins);
     }
 }

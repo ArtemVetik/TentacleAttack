@@ -1804,6 +1804,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transitions: []
+  _skinParent: {fileID: 9127716705433065563}
+  _template: {fileID: 8007496747685526550, guid: 38f57283d13919f4987b5e668773f985, type: 3}
 --- !u!114 &6332885774897763491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1908,6 +1910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f5b5c8cf84a934fb65e33a03749dc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _skinParent: {fileID: 9127716705433065563}
   _ragdollTemplate: {fileID: 2627093478180100080, guid: 2ba211dea3274984f87751213cd1db0c, type: 3}
 --- !u!1 &3453219456039934178
 GameObject:

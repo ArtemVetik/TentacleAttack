@@ -781,7 +781,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ragdollUtility: {fileID: 3881516893506894240}
-  _skinnedMesh: {fileID: 6857110793225034258}
+  _skinParent: {fileID: 4892155733319083805}
+  _skinTemplate: {fileID: 6857110793225034258}
 --- !u!1 &1420466474164237867
 GameObject:
   m_ObjectHideFlags: 0
@@ -4029,7 +4030,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4673032816591983178
 Transform:
   m_ObjectHideFlags: 0
