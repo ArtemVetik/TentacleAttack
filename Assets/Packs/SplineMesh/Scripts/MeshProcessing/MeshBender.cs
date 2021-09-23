@@ -366,7 +366,7 @@ namespace SplineMesh
                 {
                     if (!useSpline)
                     {
-                        if (curve.Length < source.Length || source.Vertices.Count != 92)
+                        if (curve.Length < source.Length)
                         {
                             sample = curve.GetSampleAtDistance(curve.Length * distanceRate);
                         }

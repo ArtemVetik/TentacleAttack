@@ -2675,7 +2675,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2238593131289656175
 Transform:
   m_ObjectHideFlags: 0
@@ -2815,7 +2815,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d83bdd918a739c242ae27c9f70c93a6b, type: 2}
+  - {fileID: 2100000, guid: 57b8c01efcf3cdc4a884eb8ffa08db4f, type: 2}
   - {fileID: 2100000, guid: 5d952ccbf26ddbc4a913471a814b8a78, type: 2}
   - {fileID: 2100000, guid: a71796e7bb7a004428ca23b3f1a092d7, type: 2}
   - {fileID: 2100000, guid: 98b6ae85577ad9647b35ed36c3a9e95b, type: 2}
@@ -3414,6 +3414,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2238593131760897021}
+  - component: {fileID: 8007496747685526550}
   m_Layer: 0
   m_Name: PuppetStickman
   m_TagString: Untagged
@@ -3436,6 +3437,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8007496747685526550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2238593131760897022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 269ecb7868dda7247860790d5c6ebfb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skinContainer: {fileID: 2238593130961195395}
+  _skinTemplate: {fileID: 2238593132764689354}
 --- !u!1 &2238593131804805963
 GameObject:
   m_ObjectHideFlags: 0
@@ -4998,7 +5013,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2238593132532517386
 Transform:
   m_ObjectHideFlags: 0
