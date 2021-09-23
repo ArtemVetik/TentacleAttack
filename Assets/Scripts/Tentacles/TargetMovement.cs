@@ -117,7 +117,7 @@ public class TargetMovement : MonoBehaviour
     private void OnLevelCompleted()
     {
         _isUsed = false;
-        Rewind(2f, 2f);
+        Rewind(1, 1);
     }
 
     private void OnTentacleDied(bool isWin)
