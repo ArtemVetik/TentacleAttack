@@ -4,6 +4,7 @@ using UnityEngine;
 using SplineMesh;
 
 [RequireComponent(typeof(Spline))]
+[RequireComponent(typeof(SplineMeshTiling))]
 public class SplineMovement : MonoBehaviour
 {
     [SerializeField] private float _stepBetweenSplineNodes;
@@ -12,6 +13,7 @@ public class SplineMovement : MonoBehaviour
     [SerializeField] private float _endRewindSpeed = 30;
 
     private Spline _spline;
+    private SplineMeshTiling _splineMesh;
     private Coroutine _rewindCoroutine;
     private int _lastNodeIndex;
     private bool _isRewind;
@@ -54,6 +56,9 @@ public class SplineMovement : MonoBehaviour
 
     private void Start()
     {
+        _splineMesh = GetComponent<SplineMeshTiling>();
+        _splineMesh.enabled = true;
+
         _spline = GetComponent<Spline>();
         _lastNodeIndex = _spline.nodes.Count - 1;
         _target.transform.position = _spline.nodes[_lastNodeIndex].Position;
