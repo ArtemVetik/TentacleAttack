@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3382312}
   - component: {fileID: 2347594}
   - component: {fileID: 64235884794812384}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SM_Env_MountainGrass_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 167684}
-  m_Mesh: {fileID: -3135134396253820346, guid: 633a4414a5a5c4a47b89e9abffc0d71b, type: 3}
+  m_Mesh: {fileID: -7780059429600032137, guid: 633a4414a5a5c4a47b89e9abffc0d71b, type: 3}
 --- !u!23 &2347594
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -95,4 +95,4 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: -3135134396253820346, guid: 633a4414a5a5c4a47b89e9abffc0d71b, type: 3}
+  m_Mesh: {fileID: -7780059429600032137, guid: 633a4414a5a5c4a47b89e9abffc0d71b, type: 3}
