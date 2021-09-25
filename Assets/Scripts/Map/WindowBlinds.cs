@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class WindowBlinds : ActiveObject
 {
+
     private Animator _selfAnimator;
     private readonly string _usingAnimation = "Using";
 
