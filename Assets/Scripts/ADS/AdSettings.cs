@@ -4,9 +4,9 @@ using UnityEngine.Events;
 
 public class AdSettings : Singleton<AdSettings>
 {
-    private const string AppLovinSdkKey = "R5ZeDg0t8rV5BQ4h_72SUwzDKUOipd1Ju_H3yph9eKZV6NZBDqI_rLKZmyFWiyFWdOn4ITSHwMdob2TtWHuzio";
-    private const string InterstitialAdId = "071b3528f77ae7f4";
-    private const string RewardedAdId = "cfaea1bc2df062fb";
+    private const string AppLovinSdkKey = "111";
+    private const string InterstitialAdId = "222";
+    private const string RewardedAdId = "333";
     private const string RemoveAdsKey = nameof(RemoveAdsKey);
 
     private int retryAttempt;

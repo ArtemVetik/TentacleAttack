@@ -31,6 +31,11 @@ public class AppMetricaEventSender : MonoBehaviour
         GlobalEventStorage.GameEnded -= OnLevelFinished;
     }
 
+    private void Start()
+    {
+        
+    }
+
     private void OnLevelStart()
     {
         int levelCount = 1;

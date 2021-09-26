@@ -31,9 +31,10 @@ public class StartMovementTrigger : MonoBehaviour
 
         _isStarted = true;
         MoveStarted?.Invoke();
-
         foreach (var hiddenObject in _hiddenObjects)
+        {
             hiddenObject.SetActive(false);
+        }
 
         _targetMovement.TragetMoved -= OnTargetMoved;
     }

@@ -13,7 +13,7 @@ class EnemyHolder : MonoBehaviour
     private SplineMovement _movement;
     private TargetDamager _damager;
     private List<Hug> _enemies;
-    private const float _correctionFactor = 1.75f;
+    private const float _correctionFactor = 1f;
 
     public event Action EnemyHold;
     public event Action EnemyLeave;
@@ -50,7 +50,7 @@ class EnemyHolder : MonoBehaviour
     {
         if (!ContainsEnemy(enemy))
         {
-            enemy.transform.localScale *= 1.25f;
+            //enemy.transform.localScale *= 1.25f;
             var hugTentacle = Instantiate(_tentacleHug, enemy.transform.position, Quaternion.Euler(-90, 90, 0));
             Hug hug = new Hug(enemy.transform, hugTentacle);
             _enemies.Add(hug);

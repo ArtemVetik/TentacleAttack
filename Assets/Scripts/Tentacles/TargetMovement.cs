@@ -59,9 +59,6 @@ public class TargetMovement : MonoBehaviour
             if (Input.GetMouseButtonUp(0))
                 _body.velocity = Vector3.zero;
         }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-            Time.timeScale = Time.timeScale == 0 ? 1 : 0;
     }
 
     public bool IsPointerOverUIObject(Vector2 inputPosition)

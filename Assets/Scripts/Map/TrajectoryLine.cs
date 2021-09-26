@@ -51,7 +51,7 @@ public class TrajectoryLine : MonoBehaviour
             float distance = 0f;
             while (distance < _trajectory.Length)
             {
-                positions.Add(_trajectory.GetSampleAtDistance(distance).location);
+                positions.Add(_trajectory.GetSampleAtDistance(distance).location - Vector3.forward * 2f);
                 _line.positionCount = positions.Count;
                 _line.SetPositions(positions.ToArray());
 

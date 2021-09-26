@@ -11,10 +11,18 @@ public class EnemyDetecter : MonoBehaviour
     private Transform _target;
     [SerializeField] private Vector3 _vectorUp;
 
-    private void OnEnable()
+    private void Awake()
     {
         _enemyContainer = FindObjectOfType<EnemyContainer>();
+    }
+
+    private void OnEnable()
+    {
         _enemyContainer.EnemyStucked += OnEnemyStickeed;
+    }
+
+    private void Start()
+    {
         _detecters = new List<Detecter>();
         _target = FindObjectOfType<TargetMovement>().transform;
 
@@ -22,7 +30,6 @@ public class EnemyDetecter : MonoBehaviour
         {
             Enemy enemy = _enemyContainer.GetEnemy(i);
             Detecter detecter = new Detecter(enemy, Instantiate(_enemyDetecterIcon, this.transform), this);
-
             _detecters.Add(detecter);
         }
     }

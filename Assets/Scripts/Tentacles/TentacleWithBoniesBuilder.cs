@@ -9,11 +9,6 @@ public class TentacleWithBoniesBuilder : MonoBehaviour
     private TentacleWithBone _tentacle;
     private Spline _spline;
 
-    private void Awake()
-    {
-        _tentacle = FindObjectOfType<TentacleWithBone>();
-    }
-
     private void OnEnable()
     {
         GlobalEventStorage.GameOvering += BuildTentacle;
@@ -33,9 +28,11 @@ public class TentacleWithBoniesBuilder : MonoBehaviour
     {
         if (!isWin)
         {
+            _tentacle = FindObjectOfType<TentacleWithBone>(true);
             GameObject[] segments = _segmentsParent.GetComponentsInChildren<TentacleSegment>().Select(segment => segment.gameObject).ToArray();
             var positions = _spline.nodes.Select(node => node.Position).ToArray();
 
+            Debug.Log((segments == null) + "<>" + (_tentacle == null));
             if (segments.Length <= _tentacle.BoneCount)
                 GameObjectsSetActive(false, segments);
             else if (segments.Length > _tentacle.BoneCount)
