@@ -6,6 +6,7 @@ public class KrakenSkinInitializer : MonoBehaviour
 {
     [SerializeField] private SkinnedMeshRenderer _bodyMesh;
     [SerializeField] private SkinDataBase _dataBase;
+    [SerializeField] private Color _defaultColor;
 
     private Material _bodyMaterial;
 
@@ -37,11 +38,13 @@ public class KrakenSkinInitializer : MonoBehaviour
         if (selectedSkin == null)
         {
             _bodyMaterial.mainTexture = null;
+            _bodyMaterial.color = _defaultColor;
         }
         else
         {
             var texture = selectedSkin.Texture;
             _bodyMaterial.mainTexture = texture;
+            _bodyMaterial.color = Color.white;
         }
     }
 }

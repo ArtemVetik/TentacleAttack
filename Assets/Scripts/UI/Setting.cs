@@ -6,9 +6,11 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Button))]
 public class Setting : MonoBehaviour
 {
+    [SerializeField] private EndGamePanel _endPanel;
     [SerializeField] private GameObject _settingPanel;
     [SerializeField] private Toggle _soundToggle;
     [SerializeField] private Toggle _vibrationToggle;
+    [SerializeField] private Button _restartButton;
 
     private Button _settingBtn;
 
@@ -22,6 +24,7 @@ public class Setting : MonoBehaviour
         _settingBtn.onClick.AddListener(ShowSettingPanel);
         _soundToggle.onValueChanged.AddListener(OnSoundSettingsChanged);
         _vibrationToggle.onValueChanged.AddListener(OnVibrationSettingsChanged);
+        _restartButton.onClick.AddListener(OnRestartButtonClicked);
     }
 
     private void OnDisable()
@@ -29,6 +32,7 @@ public class Setting : MonoBehaviour
         _settingBtn.onClick.RemoveListener(ShowSettingPanel);
         _soundToggle.onValueChanged.RemoveListener(OnSoundSettingsChanged);
         _vibrationToggle.onValueChanged.RemoveListener(OnVibrationSettingsChanged);
+        _restartButton.onClick.RemoveListener(OnRestartButtonClicked);
     }
 
     private void Start()
@@ -46,6 +50,12 @@ public class Setting : MonoBehaviour
     {
         Time.timeScale = 1;
         _settingPanel.SetActive(false);
+    }
+
+    private void OnRestartButtonClicked()
+    {
+        Time.timeScale = 1;
+        _endPanel.RepeatScene();
     }
 
     private void OnSoundSettingsChanged(bool isActive)

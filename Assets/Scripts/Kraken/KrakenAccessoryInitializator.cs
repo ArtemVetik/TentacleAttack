@@ -6,7 +6,6 @@ public class KrakenAccessoryInitializator : MonoBehaviour
 {
     [SerializeField] private Transform _container;
     [SerializeField] private AccessoryDataBase _dataBase;
-
     public KrakenAccessory InstAccessory { get; private set; }
 
     private void OnEnable()

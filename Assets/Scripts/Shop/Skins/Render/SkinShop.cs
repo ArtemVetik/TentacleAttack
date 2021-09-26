@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class SkinShop : MonoBehaviour
@@ -9,7 +10,7 @@ public class SkinShop : MonoBehaviour
     [SerializeField] private SkinDataBase _dataBase;
     [SerializeField] private SkinListView _listView;
     [SerializeField] private ScrollViewAssistant _scrollAssistant;
-    [SerializeField] private Button _unlockButton;
+    [SerializeField] private BuyButton _unlockButton;
 
     private IEnumerable<SkinPresenter> _presenters;
     private SkinPresenter _selectedPresenter;
@@ -29,7 +30,7 @@ public class SkinShop : MonoBehaviour
         foreach (var presenter in _presenters)
             presenter.Clicked += OnPresenterClicked;
 
-        _unlockButton.onClick.AddListener(OnUnlockButtonClicked);
+        _unlockButton.BuyConfirmed += OnBuyConfirmed;
 
         var isAllUnlocked = inventory.Data.Count() == _dataBase.Data.Count();
         _unlockButton.gameObject.SetActive(!isAllUnlocked);
@@ -45,7 +46,7 @@ public class SkinShop : MonoBehaviour
 
     private void OnDisable()
     {
-        _unlockButton.onClick.RemoveListener(OnUnlockButtonClicked);
+        _unlockButton.BuyConfirmed -= OnBuyConfirmed;
 
         foreach (var presenter in _presenters)
         {
@@ -77,7 +78,7 @@ public class SkinShop : MonoBehaviour
         inventory.Save();
     }
 
-    private void OnUnlockButtonClicked()
+    private void OnBuyConfirmed()
     {
         var inventory = new SkinInventory(_dataBase);
         inventory.Load();
@@ -101,5 +102,8 @@ public class SkinShop : MonoBehaviour
         SelectPresenter(unlockPresenter);
 
         _scrollAssistant.VerticalSnapTo(unlockPresenter.transform as RectTransform);
+
+        if (lockedDatas.Count == 1)
+            _unlockButton.gameObject.SetActive(false);
     }
 }

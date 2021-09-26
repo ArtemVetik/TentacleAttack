@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ public class AccessoryShop : MonoBehaviour
     [SerializeField] private AccessoryDataBase _dataBase;
     [SerializeField] private AccessoryListView _listView;
     [SerializeField] private ScrollViewAssistant _scrollAssistant;
-    [SerializeField] private Button _unlockButton;
+    [SerializeField] private BuyButton _unlockButton;
 
     private IEnumerable<AccessoryPresenter> _presenters;
     private AccessoryPresenter _selectedPresenter;
@@ -29,7 +30,7 @@ public class AccessoryShop : MonoBehaviour
         foreach (var presenter in _presenters)
             presenter.Clicked += OnPresenterClicked;
 
-        _unlockButton.onClick.AddListener(OnUnlockButtonClicked);
+        _unlockButton.BuyConfirmed += OnBuyConfirmed;
 
         var isAllUnlocked = inventory.Data.Count() == _dataBase.Data.Count();
         _unlockButton.gameObject.SetActive(!isAllUnlocked);
@@ -45,7 +46,7 @@ public class AccessoryShop : MonoBehaviour
 
     private void OnDisable()
     {
-        _unlockButton.onClick.RemoveListener(OnUnlockButtonClicked);
+        _unlockButton.BuyConfirmed -= OnBuyConfirmed;
 
         foreach (var presenter in _presenters)
         {
@@ -77,7 +78,7 @@ public class AccessoryShop : MonoBehaviour
         inventory.Save();
     }
 
-    private void OnUnlockButtonClicked()
+    private void OnBuyConfirmed()
     {
         var inventory = new AccessoryInventory(_dataBase);
         inventory.Load();
@@ -101,5 +102,8 @@ public class AccessoryShop : MonoBehaviour
         SelectPresenter(unlockPresenter);
 
         _scrollAssistant.VerticalSnapTo(unlockPresenter.transform as RectTransform);
+
+        if (lockedDatas.Count == 1)
+            _unlockButton.gameObject.SetActive(false);
     }
 }

@@ -33,6 +33,7 @@ public class TestPanel : MonoBehaviour
 
     public void SelectLevel()
     {
+        SaveDataBase.SetCurrentLevel((int)_levelSlider.value - 1);
         SceneManager.LoadScene((int)_levelSlider.value - 1);
     }
 
