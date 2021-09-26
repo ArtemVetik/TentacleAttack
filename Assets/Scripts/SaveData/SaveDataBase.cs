@@ -13,6 +13,7 @@ public static class SaveDataBase
     private const string LevelLoopCount = nameof(LevelLoopCount);
 
     public static event UnityAction<int> ScoreChanged;
+    public static event UnityAction<bool> SoundSettingChanged;
 
     public static int GetScore()
     {
@@ -44,6 +45,7 @@ public static class SaveDataBase
     public static void SetSound(bool isActive)
     {
         PlayerPrefs.SetInt(SoundSetting, isActive ? 1 : 0);
+        SoundSettingChanged?.Invoke(isActive);
     }
 
     public static bool GetSoundSetting()

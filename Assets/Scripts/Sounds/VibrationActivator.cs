@@ -5,7 +5,6 @@ public class VibrationActivator : MonoBehaviour
 {
     private Android _android;
     private EatingArea _eatingArea;
-    private TargetDamager _targetDamager;
     private KrakenChild _child;
     private EnemyHolder _enemyHolder;
     private TriggerSpeaker[] _triggerSpeakers;
@@ -14,7 +13,6 @@ public class VibrationActivator : MonoBehaviour
     {
         _android = GetComponent<Android>();
         _eatingArea = FindObjectOfType<EatingArea>();
-        _targetDamager = FindObjectOfType<TargetDamager>();
         _child = FindObjectOfType<KrakenChild>();
         _enemyHolder = FindObjectOfType<EnemyHolder>();
         _triggerSpeakers = FindObjectsOfType<TriggerSpeaker>();
@@ -24,7 +22,6 @@ public class VibrationActivator : MonoBehaviour
     {
         GlobalEventStorage.TentacleAddDamage += OnTentacleDamaged;
         _eatingArea.Eating += OnEating;
-        //_targetDamager.EnemyFounded += OnEnemyFounded;
         _enemyHolder.EnemyHold += OnEnemyFounded;
 
         if(_triggerSpeakers != null)
@@ -43,7 +40,6 @@ public class VibrationActivator : MonoBehaviour
     {
         GlobalEventStorage.TentacleAddDamage -= OnTentacleDamaged;
         _eatingArea.Eating -= OnEating;
-        //_targetDamager.EnemyFounded -= OnEnemyFounded;
         _enemyHolder.EnemyHold -= OnEnemyFounded;
 
         if (_triggerSpeakers != null)

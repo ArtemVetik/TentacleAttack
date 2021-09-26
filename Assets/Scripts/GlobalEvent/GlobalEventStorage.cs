@@ -5,6 +5,9 @@ public static class GlobalEventStorage
 {
     public static event Action<TentacleSegment> TentacleAddDamage;
     public static event Action<bool> GameOvering;
+    /// <summary>
+    /// Invoke after tentacle full rewinding
+    /// </summary>
     public static event Action<bool, int> GameEnded;
 
 
