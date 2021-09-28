@@ -32,7 +32,6 @@ public class TentacleWithBoniesBuilder : MonoBehaviour
             GameObject[] segments = _segmentsParent.GetComponentsInChildren<TentacleSegment>().Select(segment => segment.gameObject).ToArray();
             var positions = _spline.nodes.Select(node => node.Position).ToArray();
 
-            Debug.Log((segments == null) + "<>" + (_tentacle == null));
             if (segments.Length <= _tentacle.BoneCount)
                 GameObjectsSetActive(false, segments);
             else if (segments.Length > _tentacle.BoneCount)

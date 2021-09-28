@@ -27,7 +27,7 @@ public class BackgroundMusic : MonoBehaviour
     private void Start()
     {
         if (SaveDataBase.GetSoundSetting() == false)
-            _audio.Pause();
+            _audio.Stop();
     }
 
     private void OnSoundSettingChanged(bool soundEnable)
