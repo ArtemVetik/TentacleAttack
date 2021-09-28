@@ -12,6 +12,12 @@ ModelImporter:
   - first:
       74: -3100369314251171874
     second: Idle
+  - first:
+      74: -6912017302103723359
+    second: Hugging
+  - first:
+      74: 5269637430058742448
+    second: Idle
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -42,7 +48,7 @@ ModelImporter:
     clipAnimations:
     - serializedVersion: 16
       name: Hugging
-      takeName: Tentacle_Hug_Rig|Tentacle_Hug_Rig|Tentacle_Hug_Rig|Tentacle_Hugging|Tentacle_Hug
+      takeName: Tentacle_Hug_Rig|Tentacle_Hug_Rig|Tentacle_Hug_Rig|Tentacle_Hug_Rig|Tentacle
       internalID: 0
       firstFrame: 0
       lastFrame: 20
@@ -71,7 +77,7 @@ ModelImporter:
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
       name: Idle
-      takeName: Tentacle_Hug_Rig|Tentacle_Hug_Rig|Tentacle_Hug_Rig|Tentacle_Idle|Tentacle_Hug_Ri
+      takeName: Tentacle_Hug_Rig|Tentacle_Hug_Rig|Tentacle_Hug_Rig|Tentacle_Hug
       internalID: 0
       firstFrame: 0
       lastFrame: 50
