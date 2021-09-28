@@ -11,8 +11,9 @@ public class EndClothReward : MonoBehaviour
     [SerializeField] private Button _rewardButton;
     [SerializeField] private ClothDataBase _dataBase;
     [SerializeField] private ClothRewardList _rewardData;
-    [SerializeField] private ClothRewardData _reward;
+    [SerializeField] private Image _clothPreview;
 
+    private ClothRewardData _reward;
     private AdSettings _adSettings;
     private ClothData _unlockData;
 
@@ -60,6 +61,7 @@ public class EndClothReward : MonoBehaviour
             _rewardedGroup.gameObject.SetActive(true);
             var unlockIndex = _reward.ClothDataBaseIndex;
             _unlockData = _dataBase[unlockIndex];
+            _clothPreview.sprite = _unlockData.Preview;
         }
     }
 

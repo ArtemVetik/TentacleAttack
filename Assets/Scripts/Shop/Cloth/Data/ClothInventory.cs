@@ -27,8 +27,6 @@ public class ClothInventory : IShopSaved
                                               where _buyedGUID.Contains(data.GUID)
                                               select data;
 
-    public static event UnityAction<ClothData> SelectedClothChanged;
-
     private ClothDataBase _dataBase;
 
     public ClothInventory(ClothDataBase dataBase)
@@ -69,13 +67,11 @@ public class ClothInventory : IShopSaved
     public void SelectCloth(ClothData data)
     {
         _selectedGUID = data.GUID;
-        SelectedClothChanged?.Invoke(data);
     }
 
     public void DeselectAccessory()
     {
         _selectedGUID = string.Empty;
-        SelectedClothChanged?.Invoke(null);
     }
 
     public void Load()

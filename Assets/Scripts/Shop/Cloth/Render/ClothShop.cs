@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ClothShop : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class ClothShop : MonoBehaviour
     private ClothPresenter _selectedPresenter;
     private ClothPresenter _buyPresenter;
     private AdSettings _adSettings;
+
+    public event UnityAction<ClothData> SelectDataChanged;
 
     private void OnEnable()
     {
@@ -85,6 +88,8 @@ public class ClothShop : MonoBehaviour
         inventory.Load();
         inventory.SelectCloth(presenter.Data);
         inventory.Save();
+
+        SelectDataChanged?.Invoke(presenter.Data);
     }
 
     public void DeselectPresenter(ClothPresenter presenter)
@@ -96,6 +101,8 @@ public class ClothShop : MonoBehaviour
         inventory.Load();
         inventory.DeselectAccessory();
         inventory.Save();
+
+        SelectDataChanged?.Invoke(null);
     }
 
     private void TryBuy(ClothPresenter data)
@@ -109,16 +116,7 @@ public class ClothShop : MonoBehaviour
         if (_buyPresenter == null)
             return;
 
-        var inventory = new ClothInventory(_dataBase);
-        inventory.Load();
-        inventory.Add(_buyPresenter.Data);
-        inventory.SelectCloth(_buyPresenter.Data);
-        inventory.Save();
-
-        _selectedPresenter.RenderBuyed(_selectedPresenter.Data);
-        _buyPresenter.RenderSelected(_buyPresenter.Data);
-
-        _selectedPresenter = _buyPresenter;
+        SelectPresenter(_buyPresenter);
         _buyPresenter = null;
     }
 }
