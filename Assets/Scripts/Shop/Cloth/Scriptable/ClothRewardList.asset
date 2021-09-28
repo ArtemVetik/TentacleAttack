@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dea9252f0be5d574d9a20498d03f0f31, type: 3}
+  m_Name: ClothRewardList
+  m_EditorClassIdentifier: 
+  _levelRewardData:
+  - _levelBuildIndex: 4
+    _clothDataBaseIndex: 1
+  - _levelBuildIndex: 9
+    _clothDataBaseIndex: 2
+  - _levelBuildIndex: 14
+    _clothDataBaseIndex: 3
+  - _levelBuildIndex: 19
+    _clothDataBaseIndex: 4
+  - _levelBuildIndex: 24
+    _clothDataBaseIndex: 5
+  - _levelBuildIndex: 29
+    _clothDataBaseIndex: 6
+  - _levelBuildIndex: 34
+    _clothDataBaseIndex: 7
+  - _levelBuildIndex: 39
+    _clothDataBaseIndex: 8
