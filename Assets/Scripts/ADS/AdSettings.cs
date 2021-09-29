@@ -27,6 +27,7 @@ public class AdSettings : Singleton<AdSettings>
 
         MaxSdkCallbacks.OnSdkInitializedEvent += (MaxSdkBase.SdkConfiguration sdkConfiguration) => { };
         MaxSdk.SetSdkKey(AppLovinSdkKey);
+        MaxSdk.SetTestDeviceAdvertisingIdentifiers(new string[]{ "4f30a181-74d1-4438-b13f-d68b0162fda1" });
         MaxSdk.InitializeSdk();
 
         _lastInterstitialShow = DateTime.MinValue;

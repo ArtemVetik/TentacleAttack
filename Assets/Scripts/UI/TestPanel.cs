@@ -69,4 +69,9 @@ public class TestPanel : MonoBehaviour
         var inventory = new ClothInventory(_clothDataBase);
         inventory.Save();
     }
+
+    public void ResetRemoveAd()
+    {
+        Singleton<AdSettings>.Instance.ReturnAdsTest();
+    }
 }
