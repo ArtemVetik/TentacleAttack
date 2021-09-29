@@ -37,14 +37,17 @@ public class RewardScoreButton : MonoBehaviour
 
     private void OnSelfButtonClicked()
     {
-        _adSettings.UserEarnedReward += OnUserEarnedReward;
-        _adSettings.ShowRewarded();
+        if (_adSettings.IsRewardLoad)
+        {
+            _adSettings.UserEarnedReward += OnUserEarnedReward;
+            _adSettings.ShowRewarded();
+        }
     }
 
     private void OnUserEarnedReward()
     {
         _adSettings.UserEarnedReward -= OnUserEarnedReward;
-        
+
         var score = SaveDataBase.GetScore();
         SaveDataBase.SetScore(score + _rewardScoreValue);
     }

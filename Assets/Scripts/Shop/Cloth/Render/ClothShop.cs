@@ -116,6 +116,11 @@ public class ClothShop : MonoBehaviour
         if (_buyPresenter == null)
             return;
 
+        var inventory = new ClothInventory(_dataBase);
+        inventory.Load();
+        inventory.Add(_buyPresenter.Data);
+        inventory.Save();
+
         SelectPresenter(_buyPresenter);
         _buyPresenter = null;
     }

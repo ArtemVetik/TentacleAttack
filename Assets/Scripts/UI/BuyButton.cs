@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class BuyButton : MonoBehaviour
 {
     [SerializeField] private int _price;
+    [SerializeField] private TMP_Text _buttonText;
     [SerializeField] private Sprite _lockSprite;
     [SerializeField] private Sprite _unlockSprite;
 
@@ -23,6 +24,11 @@ public class BuyButton : MonoBehaviour
     {
         _selfButton = GetComponent<Button>();
         _childTexts = GetComponentsInChildren<TMP_Text>();
+    }
+
+    private void Start()
+    {
+        _buttonText.text = _price.ToString();
     }
 
     private void OnEnable()

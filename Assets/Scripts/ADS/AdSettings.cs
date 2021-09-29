@@ -14,6 +14,7 @@ public class AdSettings : Singleton<AdSettings>
     private DateTime _lastInterstitialShow;
 
     public bool IsAdsRemove { get; private set; }
+    public bool IsRewardLoad => MaxSdk.IsRewardedAdReady(RewardedAdId);
 
     public event UnityAction InterstitialShowed;
     public event UnityAction InterstitialShowTryed;

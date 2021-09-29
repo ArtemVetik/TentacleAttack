@@ -10,6 +10,15 @@ public class ClothRewardList : ScriptableObject
 
     public IEnumerable<ClothRewardData> Data => _levelRewardData;
 
+    public bool ContainsLevel(int buildIndex)
+    {
+        foreach (var data in _levelRewardData)
+            if (data.LevelBuildIndex == buildIndex)
+                return true;
+
+        return false;
+    }
+
     public bool TryGetByLevel(int levelBuildIndex, out ClothRewardData rewardData)
     {
         foreach (var data in _levelRewardData)
