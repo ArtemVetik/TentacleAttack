@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class BrokenGlass : MonoBehaviour
 {
     [SerializeField] private GameObject _normalWindow;
@@ -9,22 +10,32 @@ public class BrokenGlass : MonoBehaviour
     [SerializeField] private GameObject[] _glasses;
     [SerializeField] private float _brokenGlassLifeTime;
 
+    private AudioSource _audio;
     private Animator _selfAnimator;
     private readonly string Destroy = nameof(Destroy);
+    private bool _isBroken = false;
 
-    private void Start()
+    private void Awake()
     {
+        _audio = GetComponent<AudioSource>();
         _selfAnimator = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out TargetMovement tentacle))
+        if (_isBroken == false && other.TryGetComponent(out TargetMovement tentacle))
         {
             _normalWindow.gameObject.SetActive(false);
             _brokenWindow.gameObject.SetActive(true);
 
+            if (SaveDataBase.GetSoundSetting() == true)
+            {
+                _audio.Play();
+            }
+
             StartCoroutine(DestroyGlass());
+
+            _isBroken = true;
         }
     }
 
@@ -48,7 +59,6 @@ public class BrokenGlass : MonoBehaviour
     private IEnumerator DestroyGlass()
     {
         yield return new WaitForSeconds(_brokenGlassLifeTime);
-        Debug.Log("Destroy glass");
         _selfAnimator.SetTrigger(Destroy);
     }
 }

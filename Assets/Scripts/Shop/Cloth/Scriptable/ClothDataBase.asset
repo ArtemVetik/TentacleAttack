@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71919b8600ddfb84f8e905d53a4277d0, type: 3}
+  m_Name: ClothDataBase
+  m_EditorClassIdentifier: 
+  _defaultSnakeIndex: 0
+  _clothes:
+  - _guid: 44bd1d91-43ae-4b6b-b68d-47e162e6680f
+    _name: Ship
+    _preview: {fileID: 21300000, guid: a62c85d08f1b8a94d842afa7dd4638d3, type: 3}
+    _prefab: {fileID: 6224135023708915516, guid: be66c9f11891a4d468baf741ca674ec2, type: 3}
+  - _guid: 1a93ce9b-507e-4ff9-bcd6-9dc4f30cd4b2
+    _name: Castle
+    _preview: {fileID: 21300000, guid: 0e5fdb15d4a6ea04f8a6dd1659be6fb9, type: 3}
+    _prefab: {fileID: -7055945173549915000, guid: a1d04cff2634c5941a12314d3c2f6cc2, type: 3}
+  - _guid: 9a9b1ec7-41c7-4760-8411-2b300e929622
+    _name: Home
+    _preview: {fileID: 21300000, guid: 260f1c8058ccd424e8a93888f445bedc, type: 3}
+    _prefab: {fileID: 4509040527900140573, guid: 533042ecb4b63a145afa14567e9d025f, type: 3}
+  - _guid: 68e596c3-0a28-4254-bdc4-03086f8c4819
+    _name: Arctic
+    _preview: {fileID: 21300000, guid: 9c5e688eb79432147a7b15acddc32e69, type: 3}
+    _prefab: {fileID: 3620769482595219927, guid: 18267bf18c3cdbf478be1bddae8ecb65, type: 3}
+  - _guid: 7300f3f7-6d02-4b83-b6d4-69a8bdc5398c
+    _name: Pier
+    _preview: {fileID: 21300000, guid: ff5b52356d42fed48b838ca9a9e1e1c9, type: 3}
+    _prefab: {fileID: 6659980715972800269, guid: bced6de5b3420f14988c3529a72a9743, type: 3}
+  - _guid: 2a94ae0c-0a7f-4601-828f-6dc9017e1f38
+    _name: Jungle
+    _preview: {fileID: 21300000, guid: 47e22208d7df960438427cc93b946625, type: 3}
+    _prefab: {fileID: -8666386691263367588, guid: e2c83555aca339f4aa4d5bedc629326d, type: 3}
+  - _guid: a0954f1a-3ae8-4f79-80ad-79054fd8f7c9
+    _name: Office
+    _preview: {fileID: 21300000, guid: 11595b778229db54cb741192530f578f, type: 3}
+    _prefab: {fileID: -5419205812931174194, guid: 391861b1f1c297f4287edadc8dc9aa4d, type: 3}
+  - _guid: 21a7b1b8-b78c-426f-81c6-5568fc982392
+    _name: Starbase
+    _preview: {fileID: 21300000, guid: 2a5b57ba9c84f4c42b17dc5254d6f12e, type: 3}
+    _prefab: {fileID: 279988194194418870, guid: 21ffffd738ef7ed4591e4424cf3759f2, type: 3}
+  - _guid: 1e33499e-ecd7-43d1-82e3-b726d50eb1ee
+    _name: Miner
+    _preview: {fileID: 21300000, guid: a83d1ca88f1924f44aed5773c7dcc3d1, type: 3}
+    _prefab: {fileID: 1674896515137168706, guid: 8ba437a01d311464dadb553907f73967, type: 3}

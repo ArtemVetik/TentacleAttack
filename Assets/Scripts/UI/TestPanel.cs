@@ -8,6 +8,7 @@ public class TestPanel : MonoBehaviour
 {
     [SerializeField] private SkinDataBase _skinDataBase;
     [SerializeField] private AccessoryDataBase _accessoryDataBase;
+    [SerializeField] private ClothDataBase _clothDataBase;
     [SerializeField] private Slider _levelSlider;
     [SerializeField] private Text _levelText;
 
@@ -61,5 +62,16 @@ public class TestPanel : MonoBehaviour
     {
         var inventory = new AccessoryInventory(_accessoryDataBase);
         inventory.Save();
+    }
+
+    public void ResetCloth()
+    {
+        var inventory = new ClothInventory(_clothDataBase);
+        inventory.Save();
+    }
+
+    public void ResetRemoveAd()
+    {
+        Singleton<AdSettings>.Instance.ReturnAdsTest();
     }
 }

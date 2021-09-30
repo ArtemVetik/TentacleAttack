@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
 public class SkipLevelButton : MonoBehaviour
 {
+    [SerializeField] private ClothRewardList _rewardList;
     [SerializeField] private EndGamePanel _endPanel;
 
     private Button _selfButton;
@@ -20,6 +22,9 @@ public class SkipLevelButton : MonoBehaviour
     private void OnEnable()
     {
         _selfButton.onClick.AddListener(OnSelfButtonClicked);
+
+        if (_rewardList.ContainsLevel(SceneManager.GetActiveScene().buildIndex))
+            gameObject.SetActive(false);
     }
 
     private void OnDestroy()

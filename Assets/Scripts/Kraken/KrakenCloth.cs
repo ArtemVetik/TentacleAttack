@@ -13,4 +13,14 @@ public class KrakenCloth : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
     }
+
+    public void Init(AnimatorStateInfo stateInfo)
+    {
+        _animator.Play(stateInfo.fullPathHash, 0, stateInfo.normalizedTime);
+    }
+
+    public void SetTrigger(string id)
+    {
+        _animator.SetTrigger(id);
+    }
 }
