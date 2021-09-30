@@ -238,7 +238,7 @@ PlayerSettings:
   AndroidTargetArchitectures: 3
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: D:/Key/TentacleAttack.keystore
+  AndroidKeystoreName: E:/Unity/Projects/Tentacle Attack Data/key/TentacleAttack.keystore
   AndroidKeyaliasName: tentacleattack
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
@@ -582,6 +582,8 @@ PlayerSettings:
   switchNetworkInterfaceManagerInitializeEnabled: 1
   switchPlayerConnectionEnabled: 1
   switchUseNewStyleFilepaths: 0
+  switchUseMicroSleepForYield: 1
+  switchMicroSleepForYieldTime: 25
   ps4NPAgeRating: 12
   ps4NPTitleSecret: 
   ps4NPTrophyPackPath: 
@@ -776,11 +778,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 0ee6c031-8103-4c93-8f7b-49b55aade9ad
+  cloudProjectId: d129e56d-43e7-48ef-86fd-d42048c49d3f
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: 'Kraken Quest: Tentacle Monster 3D'
-  organizationId: artemvetik
+  organizationId: cromwill
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   virtualTexturingSupportEnabled: 0
