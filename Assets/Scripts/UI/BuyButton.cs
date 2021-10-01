@@ -33,6 +33,7 @@ public class BuyButton : MonoBehaviour
 
     private void OnEnable()
     {
+        SaveDataBase.ScoreChanged += OnScoreChanged;
         _selfButton.onClick.AddListener(OnSelfButtonClicked);
 
         UpdateButtonView();
@@ -40,7 +41,13 @@ public class BuyButton : MonoBehaviour
 
     private void OnDisable()
     {
+        SaveDataBase.ScoreChanged -= OnScoreChanged;
         _selfButton.onClick.RemoveListener(OnSelfButtonClicked);
+    }
+
+    private void OnScoreChanged(int score)
+    {
+        UpdateButtonView();
     }
 
     private void UpdateButtonView()
@@ -59,7 +66,6 @@ public class BuyButton : MonoBehaviour
             foreach (var text in _childTexts)
                 text.color = Color.gray;
         }
-
     }
 
     private void OnSelfButtonClicked()
@@ -71,6 +77,5 @@ public class BuyButton : MonoBehaviour
         UpdateButtonView();
 
         BuyConfirmed?.Invoke();
-
     }
 }
