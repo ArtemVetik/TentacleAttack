@@ -5,8 +5,9 @@ using UnityEngine.Events;
 public class AdSettings : Singleton<AdSettings>
 {
     private const string AppLovinSdkKey = "R5ZeDg0t8rV5BQ4h_72SUwzDKUOipd1Ju_H3yph9eKZV6NZBDqI_rLKZmyFWiyFWdOn4ITSHwMdob2TtWHuzio";
-    private const string InterstitialAdId = "222";
-    private const string RewardedAdId = "333";
+    private const string InterstitialAdId = "1e20fcdc15aadac2";
+    private const string RewardedAdId = "051783559018cb6e";
+    private const string BannerAdId = "6552c32a7e789fa8";
     private const string RemoveAdsKey = nameof(RemoveAdsKey);
 
     private int retryAttempt;
@@ -28,19 +29,24 @@ public class AdSettings : Singleton<AdSettings>
 
         MaxSdkCallbacks.OnSdkInitializedEvent += (MaxSdkBase.SdkConfiguration sdkConfiguration) => { };
         MaxSdk.SetSdkKey(AppLovinSdkKey);
-        MaxSdk.SetTestDeviceAdvertisingIdentifiers(new string[]{ "4f30a181-74d1-4438-b13f-d68b0162fda1" });
         MaxSdk.InitializeSdk();
 
         _lastInterstitialShow = DateTime.MinValue;
 
         InitializeInterstitialAds();
         InitializeRewardedAds();
+        InitializeBannerAds();
+
+        ShowBanner();
     }
 
     public void RemoveAds()
     {
         PlayerPrefs.SetInt(RemoveAdsKey, 1);
         IsAdsRemove = true;
+
+        HideBanner();
+
         AdsRemoved?.Invoke();
     }
 
@@ -78,7 +84,12 @@ public class AdSettings : Singleton<AdSettings>
         if (IsAdsRemove)
             return;
 
-        //MaxSdk.ShowBanner(_adUnitId);
+        MaxSdk.ShowBanner(BannerAdId);
+    }
+
+    public void HideBanner()
+    {
+        MaxSdk.HideBanner(BannerAdId);
     }
 
     public void InitializeInterstitialAds()
@@ -118,10 +129,10 @@ public class AdSettings : Singleton<AdSettings>
     {
         // Banners are automatically sized to 320×50 on phones and 728×90 on tablets
         // You may call the utility method MaxSdkUtils.isTablet() to help with view sizing adjustments
-        //MaxSdk.CreateBanner(_adUnitId, MaxSdkBase.BannerPosition.BottomCenter);
+        MaxSdk.CreateBanner(BannerAdId, MaxSdkBase.BannerPosition.BottomCenter);
 
         // Set background or background color for banners to be fully functional
-        //MaxSdk.SetBannerBackgroundColor(_adUnitId, Color.white);
+        MaxSdk.SetBannerBackgroundColor(BannerAdId, Color.white);
     }
 
     #region InterstitialCallbacks
