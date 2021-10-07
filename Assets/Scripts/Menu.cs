@@ -16,4 +16,12 @@ public class Menu : MonoBehaviour
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            ScreenCapture.CaptureScreenshot(@"D:\scr.png");
+        }
+    }
 }

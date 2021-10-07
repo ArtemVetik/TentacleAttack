@@ -25,36 +25,18 @@ public class EndClothReward : MonoBehaviour
 
     private void OnEnable()
     {
-        _adSettings.RewardedLoaded += OnRewardLoaded;
         _rewardButton.onClick.AddListener(OnRewardButtonClicked);
-
         GlobalEventStorage.GameEnded += OnGameEnded;
     }
 
     private void OnDisable()
     {
-        _adSettings.RewardedLoaded -= OnRewardLoaded;
         _rewardButton.onClick.RemoveListener(OnRewardButtonClicked);
-
         GlobalEventStorage.GameEnded -= OnGameEnded;
     }
 
     private void OnGameEnded(bool isWin, int progress)
     {
-        if (_unlockData == null)
-            return;
-
-        var inventory = new ClothInventory(_dataBase);
-        inventory.Load();
-        inventory.AddAvailable(_unlockData);
-        inventory.Save();
-    }
-
-    private void OnRewardLoaded()
-    {
-        if (_unlockData != null)
-            return;
-
         var levelIndex = SceneManager.GetActiveScene().buildIndex;
         if (_rewardData.TryGetByLevel(levelIndex, out _reward))
         {
@@ -62,13 +44,21 @@ public class EndClothReward : MonoBehaviour
             var unlockIndex = _reward.ClothDataBaseIndex;
             _unlockData = _dataBase[unlockIndex];
             _clothPreview.sprite = _unlockData.Preview;
+
+            var inventory = new ClothInventory(_dataBase);
+            inventory.Load();
+            inventory.AddAvailable(_unlockData);
+            inventory.Save();
         }
     }
 
     private void OnRewardButtonClicked()
     {
-        _adSettings.UserEarnedReward += OnUserEarnedReward;
-        _adSettings.ShowRewarded();
+        if (_adSettings.IsRewardLoad)
+        {
+            _adSettings.UserEarnedReward += OnUserEarnedReward;
+            _adSettings.ShowRewarded();
+        }
     }
 
     private void OnUserEarnedReward()
