@@ -25,6 +25,7 @@ public class TestPanel : MonoBehaviour
     public void ResetRateUsSettings()
     {
         PlayerPrefs.DeleteKey("RateUsCantShowKey");
+        PlayerPrefs.DeleteKey("SerializableDateTimeSaveKey");
     }
 
     private void OnSliderValueChanged(float value)
