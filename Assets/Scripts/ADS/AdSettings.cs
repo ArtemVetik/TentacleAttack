@@ -4,6 +4,7 @@ using UnityEngine.Events;
 
 public class AdSettings : Singleton<AdSettings>
 {
+    
     private const string AppLovinSdkKey = "R5ZeDg0t8rV5BQ4h_72SUwzDKUOipd1Ju_H3yph9eKZV6NZBDqI_rLKZmyFWiyFWdOn4ITSHwMdob2TtWHuzio";
     private const string InterstitialAdId = "1e20fcdc15aadac2";
     private const string RewardedAdId = "051783559018cb6e";
@@ -26,11 +27,11 @@ public class AdSettings : Singleton<AdSettings>
     protected override void OnAwake()
     {
         IsAdsRemove = PlayerPrefs.HasKey(RemoveAdsKey);
-
+        
         MaxSdkCallbacks.OnSdkInitializedEvent += (MaxSdkBase.SdkConfiguration sdkConfiguration) => { };
         MaxSdk.SetSdkKey(AppLovinSdkKey);
         MaxSdk.InitializeSdk();
-
+        
         _lastInterstitialShow = DateTime.MinValue;
 
         InitializeInterstitialAds();
@@ -66,7 +67,7 @@ public class AdSettings : Singleton<AdSettings>
 
         var dateDiff = DateTime.Now.Subtract(_lastInterstitialShow);
         var delayed = dateDiff.TotalSeconds > InterstitialDelay;
-
+        
         if (MaxSdk.IsInterstitialReady(InterstitialAdId) && delayed)
             MaxSdk.ShowInterstitial(InterstitialAdId);
         else
@@ -75,8 +76,10 @@ public class AdSettings : Singleton<AdSettings>
 
     public void ShowRewarded()
     {
+        
         if (MaxSdk.IsRewardedAdReady(RewardedAdId))
             MaxSdk.ShowRewardedAd(RewardedAdId);
+        
     }
 
     public void ShowBanner()
@@ -98,13 +101,14 @@ public class AdSettings : Singleton<AdSettings>
             return;
 
         // Attach callback
+        
         MaxSdkCallbacks.Interstitial.OnAdLoadedEvent += OnInterstitialLoadedEvent;
         MaxSdkCallbacks.Interstitial.OnAdLoadFailedEvent += OnInterstitialLoadFailedEvent;
         MaxSdkCallbacks.Interstitial.OnAdDisplayedEvent += OnInterstitialDisplayedEvent;
         MaxSdkCallbacks.Interstitial.OnAdClickedEvent += OnInterstitialClickedEvent;
         MaxSdkCallbacks.Interstitial.OnAdHiddenEvent += OnInterstitialHiddenEvent;
         MaxSdkCallbacks.Interstitial.OnAdDisplayFailedEvent += OnInterstitialAdFailedToDisplayEvent;
-
+        
         // Load the first interstitial
         LoadInterstitial();
     }
@@ -112,6 +116,7 @@ public class AdSettings : Singleton<AdSettings>
     public void InitializeRewardedAds()
     {
         // Attach callback
+        
         MaxSdkCallbacks.Rewarded.OnAdLoadedEvent += OnRewardedAdLoadedEvent;
         MaxSdkCallbacks.Rewarded.OnAdLoadFailedEvent += OnRewardedAdLoadFailedEvent;
         MaxSdkCallbacks.Rewarded.OnAdDisplayedEvent += OnRewardedAdDisplayedEvent;
@@ -120,6 +125,7 @@ public class AdSettings : Singleton<AdSettings>
         MaxSdkCallbacks.Rewarded.OnAdHiddenEvent += OnRewardedAdHiddenEvent;
         MaxSdkCallbacks.Rewarded.OnAdDisplayFailedEvent += OnRewardedAdFailedToDisplayEvent;
         MaxSdkCallbacks.Rewarded.OnAdReceivedRewardEvent += OnRewardedAdReceivedRewardEvent;
+        
 
         // Load the first rewarded ad
         LoadRewardedAd();
@@ -247,4 +253,5 @@ public class AdSettings : Singleton<AdSettings>
     }
 
     #endregion
+    
 }

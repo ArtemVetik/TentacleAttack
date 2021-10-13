@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,11 +34,13 @@ public class RewardScoreButton : MonoBehaviour
 
     private void OnSelfButtonClicked()
     {
+        
         if (_adSettings.IsRewardLoad)
         {
             _adSettings.UserEarnedReward += OnUserEarnedReward;
             _adSettings.ShowRewarded();
         }
+        
     }
 
     private void OnUserEarnedReward()

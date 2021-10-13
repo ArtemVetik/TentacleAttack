@@ -54,11 +54,13 @@ public class EndClothReward : MonoBehaviour
 
     private void OnRewardButtonClicked()
     {
+        
         if (_adSettings.IsRewardLoad)
         {
             _adSettings.UserEarnedReward += OnUserEarnedReward;
             _adSettings.ShowRewarded();
         }
+        
     }
 
     private void OnUserEarnedReward()

@@ -773,7 +773,7 @@ namespace AppLovinMax.Scripts.IntegrationManager.Editor
 
         private static string GetPluginFileName(Network network)
         {
-            return network.Name.ToLower() + "_" + network.LatestVersions.Unity + ".unitypackage";
+            return network.Name.ToLowerInvariant() + "_" + network.LatestVersions.Unity + ".unitypackage";
         }
 
         #endregion
