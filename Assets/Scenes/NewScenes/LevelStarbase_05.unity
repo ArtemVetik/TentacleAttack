@@ -2143,6 +2143,7 @@ MonoBehaviour:
   _startTrigger: {fileID: 2658304299783522783}
   _targetPositionZ: -20
   _endGamePoint: {fileID: 110980815}
+  _krakenChild: {fileID: 1143245351}
 --- !u!114 &778396647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2777,6 +2778,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f77d51027f9ef984fbd33244fc6e14bc, type: 3}
+--- !u!4 &1143245351 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1034359625572961339, guid: f77d51027f9ef984fbd33244fc6e14bc, type: 3}
+  m_PrefabInstance: {fileID: 1143245350}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1159170147
 GameObject:
   m_ObjectHideFlags: 0

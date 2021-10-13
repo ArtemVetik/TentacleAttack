@@ -56,6 +56,7 @@ public class EnemyContainer : MonoBehaviour
         if(AliveEnemyCount == 0)
         {
             EnemyEnded?.Invoke();
+            GlobalEventStorage.EnemyEndedInvoke();
         }
     }
 }

@@ -16,6 +16,8 @@ public class HidingSawTrap : ActiveObject
 
     private Animator _selfAnimator;
     private Spline _spline;
+    private TargetMovement _tentacle;
+    private SphereCollider _rootCollider;
     private Coroutine _moving;
     private float _distanceCovered;
     private Direction _direction;
@@ -24,6 +26,37 @@ public class HidingSawTrap : ActiveObject
     {
         _selfAnimator = GetComponent<Animator>();
         _spline = GetComponentInParent<Spline>();
+        _rootCollider = GetComponentInChildren<SphereCollider>();
+        _tentacle = FindObjectOfType<TargetMovement>();
+    }
+
+    private void OnEnable()
+    {
+        _tentacle.TragetMoved += OnTargetMoved;
+    }
+
+    private void OnDisable()
+    {
+        _tentacle.TragetMoved -= OnTargetMoved;
+    }
+
+    private void OnTargetMoved(Vector3 position)
+    {
+        if (_isMoving == false || _rootCollider == null || _spline == null)
+            return;
+
+        var splinePos = _spline.GetProjectionSample(position).location;
+        var distance = Vector3.Distance(splinePos, position);
+        
+        if (distance <= _rootCollider.radius * 1.2f)
+        {
+            if (_moving != null)
+            {
+                StopCoroutine(_moving);
+                _moving = null;
+            }
+        }
+
     }
 
     private void Start()

@@ -10,7 +10,7 @@ public class RateUsInitializer : MonoBehaviour
 
     private const string RateUsCantShowKey = nameof(RateUsCantShowKey);
     private const int FirstShowNumber = 6;
-    private const int NextShowDelay = 259200;
+    private const int NextShowDelay = 86400;
 
     private bool CantShow => PlayerPrefs.HasKey(RateUsCantShowKey);
 
@@ -53,8 +53,10 @@ public class RateUsInitializer : MonoBehaviour
         var dateDiff = DateTime.Now.Subtract(_lastShowTime.ToDateTime);
         var delayed = dateDiff.TotalSeconds > NextShowDelay;
 
-        if (delayed || (scene.buildIndex + 1 == FirstShowNumber))
-            ShowRateUsWindow();
+        if (delayed == false || scene.buildIndex + 1 < FirstShowNumber)
+            return;
+
+        ShowRateUsWindow();
     }
 
     private void ShowRateUsWindow()
@@ -118,12 +120,12 @@ public struct SerializableDateTime
 
     public void Load()
     {
-        var saved = new SerializableDateTime(DateTime.Now);
-        if (PlayerPrefs.HasKey(SerializableDateTimeSaveKey))
-        {
-            var jsonString = PlayerPrefs.GetString(SerializableDateTimeSaveKey);
-            saved = JsonUtility.FromJson<SerializableDateTime>(jsonString);
-        }
+        var saved = new SerializableDateTime(DateTime.MinValue);
+        //if (PlayerPrefs.HasKey(SerializableDateTimeSaveKey))
+        //{
+        //    var jsonString = PlayerPrefs.GetString(SerializableDateTimeSaveKey);
+        //    saved = JsonUtility.FromJson<SerializableDateTime>(jsonString);
+        //}
 
         _year = saved._year;
         _month = saved._month;
