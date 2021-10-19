@@ -118,10 +118,18 @@ public class EndGamePanel : MonoBehaviour
 
         yield return new WaitForSeconds(_delayTime);
 
+        StartCoroutine(ShowContinueButton(2f));
         if (isWin)
             _winWindow.SetActive(true);
         else
             _looseWindow.SetActive(true);
+    }
+
+    public IEnumerator ShowContinueButton(float delay)
+    {
+        _collectButton.gameObject.SetActive(false);
+        yield return new WaitForSeconds(delay);
+        _collectButton.gameObject.SetActive(true);
     }
 
     private bool EndGameConditions(bool isWin)
