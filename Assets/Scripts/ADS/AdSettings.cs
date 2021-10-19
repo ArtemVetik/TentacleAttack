@@ -6,9 +6,9 @@ public class AdSettings : Singleton<AdSettings>
 {
     
     private const string AppLovinSdkKey = "R5ZeDg0t8rV5BQ4h_72SUwzDKUOipd1Ju_H3yph9eKZV6NZBDqI_rLKZmyFWiyFWdOn4ITSHwMdob2TtWHuzio";
-    private const string InterstitialAdId = "1e20fcdc15aadac2";
-    private const string RewardedAdId = "051783559018cb6e";
-    private const string BannerAdId = "6552c32a7e789fa8";
+    private const string InterstitialAdId = "30501ee19001bed1";
+    private const string RewardedAdId = "c6e61a931e03b165";
+    private const string BannerAdId = "ee37e5f62bd554c1";
     private const string RemoveAdsKey = nameof(RemoveAdsKey);
 
     private int retryAttempt;
