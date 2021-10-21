@@ -43,10 +43,10 @@ public class RateUsCanvas : MonoBehaviour
 #if UNITY_ANDROID
         Application.OpenURL("https://play.google.com/store/apps/details?id=kraken.adventure.squid.puzzle");
 #elif UNITY_IOS
+        Application.OpenURL("https://apps.apple.com/ru/app/kraken-tentacle-monster/id1589228244");
+    #endif
 
-#endif
-
-        SureButtonClicked?.Invoke();
+            SureButtonClicked?.Invoke();
         gameObject.SetActive(false);
     }
 }
