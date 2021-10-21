@@ -13,10 +13,14 @@ public class AdSettings : Singleton<AdSettings>
     private int retryAttempt;
     private const int InterstitialDelay = 30;
     private DateTime _lastInterstitialShow;
+    private string _placement;
 
     public bool IsAdsRemove { get; private set; }
     public bool IsRewardLoad => MaxSdk.IsRewardedAdReady(RewardedAdId);
 
+    public event UnityAction<string, string, string, bool> VideoAdsAviable;
+    public event UnityAction<string, string, string, bool> VideoAdsStarted;
+    public event UnityAction<string, string, string, bool> VideoAdsWatched;
     public event UnityAction InterstitialShowed;
     public event UnityAction InterstitialShowTryed;
     public event UnityAction RewardedLoaded;
@@ -56,7 +60,7 @@ public class AdSettings : Singleton<AdSettings>
         IsAdsRemove = false;
     }
 
-    public void ShowInterstitial()
+    public void ShowInterstitial(string placement = "")
     {
         if (IsAdsRemove)
         {
@@ -67,16 +71,31 @@ public class AdSettings : Singleton<AdSettings>
         var dateDiff = DateTime.Now.Subtract(_lastInterstitialShow);
         var delayed = dateDiff.TotalSeconds > InterstitialDelay;
 
+        _placement = placement;
         if (MaxSdk.IsInterstitialReady(InterstitialAdId) && delayed)
+        {
+            VideoAdsAviable?.Invoke("interstitial", placement, "success", true);
             MaxSdk.ShowInterstitial(InterstitialAdId);
+        }
         else
+        {
+            VideoAdsAviable?.Invoke("interstitial", placement, "not_aviable", false);
             InterstitialShowTryed?.Invoke();
+        }
     }
 
-    public void ShowRewarded()
+    public void ShowRewarded(string placement = "")
     {
+        _placement = placement;
         if (MaxSdk.IsRewardedAdReady(RewardedAdId))
+        {
+            VideoAdsAviable?.Invoke("rewarded", placement, "success", true);
             MaxSdk.ShowRewardedAd(RewardedAdId);
+        }
+        else
+        {
+            VideoAdsAviable?.Invoke("rewarded", placement, "not_aviable", false);
+        }
     }
 
     public void ShowBanner()
@@ -164,6 +183,8 @@ public class AdSettings : Singleton<AdSettings>
     private void OnInterstitialDisplayedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
     {
         _lastInterstitialShow = DateTime.Now;
+
+        VideoAdsStarted?.Invoke("interstitial", _placement, "start", true);
         InterstitialShowed?.Invoke();
         Debug.Log("OnInterstitialDisplayedEvent");
         LoadInterstitial();
@@ -172,6 +193,7 @@ public class AdSettings : Singleton<AdSettings>
     private void OnInterstitialAdFailedToDisplayEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo, MaxSdkBase.AdInfo adInfo)
     {
         // Interstitial ad failed to display. AppLovin recommends that you load the next ad.
+        VideoAdsStarted?.Invoke("interstitial", _placement, "failed_to_display", false);
         InterstitialShowTryed?.Invoke();
         LoadInterstitial();
     }
@@ -182,6 +204,7 @@ public class AdSettings : Singleton<AdSettings>
     {
         // Interstitial ad is hidden. Pre-load the next ad.
         _lastInterstitialShow = DateTime.Now;
+        VideoAdsWatched?.Invoke("interstitial", _placement, "hiding", true);
         LoadInterstitial();
     }
     #endregion
@@ -215,11 +238,13 @@ public class AdSettings : Singleton<AdSettings>
     private void OnRewardedAdDisplayedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo)
     {
         _lastInterstitialShow = DateTime.Now;
+        VideoAdsStarted?.Invoke("rewarded", _placement, "start", true);
     }
 
     private void OnRewardedAdFailedToDisplayEvent(string adUnitId, MaxSdkBase.ErrorInfo errorInfo, MaxSdkBase.AdInfo adInfo)
     {
         // Rewarded ad failed to display. AppLovin recommends that you load the next ad.
+        VideoAdsStarted?.Invoke("rewarded", _placement, "failed_to_display", false);
         LoadRewardedAd();
     }
 
@@ -238,6 +263,7 @@ public class AdSettings : Singleton<AdSettings>
         double amount = adInfo.Revenue;
         Debug.Log("HandleRewardedAdRewarded event received for " + amount.ToString() + " " + type);
 
+        VideoAdsWatched?.Invoke("interstitial", _placement, "earned_reward", true);
         UserEarnedReward?.Invoke();
     }
 
