@@ -1845,6 +1845,7 @@ MonoBehaviour:
   _startTrigger: {fileID: 2658304299783522783}
   _targetPositionZ: -20
   _endGamePoint: {fileID: 0}
+  _krakenChild: {fileID: 0}
 --- !u!114 &778396647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3048,7 +3049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startTrigger: {fileID: 2658304299783522783}
-  _levelDiff: 0
+  _levelDiff: 1
   _levelType: 0
 --- !u!4 &1536883108
 Transform:

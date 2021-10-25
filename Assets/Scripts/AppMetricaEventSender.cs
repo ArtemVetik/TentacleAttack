@@ -18,22 +18,51 @@ public class AppMetricaEventSender : MonoBehaviour
 
     private DateTime _startLevelTime;
     private bool _isStarted;
+    private AdSettings _adSettings;
 
     private void OnEnable()
     {
+        _adSettings = Singleton<AdSettings>.Instance;
+
         _startTrigger.MoveStarted += OnLevelStart;
         GlobalEventStorage.GameEnded += OnLevelFinished;
+        _adSettings.VideoAdsAviable += OnVideoAdsAviable;
+        _adSettings.VideoAdsStarted += OnVideoAdsStarted;
+        _adSettings.VideoAdsWatched += OnVideoAdsWatched;
     }
 
     private void OnDisable()
     {
         _startTrigger.MoveStarted -= OnLevelStart;
         GlobalEventStorage.GameEnded -= OnLevelFinished;
+        _adSettings.VideoAdsAviable -= OnVideoAdsAviable;
+        _adSettings.VideoAdsStarted -= OnVideoAdsStarted;
+        _adSettings.VideoAdsWatched -= OnVideoAdsWatched;
     }
 
-    private void Start()
+    private void ShowAdEvent(string eventName, string adType, string placement, string result, bool connection)
     {
-        
+        Dictionary<string, object> eventParameters = new Dictionary<string, object>();
+        eventParameters.Add("ad_type", adType);
+        eventParameters.Add("placement", placement);
+        eventParameters.Add("result", result);
+        eventParameters.Add("connection", connection);
+
+        AppMetrica.Instance.ReportEvent(eventName, eventParameters);
+    }
+    private void OnVideoAdsAviable(string adType, string placement, string result, bool connection)
+    {
+        ShowAdEvent("video_ads_aviable", adType, placement, result, connection);
+    }
+
+    private void OnVideoAdsStarted(string adType, string placement, string result, bool connection)
+    {
+        ShowAdEvent("video_ads_started", adType, placement, result, connection);
+    }
+
+    private void OnVideoAdsWatched(string adType, string placement, string result, bool connection)
+    {
+        ShowAdEvent("video_ads_watched", adType, placement, result, connection);
     }
 
     private void OnLevelStart()
@@ -69,7 +98,7 @@ public class AppMetricaEventSender : MonoBehaviour
         _isStarted = true;
     }
 
-    private void OnLevelFinished(bool isLeave, bool isWin, int progress)
+    private void OnLevelFinished(bool isWin, int progress, string customResult = null)
     {
         var levelNumber = SceneManager.GetActiveScene().buildIndex + 1;
         var levelName = SceneManager.GetActiveScene().name;
@@ -79,7 +108,7 @@ public class AppMetricaEventSender : MonoBehaviour
         var levelRandom = 0;
         var levelType = _levelType.ToString();
         var gameMode = GameMode;
-        var result = isLeave ? "leave" : isWin ? "win" : "loose";
+        var result = customResult != null ? customResult : isWin ? "win" : "loose";
         var timeSec = (DateTime.Now - _startLevelTime).Seconds;
 
         Dictionary<string, object> eventParameters = new Dictionary<string, object>();
@@ -104,7 +133,7 @@ public class AppMetricaEventSender : MonoBehaviour
 
     private void OnLevelFinished(bool isWin, int progress)
     {
-        OnLevelFinished(false, isWin, progress);
+        OnLevelFinished(isWin, progress);
     }
 
     private void OnApplicationQuit()
@@ -115,7 +144,7 @@ public class AppMetricaEventSender : MonoBehaviour
         var endGamePanel = FindObjectOfType<EndGamePanel>();
         var progress = endGamePanel.GetProgress(false);
 
-        OnLevelFinished(true, false, progress);
+        OnLevelFinished(false, progress, "leave");
 
         Debug.Log("OnAppQuit2");
     }
