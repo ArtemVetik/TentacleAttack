@@ -421,6 +421,17 @@ namespace AppsFlyerSDK
 #endif
         }
 
+
+        /// <summary>
+        /// Lets you configure how which partners should the SDK exclude from data-sharing.
+        /// <param name="partners">partners to exclude from getting data</param>
+        public static void setSharingFilterForPartners(params string[] partners)
+        {
+#if !UNITY_EDITOR
+            _setSharingFilterForPartners(partners.Length, partners);
+#endif
+        }
+
         /// <summary>
         /// To record an impression use the following API call.
         /// Make sure to use the promoted App ID as it appears within the AppsFlyer dashboard.
@@ -513,6 +524,15 @@ namespace AppsFlyerSDK
         public static void subscribeForDeepLink(string objectName){
 #if !UNITY_EDITOR
             _subscribeForDeepLink(objectName);
+#endif
+        }
+
+           /// <summary>
+        /// Set the language of the device.
+        /// </summary>
+        public static void setCurrentDeviceLanguage(string language){
+#if !UNITY_EDITOR
+            _setCurrentDeviceLanguage(language);
 #endif
         }
 
@@ -620,6 +640,9 @@ namespace AppsFlyerSDK
         private static extern void _setSharingFilter(int length, params string[] partners);
 
         [DllImport("__Internal")]
+        private static extern void _setSharingFilterForPartners(int length, params string[] partners);
+
+        [DllImport("__Internal")]
         private static extern void _recordCrossPromoteImpression(string appID, string campaign, string parameters);
 
         [DllImport("__Internal")]
@@ -642,6 +665,9 @@ namespace AppsFlyerSDK
 
         [DllImport("__Internal")]
         private static extern void _subscribeForDeepLink(string objectName);
+
+        [DllImport("__Internal")]
+        private static extern void _setCurrentDeviceLanguage(string language);
 
     }
 
