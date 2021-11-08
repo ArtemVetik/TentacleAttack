@@ -133,7 +133,8 @@ public class AppMetricaEventSender : MonoBehaviour
 
     private void OnLevelFinished(bool isWin, int progress)
     {
-        OnLevelFinished(isWin, progress);
+        var result = isWin ? "win" : "loose";
+        OnLevelFinished(isWin, progress, result);
     }
 
     private void OnApplicationQuit()

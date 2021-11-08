@@ -29,13 +29,11 @@ public class StartMovementTrigger : MonoBehaviour
         if (_isStarted)
             return;
 
-        _isStarted = true;
-        MoveStarted?.Invoke();
-        foreach (var hiddenObject in _hiddenObjects)
-        {
-            hiddenObject.SetActive(false);
-        }
-
         _targetMovement.TragetMoved -= OnTargetMoved;
+        _isStarted = true;
+        foreach (var hiddenObject in _hiddenObjects)
+            hiddenObject.SetActive(false);
+
+        MoveStarted?.Invoke();
     }
 }
